@@ -44,27 +44,30 @@ namespace lw_sm_1
             // pictureBox1
             // 
             this.pictureBox1.Image = global::lw_sm_1.Properties.Resources.comp;
-            this.pictureBox1.Location = new System.Drawing.Point(531, 39);
+            this.pictureBox1.Location = new System.Drawing.Point(500, 11);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(198, 106);
+            this.pictureBox1.Size = new System.Drawing.Size(138, 98);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::lw_sm_1.Properties.Resources.comp;
-            this.pictureBox2.Location = new System.Drawing.Point(531, 170);
+            this.pictureBox2.Location = new System.Drawing.Point(500, 128);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(198, 106);
+            this.pictureBox2.Size = new System.Drawing.Size(138, 92);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::lw_sm_1.Properties.Resources.comp;
-            this.pictureBox3.Location = new System.Drawing.Point(531, 298);
+            this.pictureBox3.Location = new System.Drawing.Point(500, 252);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(198, 106);
+            this.pictureBox3.Size = new System.Drawing.Size(138, 84);
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             // 
@@ -73,17 +76,18 @@ namespace lw_sm_1
             this.route.AutoSize = true;
             this.route.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.route.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.route.Location = new System.Drawing.Point(185, 238);
+            this.route.Location = new System.Drawing.Point(218, 155);
             this.route.Name = "route";
-            this.route.Size = new System.Drawing.Size(194, 81);
+            this.route.Size = new System.Drawing.Size(153, 65);
             this.route.TabIndex = 3;
             this.route.Text = "канал";
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(249, 453);
+            this.btnStart.Location = new System.Drawing.Point(218, 340);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(175, 54);
+            this.btnStart.Size = new System.Drawing.Size(153, 40);
             this.btnStart.TabIndex = 4;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -91,26 +95,27 @@ namespace lw_sm_1
             // 
             // signal
             // 
-            this.signal.Location = new System.Drawing.Point(49, 258);
+            this.signal.Location = new System.Drawing.Point(48, 155);
+            this.signal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.signal.Name = "signal";
-            this.signal.Size = new System.Drawing.Size(34, 38);
+            this.signal.Size = new System.Drawing.Size(75, 65);
             this.signal.TabIndex = 5;
             this.signal.TabStop = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 531);
+            this.ClientSize = new System.Drawing.Size(700, 398);
             this.Controls.Add(this.signal);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.route);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

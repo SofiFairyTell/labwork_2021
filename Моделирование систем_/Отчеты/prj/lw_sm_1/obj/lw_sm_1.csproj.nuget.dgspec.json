@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kurbatova\\source\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\lw_sm_1\\lw_sm_1.csproj": {}
+    "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\lw_sm_1\\lw_sm_1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kurbatova\\source\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\lw_sm_1\\lw_sm_1.csproj": {
+    "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\lw_sm_1\\lw_sm_1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kurbatova\\source\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\lw_sm_1\\lw_sm_1.csproj",
+        "projectUniqueName": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\lw_sm_1\\lw_sm_1.csproj",
         "projectName": "lw_sm_1",
-        "projectPath": "C:\\Users\\Kurbatova\\source\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\lw_sm_1\\lw_sm_1.csproj",
-        "packagesPath": "C:\\Users\\Kurbatova\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kurbatova\\source\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\lw_sm_1\\obj\\",
+        "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\lw_sm_1\\lw_sm_1.csproj",
+        "packagesPath": "C:\\Users\\SKurbatova\\.nuget\\packages\\",
+        "outputPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\lw_sm_1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Kurbatova\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\SKurbatova\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -62,7 +61,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.207\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

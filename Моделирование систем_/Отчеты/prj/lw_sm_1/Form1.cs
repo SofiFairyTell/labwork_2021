@@ -23,17 +23,19 @@ namespace lw_sm_1
             tmr.Tick += new EventHandler(tmr_Tick);
             route.Text = labelValue.ToString();
         }
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            //e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(10, 10, 100, 100));
-        }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void DrawSignal()
         {
             Bitmap mybit = new Bitmap(signal.Width, signal.Height);
             Graphics g = Graphics.FromImage(mybit);
             SolidBrush grBrush = new SolidBrush(Color.Green);
             g.FillRectangle(grBrush,0,0, signal.Width, signal.Height);
+            signal.Image = mybit;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            DrawSignal();
             tmr.Enabled = !tmr.Enabled; //старт/стоп
         }
         void tmr_Tick(object sender, EventArgs e)
@@ -43,11 +45,25 @@ namespace lw_sm_1
             if (labelValue == max || labelValue == min)
             {
                 sign *= -1;
+                signal.Location = new Point(signal.Location.X - 10, signal.Location.Y - 10);
+            }
+            else
+            {
+                signal.Location = new Point(signal.Location.X + 10, signal.Location.Y + 10);
+            }
+            
+        }
+
+//двойная буферизация
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                var cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;    // WS_EX_COMPOSITED
+                return cp;
             }
         }
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
     }
 }
