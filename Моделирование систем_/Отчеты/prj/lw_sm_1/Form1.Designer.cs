@@ -100,7 +100,7 @@ namespace lw_sm_1
             // 
             // signal
             // 
-            this.signal.Location = new System.Drawing.Point(55, 170);
+            this.signal.Location = new System.Drawing.Point(88, 170);
             this.signal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.signal.Name = "signal";
             this.signal.Size = new System.Drawing.Size(37, 36);
@@ -120,7 +120,7 @@ namespace lw_sm_1
             // lbComp1
             // 
             this.lbComp1.AutoSize = true;
-            this.lbComp1.Location = new System.Drawing.Point(395, 57);
+            this.lbComp1.Location = new System.Drawing.Point(395, 54);
             this.lbComp1.Name = "lbComp1";
             this.lbComp1.Size = new System.Drawing.Size(38, 15);
             this.lbComp1.TabIndex = 7;

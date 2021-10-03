@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lw_sm_1
 {
-    class comp
+    public class comp
     {
         public string compName { get; set; } //название группы верхнего уровня
         public int capacity;
