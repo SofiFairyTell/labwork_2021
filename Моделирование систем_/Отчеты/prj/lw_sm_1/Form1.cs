@@ -22,7 +22,7 @@ namespace lw_sm_1
         private bool emptyComp = true;
       //для детерминированной СМО
         int t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4;
-        int arivTime = 0, prepTime = 0, checkTime = 0;
+        int arivTime = 0, prepTime = 0, checkTime = 0,prepTimeComp = 0, prepSignal = 0;
 
         public Form1()
         {
@@ -32,13 +32,13 @@ namespace lw_sm_1
             route.Text = signalCounter.ToString();
         }
 
-        private void DrawSignal()
+        private async void DrawSignal()
         {
-            Bitmap mybit = new Bitmap(signal.Width, signal.Height);
+            Bitmap mybit = new Bitmap(50, 50);
             Graphics g = Graphics.FromImage(mybit);
             SolidBrush grBrush = new SolidBrush(Color.Green);
-            g.FillRectangle(grBrush,0,0, signal.Width, signal.Height);
-            signal.Image = mybit;
+            g.FillRectangle(grBrush,0,0, 50, 50);
+            g.DrawImage(mybit,80,80);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -49,73 +49,86 @@ namespace lw_sm_1
             {
                 compList.Add(new comp());
             }
-            tmr.Enabled = !tmr.Enabled; //старт/стоп
-            
+            tmr.Enabled = !tmr.Enabled; //старт/стоп          
         }
 
-        private void AK1()
+        private async void SlideLeft()
+        {
+            signal.Location = new Point(signal.Location.X + 50, signal.Location.Y);
+        }
+        private async void SlideUp()
+        {
+            signal.Location = new Point(signal.Location.X, signal.Location.Y - 50);
+        }
+        private async void AK1()
         {
             arivTime = t0 + t1;
             signalCounter++;
+            Task.Delay(50).Wait();
         }
-        private void AK2()
+        private async void AK2()
         {
+            checkTime = checkTime + t2;//для фиксации общего времени проверки в канале
             prepTime = t0 + t2;
-            OutSignalCounter++;
+            OutSignalCounter++;//считаем количесво исходящих сигналов
+            Task.Delay(50).Wait();
         }
 
-        private void AK3()
+        private async void AK3()
         {
-            //compList.Sort();
             for (int i = 0; i < N; i++)
             {
-                if(compList[i].capacity <= 4)
+                if(compList[min].capacity > compList[i].capacity)
                 {
-                    compList[i].capacity -= 1; //если емкость
-                    checkTime = t0 + t3;
-                    lbComp1.Text = compList[i].capacity.ToString();
-                }
-                if (compList[i].capacity ==0)
-                {
-                    compList[i].capacity = 4;
-                }
+                    min = i;
+                }    
             }
-
-        }
-        void tmr_Tick(object sender, EventArgs e)
-        {
-            if (t0 >= arivTime)
+            compList[min].capacity++; //если емкость
+            prepSignal++;
+            if (compList[min].capacity<=4)
             {
-                AK1();//выполнение первого действия
-            }
-            if (t0>=prepTime)
-            {
-                AK2();//выполнение обработки в канале
-            }
-            if (emptyComp)
-            {
-                AK3(); //установка в очередь перед компьютером
-            }
-            //signalCounter += sign;
-            route.Text = signalCounter.ToString();
-            if (signalCounter == max)
-            {
-                signal.Location = new Point(signal.Location.X - 100, signal.Location.Y);
-                tmr.Enabled = !tmr.Enabled; //старт/стоп
+                prepTimeComp = t0 + t3;
             }
             else
             {
-                
-                if (signal.Location.X <= 120)
-                {
-                   signal.Location = new Point(signal.Location.X + 10, signal.Location.Y);
-                }
-                else
-                {
-                    signal.Location = new Point(signal.Location.X, signal.Location.Y-10);
-                }
+                compList[min].capacity = 0;
             }
-            
+            Task.Delay(50).Wait();
+        }
+        private async void Count()
+        {
+                for (int t0 = 0; t0 < 40; t0++)
+                {
+                    route.Text = signalCounter.ToString();
+                    DrawSignal();
+                    SlideLeft();
+                    if (t0 >= arivTime)
+                    {                     
+                        AK1();//выполнение первого действия                      
+                    }
+                    if (t0>=prepTime)
+                    {
+                        AK2();//выполнение обработки в канале
+                        SlideLeft();
+                    }
+                    if (signalCounter+OutSignalCounter >0)
+                    {
+                        AK3(); //установка в очередь перед компьютером
+                    }
+                    if (t0>prepTimeComp)
+                    {
+                        logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(min), Convert.ToString(prepSignal));
+                    } 
+                }
+        }
+        async void tmr_Tick(object sender, EventArgs e)
+        {
+            Count();
+            if(signalCounter == 100)
+            {
+               signalCounter = 0;
+               tmr.Enabled = !tmr.Enabled; //старт/стоп
+            }
         }
 
 //двойная буферизация

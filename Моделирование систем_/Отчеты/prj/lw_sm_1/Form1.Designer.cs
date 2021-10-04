@@ -39,11 +39,16 @@ namespace lw_sm_1
             this.lbComp1 = new System.Windows.Forms.Label();
             this.lbComp2 = new System.Windows.Forms.Label();
             this.lbComp3 = new System.Windows.Forms.Label();
+            this.logTable = new System.Windows.Forms.DataGridView();
+            this.TimePrep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrepSign = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signal)).BeginInit();
             this.grProperties.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logTable)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -89,7 +94,7 @@ namespace lw_sm_1
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(26, 104);
+            this.btnStart.Location = new System.Drawing.Point(27, 116);
             this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(153, 40);
@@ -112,7 +117,7 @@ namespace lw_sm_1
             this.grProperties.Controls.Add(this.btnStart);
             this.grProperties.Location = new System.Drawing.Point(615, 13);
             this.grProperties.Name = "grProperties";
-            this.grProperties.Size = new System.Drawing.Size(200, 161);
+            this.grProperties.Size = new System.Drawing.Size(200, 172);
             this.grProperties.TabIndex = 6;
             this.grProperties.TabStop = false;
             this.grProperties.Text = "Параметры моделирования";
@@ -144,11 +149,40 @@ namespace lw_sm_1
             this.lbComp3.TabIndex = 9;
             this.lbComp3.Text = "label1";
             // 
+            // logTable
+            // 
+            this.logTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.logTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TimePrep,
+            this.NumComp,
+            this.PrepSign});
+            this.logTable.Location = new System.Drawing.Point(842, 22);
+            this.logTable.Name = "logTable";
+            this.logTable.RowTemplate.Height = 25;
+            this.logTable.Size = new System.Drawing.Size(352, 150);
+            this.logTable.TabIndex = 10;
+            // 
+            // TimePrep
+            // 
+            this.TimePrep.HeaderText = "t0";
+            this.TimePrep.Name = "TimePrep";
+            // 
+            // NumComp
+            // 
+            this.NumComp.HeaderText = "№ЭВМ";
+            this.NumComp.Name = "NumComp";
+            // 
+            // PrepSign
+            // 
+            this.PrepSign.HeaderText = "Обр.сигналов";
+            this.PrepSign.Name = "PrepSign";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 398);
+            this.ClientSize = new System.Drawing.Size(1232, 405);
+            this.Controls.Add(this.logTable);
             this.Controls.Add(this.lbComp3);
             this.Controls.Add(this.lbComp2);
             this.Controls.Add(this.lbComp1);
@@ -166,6 +200,7 @@ namespace lw_sm_1
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.signal)).EndInit();
             this.grProperties.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.logTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,5 +218,9 @@ namespace lw_sm_1
         private System.Windows.Forms.Label lbComp1;
         private System.Windows.Forms.Label lbComp2;
         private System.Windows.Forms.Label lbComp3;
+        private System.Windows.Forms.DataGridView logTable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimePrep;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumComp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrepSign;
     }
 }
