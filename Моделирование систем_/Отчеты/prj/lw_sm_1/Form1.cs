@@ -21,35 +21,61 @@ namespace lw_sm_1
         //для компьютеров
         private bool emptyComp = true;
       //для детерминированной СМО
-        int t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4;
+        int t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 1;
         int arivTime = 0, prepTime = 0, checkTime = 0,prepTimeComp = 0, prepSignal = 0;
-
+        int StartX = 0, StartY = 0;
         public Form1()
         {
             InitializeComponent();  
             tmr.Interval = 100;          
             tmr.Tick += new EventHandler(tmr_Tick);
             route.Text = signalCounter.ToString();
+            StartX = signal.Location.X;
+            StartY = signal.Location.Y;
         }
 
-        private async void DrawSignal()
+        private void DrawSignal()
         {
-            Bitmap mybit = new Bitmap(50, 50);
+            Bitmap mybit = new Bitmap(signal.Width, signal.Height);
             Graphics g = Graphics.FromImage(mybit);
             SolidBrush grBrush = new SolidBrush(Color.Green);
-            g.FillRectangle(grBrush,0,0, 50, 50);
-            g.DrawImage(mybit,80,80);
+            g.FillRectangle(grBrush,0,0, signal.Width, signal.Height);
+            g.DrawImage(mybit,StartX,StartY);
+            SignalMovement();
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void SignalMovement()
         {
-            signalCounter = 0;
+            do
+            {
+                if (signal.Location.X<100)
+                {
+                    SlideLeft();
+                }
+                else
+                {
+                    if(signal.Location.X == 106)
+                    {
+                        SlideUp();
+                    }              
+                }
+            } while (signal.Location.Y >= 50);
+            //DrawSignal();
+
+
+        }
+        private void btnStart_Click(object sender, EventArgs e)
+        { 
             DrawSignal();
+            Write();
+            signalCounter = 0;
+            tmr.Enabled = !tmr.Enabled; //старт/стоп       
             for (int i = 0; i < N; i++)
             {
                 compList.Add(new comp());
-            }
-            tmr.Enabled = !tmr.Enabled; //старт/стоп          
+            }           
+            Count();
+            
         }
 
         private async void SlideLeft()
@@ -60,13 +86,13 @@ namespace lw_sm_1
         {
             signal.Location = new Point(signal.Location.X, signal.Location.Y - 50);
         }
-        private async void AK1()
+        private void AK1()
         {
             arivTime = t0 + t1;
             signalCounter++;
             Task.Delay(50).Wait();
         }
-        private async void AK2()
+        private void AK2()
         {
             checkTime = checkTime + t2;//для фиксации общего времени проверки в канале
             prepTime = t0 + t2;
@@ -74,7 +100,7 @@ namespace lw_sm_1
             Task.Delay(50).Wait();
         }
 
-        private async void AK3()
+        private void AK3()
         {
             for (int i = 0; i < N; i++)
             {
@@ -97,11 +123,9 @@ namespace lw_sm_1
         }
         private async void Count()
         {
-                for (int t0 = 0; t0 < 40; t0++)
+                for (; t0 < 40; t0+=detT)
                 {
                     route.Text = signalCounter.ToString();
-                    //DrawSignal();
-                   // SlideLeft();
                     if (t0 >= arivTime)
                     {                     
                         AK1();//выполнение первого действия                      
@@ -109,22 +133,34 @@ namespace lw_sm_1
                     if (t0>=prepTime)
                     {
                         AK2();//выполнение обработки в канале
-                       // SlideLeft();
                     }
                     if (signalCounter+OutSignalCounter >0)
                     {
                         AK3(); //установка в очередь перед компьютером
                     }
-                    if (t0>prepTimeComp)
-                    {
-                        logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(min), Convert.ToString(prepSignal));
-                    } 
+                Write();
                 }
+        }
+        
+        private async void Write()
+        {
+            if (t0 <= arivTime)
+            {
+                logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(min), Convert.ToString(prepSignal), "Прием сигнала");
+            }
+            if (t0 <= prepTime)
+            {
+                logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(min), Convert.ToString(prepSignal), "Обработка в канале");
+            }
+            if (t0 <= prepTimeComp)
+            {
+                logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(min), Convert.ToString(prepSignal), "Обработка в ЭВМ");
+            }
+            Task.Delay(50).Wait();
         }
         async void tmr_Tick(object sender, EventArgs e)
         {
-            Count();
-            if(signalCounter >= 100)
+           if(signalCounter >= 100)
             {
                signalCounter = 0;
                tmr.Enabled = !tmr.Enabled; //старт/стоп
