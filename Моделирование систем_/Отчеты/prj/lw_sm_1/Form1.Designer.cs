@@ -48,13 +48,16 @@ namespace lw_sm_1
             this.lbComp2 = new System.Windows.Forms.Label();
             this.lbComp3 = new System.Windows.Forms.Label();
             this.logTable = new System.Windows.Forms.DataGridView();
-            this.TimePrep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrepSign = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbModel = new System.Windows.Forms.TabControl();
             this.tabModel = new System.Windows.Forms.TabPage();
             this.tabData = new System.Windows.Forms.TabPage();
+            this.TimeArrive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeArriv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimePrep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrepSign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -139,7 +142,7 @@ namespace lw_sm_1
             this.grProperties.Controls.Add(this.tbNumComp);
             this.grProperties.Controls.Add(this.lbNumComp);
             this.grProperties.Controls.Add(this.btnStart);
-            this.grProperties.Location = new System.Drawing.Point(620, 46);
+            this.grProperties.Location = new System.Drawing.Point(878, 42);
             this.grProperties.Name = "grProperties";
             this.grProperties.Size = new System.Drawing.Size(227, 347);
             this.grProperties.TabIndex = 6;
@@ -241,20 +244,77 @@ namespace lw_sm_1
             // 
             this.logTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.logTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TimeArrive,
+            this.TimeArriv,
             this.TimePrep,
+            this.TimeComp,
             this.NumComp,
             this.PrepSign,
             this.ActionData});
             this.logTable.Location = new System.Drawing.Point(6, 6);
             this.logTable.Name = "logTable";
             this.logTable.RowTemplate.Height = 25;
-            this.logTable.Size = new System.Drawing.Size(581, 337);
+            this.logTable.Size = new System.Drawing.Size(761, 337);
             this.logTable.TabIndex = 10;
+            // 
+            // tbModel
+            // 
+            this.tbModel.Controls.Add(this.tabModel);
+            this.tbModel.Controls.Add(this.tabData);
+            this.tbModel.Location = new System.Drawing.Point(13, 22);
+            this.tbModel.Name = "tbModel";
+            this.tbModel.SelectedIndex = 0;
+            this.tbModel.Size = new System.Drawing.Size(811, 377);
+            this.tbModel.TabIndex = 11;
+            // 
+            // tabModel
+            // 
+            this.tabModel.Controls.Add(this.signal);
+            this.tabModel.Controls.Add(this.route);
+            this.tabModel.Controls.Add(this.lbComp1);
+            this.tabModel.Controls.Add(this.pictureBox3);
+            this.tabModel.Controls.Add(this.lbComp3);
+            this.tabModel.Controls.Add(this.pictureBox2);
+            this.tabModel.Controls.Add(this.lbComp2);
+            this.tabModel.Controls.Add(this.pictureBox1);
+            this.tabModel.Location = new System.Drawing.Point(4, 24);
+            this.tabModel.Name = "tabModel";
+            this.tabModel.Padding = new System.Windows.Forms.Padding(3);
+            this.tabModel.Size = new System.Drawing.Size(803, 349);
+            this.tabModel.TabIndex = 0;
+            this.tabModel.Text = "Модель";
+            this.tabModel.UseVisualStyleBackColor = true;
+            // 
+            // tabData
+            // 
+            this.tabData.Controls.Add(this.logTable);
+            this.tabData.Location = new System.Drawing.Point(4, 24);
+            this.tabData.Name = "tabData";
+            this.tabData.Padding = new System.Windows.Forms.Padding(3);
+            this.tabData.Size = new System.Drawing.Size(803, 349);
+            this.tabData.TabIndex = 1;
+            this.tabData.Text = "Данные";
+            this.tabData.UseVisualStyleBackColor = true;
+            // 
+            // TimeArrive
+            // 
+            this.TimeArrive.HeaderText = "t0";
+            this.TimeArrive.Name = "TimeArrive";
+            // 
+            // TimeArriv
+            // 
+            this.TimeArriv.HeaderText = "Вр.приб";
+            this.TimeArriv.Name = "TimeArriv";
             // 
             // TimePrep
             // 
-            this.TimePrep.HeaderText = "t0";
+            this.TimePrep.HeaderText = "Вр.Канал";
             this.TimePrep.Name = "TimePrep";
+            // 
+            // TimeComp
+            // 
+            this.TimeComp.HeaderText = "Вр.ЭВМ";
+            this.TimeComp.Name = "TimeComp";
             // 
             // NumComp
             // 
@@ -271,50 +331,11 @@ namespace lw_sm_1
             this.ActionData.HeaderText = "Вып.действие";
             this.ActionData.Name = "ActionData";
             // 
-            // tbModel
-            // 
-            this.tbModel.Controls.Add(this.tabModel);
-            this.tbModel.Controls.Add(this.tabData);
-            this.tbModel.Location = new System.Drawing.Point(13, 22);
-            this.tbModel.Name = "tbModel";
-            this.tbModel.SelectedIndex = 0;
-            this.tbModel.Size = new System.Drawing.Size(601, 377);
-            this.tbModel.TabIndex = 11;
-            // 
-            // tabModel
-            // 
-            this.tabModel.Controls.Add(this.signal);
-            this.tabModel.Controls.Add(this.route);
-            this.tabModel.Controls.Add(this.lbComp1);
-            this.tabModel.Controls.Add(this.pictureBox3);
-            this.tabModel.Controls.Add(this.lbComp3);
-            this.tabModel.Controls.Add(this.pictureBox2);
-            this.tabModel.Controls.Add(this.lbComp2);
-            this.tabModel.Controls.Add(this.pictureBox1);
-            this.tabModel.Location = new System.Drawing.Point(4, 24);
-            this.tabModel.Name = "tabModel";
-            this.tabModel.Padding = new System.Windows.Forms.Padding(3);
-            this.tabModel.Size = new System.Drawing.Size(593, 349);
-            this.tabModel.TabIndex = 0;
-            this.tabModel.Text = "Модель";
-            this.tabModel.UseVisualStyleBackColor = true;
-            // 
-            // tabData
-            // 
-            this.tabData.Controls.Add(this.logTable);
-            this.tabData.Location = new System.Drawing.Point(4, 24);
-            this.tabData.Name = "tabData";
-            this.tabData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabData.Size = new System.Drawing.Size(593, 349);
-            this.tabData.TabIndex = 1;
-            this.tabData.Text = "Данные";
-            this.tabData.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(859, 405);
+            this.ClientSize = new System.Drawing.Size(1120, 405);
             this.Controls.Add(this.tbModel);
             this.Controls.Add(this.grProperties);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -356,12 +377,15 @@ namespace lw_sm_1
         private System.Windows.Forms.Label lbT1;
         private System.Windows.Forms.TextBox tbNumComp;
         private System.Windows.Forms.Label lbNumComp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimePrep;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumComp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrepSign;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ActionData;
         private System.Windows.Forms.TabControl tbModel;
         private System.Windows.Forms.TabPage tabModel;
         private System.Windows.Forms.TabPage tabData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeArrive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeArriv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimePrep;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeComp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumComp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrepSign;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ActionData;
     }
 }
