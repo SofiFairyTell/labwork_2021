@@ -27,7 +27,7 @@ namespace lw_sm_1
         public Form1()
         {
             InitializeComponent();  
-            tmr.Interval = 1000;          
+            tmr.Interval = 100;          
             tmr.Tick += new EventHandler(tmr_Tick);
             route.Text = signalCounter.ToString();
         }
@@ -100,8 +100,8 @@ namespace lw_sm_1
                 for (int t0 = 0; t0 < 40; t0++)
                 {
                     route.Text = signalCounter.ToString();
-                    DrawSignal();
-                    SlideLeft();
+                    //DrawSignal();
+                   // SlideLeft();
                     if (t0 >= arivTime)
                     {                     
                         AK1();//выполнение первого действия                      
@@ -109,7 +109,7 @@ namespace lw_sm_1
                     if (t0>=prepTime)
                     {
                         AK2();//выполнение обработки в канале
-                        SlideLeft();
+                       // SlideLeft();
                     }
                     if (signalCounter+OutSignalCounter >0)
                     {
@@ -124,7 +124,7 @@ namespace lw_sm_1
         async void tmr_Tick(object sender, EventArgs e)
         {
             Count();
-            if(signalCounter == 100)
+            if(signalCounter >= 100)
             {
                signalCounter = 0;
                tmr.Enabled = !tmr.Enabled; //старт/стоп
