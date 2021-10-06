@@ -27,7 +27,7 @@ namespace lw_sm_1
         public Form1()
         {
             InitializeComponent();
-            tmr.Interval = 100;
+            tmr.Interval = 10;
             tmr.Tick += new EventHandler(tmr_Tick);
             route.Text = signalCounter.ToString();
             StartX = signal.Location.X;
@@ -67,22 +67,23 @@ namespace lw_sm_1
         private void btnStart_Click(object sender, EventArgs e)
         {
             DrawSignal();
-            Write();
+            //Write();
             signalCounter = 0;
-            tmr.Enabled = !tmr.Enabled; //старт/стоп       
+            tmr.Enabled = true; //старт/стоп       
             for (int i = 0; i < N; i++)
             {
                 compList.Add(new comp());
             }
-            Count();
-
+            Task.Run(() => {
+                Count();
+            });
         }
 
-        private async void SlideLeft()
+        private void SlideLeft()
         {
             signal.Location = new Point(signal.Location.X + 50, signal.Location.Y);
         }
-        private async void SlideUp()
+        private void SlideUp()
         {
             signal.Location = new Point(signal.Location.X, signal.Location.Y - 50);
         }
@@ -109,6 +110,7 @@ namespace lw_sm_1
                     min = i;
                 }
             }
+
             compList[min].capacity++; //если емкость
             prepSignal++;
             if (compList[min].capacity <= 4)
@@ -117,33 +119,40 @@ namespace lw_sm_1
             }
             else
             {
-                compList[min].capacity = 0;
+                if (compList[min].capacity >= 4)
+                {
+                    compList[min].capacity = 0;
+                }
+                //очистка компьютеров
+                //for (int i = 0; i < N; i++)
+                //{
+                //    if (compList[i].capacity == 4)
+                //    {
+                //        compList[min].capacity = 0;
+                //    }
+                //}
+
             }
+            
             Task.Delay(40).Wait();
         }
-        private async void Count()
+        private void Count()
         {
                 for (; prepSignal <= 1000; t0 += detT)
                 {
-                    route.Text = signalCounter.ToString();
+                   
                     if (t0 >= arivTime)
                     {
                         AK1();//выполнение первого действия
-                        logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
-                        " ", " ", " ", " ", "Прием сигнала");
                     }
                     if (t0 >= prepTime)
                     {
                         AK2();//выполнение обработки в канале
-                        logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
-                        Convert.ToString(prepTime), " ", " ", " ", "Обработка в канале");
                     }
                     //if (signalCounter+OutSignalCounter >0)
                     if (t0 >= prepTimeComp)
                     {
                         AK3(); //установка в очередь перед компьютером
-                        logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
-                        Convert.ToString(min), Convert.ToString(prepSignal), "Обработка в ЭВМ");
                     }
                 }
         } 
@@ -179,10 +188,40 @@ namespace lw_sm_1
         }
         async void tmr_Tick(object sender, EventArgs e)
         {
-           if(signalCounter >= 1000)
+            route.Text = signalCounter.ToString();
+           
+            if (t0 >= arivTime)
             {
-              // signalCounter = 0;
-               tmr.Enabled = !tmr.Enabled; //старт/стоп
+                logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
+" ", " ", " ", " ", "Прием сигнала");
+            }
+            if (t0 >= prepTime)
+            {
+                logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
+                Convert.ToString(prepTime), " ", " ", " ", "Обработка в канале");
+            }
+            //if (signalCounter+OutSignalCounter >0)
+            if (t0 >= prepTimeComp)
+            {
+                logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
+                Convert.ToString(min), Convert.ToString(prepSignal), "Обработка в ЭВМ");
+            }
+
+            switch (min)
+            {
+                case 0:
+                    lbComp1.Text = Convert.ToString(compList[0].capacity); break;
+                case 1:
+                    lbComp2.Text = Convert.ToString(compList[1].capacity); break;
+                case 2:
+                    lbComp3.Text = Convert.ToString(compList[2].capacity); break;
+                default:
+                    break;
+            }
+            if (signalCounter >= 1000)
+            {
+               signalCounter = 0;
+               tmr.Enabled = false; //старт/стоп
             }
         }
 
