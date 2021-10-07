@@ -10,10 +10,12 @@ namespace lw_sm_1
     {
         public string compName { get; set; } //название группы верхнего уровня
         public int capacity;
+        public bool in_work; 
         public comp()
         {
             this.compName = "comp_";
             this.capacity = 0; //изначально емкость незаполнена
+            this.in_work = false;
         }
 
         public comp(int Capacity,string compName)

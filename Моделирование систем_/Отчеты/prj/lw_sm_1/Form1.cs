@@ -22,7 +22,9 @@ namespace lw_sm_1
         private bool emptyComp = true;
         //для детерминированной СМО
         int t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 1;
+        //Локальное время обработки
         int arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0;
+        //Для координат
         int StartX = 0, StartY = 0;
         public Form1()
         {
@@ -60,14 +62,10 @@ namespace lw_sm_1
                     }
                 }
             } while (signal.Location.Y >= 50);
-            //DrawSignal();
-
-
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
             DrawSignal();
-            //Write();
             signalCounter = 0;
             tmr.Enabled = true; //старт/стоп       
             for (int i = 0; i < N; i++)
@@ -103,6 +101,23 @@ namespace lw_sm_1
 
         private void AK3()
         {
+            prepTime = t0;
+            if((compList[min].capacity == 0) )
+            {
+              compList[min].in_work = true;
+              
+            }
+            else
+            {
+                if ((compList[min].in_work == true)||(compList[min].capacity <= 4))
+                {
+                 compList[min].capacity++;
+                 
+                }
+            }
+
+
+            
             for (int i = 0; i < N; i++)
             {
                 if (compList[min].capacity > compList[i].capacity)
@@ -110,8 +125,10 @@ namespace lw_sm_1
                     min = i;
                 }
             }
+            //обработка
+              prepTimeComp = t0 + t3;
+              prepSignal++;
 
-            compList[min].capacity++; //если емкость
             prepSignal++;
             if (compList[min].capacity <= 4)
             {
@@ -123,14 +140,6 @@ namespace lw_sm_1
                 {
                     compList[min].capacity = 0;
                 }
-                //очистка компьютеров
-                //for (int i = 0; i < N; i++)
-                //{
-                //    if (compList[i].capacity == 4)
-                //    {
-                //        compList[min].capacity = 0;
-                //    }
-                //}
 
             }
             
@@ -157,36 +166,7 @@ namespace lw_sm_1
                 }
         } 
 
-        private async void Write()
-        {
-            if ((t0>=0) || (t0 <= arivTime))
-            {
-                logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
-                    " ", " "," ", " ", "Прием сигнала");
-
-            }
-            else
-            {
-                    if ((t0 >= 0) || (prepTime>0))
-                    {
-                        logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
-                            Convert.ToString(prepTime), " ", " ", " ", "Обработка в канале");
-                    }
-                    else
-                    {
-                        if ((t0 > 0) || t0 <= prepTimeComp)
-                        {
-                            logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
-                                Convert.ToString(prepTime), Convert.ToString(prepTimeComp),
-                                Convert.ToString(min), Convert.ToString(prepSignal), "Обработка в ЭВМ");
-                        }
-                    }
-            }
-           
-           
-            Task.Delay(10).Wait();
-        }
-        async void tmr_Tick(object sender, EventArgs e)
+         async void tmr_Tick(object sender, EventArgs e)
         {
             route.Text = signalCounter.ToString();
            
