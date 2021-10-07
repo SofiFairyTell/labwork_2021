@@ -6,20 +6,35 @@ using System.Threading.Tasks;
 
 namespace lw_sm_1
 {
-    public class comp
+    public class comp: IComparer<comp> 
     {
         public string compName { get; set; } //название группы верхнего уровня
         public int capacity;
+        public bool in_work; 
         public comp()
         {
             this.compName = "comp_";
-            this.capacity = 4;
+            this.capacity = 0; //изначально емкость незаполнена
+            this.in_work = false;
         }
 
         public comp(int Capacity,string compName)
         {
             this.compName = compName;
             this.capacity = Capacity;
+        }
+        public int Compare(comp o1, comp o2)
+        {
+            if (o1.capacity > o2.capacity)
+            {
+                return 1;
+            }
+            else if (o1.capacity < o2.capacity)
+            {
+                return -1;
+            }
+
+            return 0;
         }
     }
 }
