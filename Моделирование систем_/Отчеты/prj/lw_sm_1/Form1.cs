@@ -21,7 +21,7 @@ namespace lw_sm_1
         //для компьютеров
         private bool emptyComp = true;
         //для детерминированной СМО
-        int t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 1;
+        int t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 10;
         //Локальное время обработки
         int arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0;
         //Для координат
@@ -72,7 +72,8 @@ namespace lw_sm_1
             {
                 compList.Add(new comp());
             }
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 Count();
             });
         }
@@ -87,81 +88,73 @@ namespace lw_sm_1
         }
         private void AK1()
         {
-            arivTime = t0 + t1;
+            arivTime = t0;
             signalCounter++;
             Task.Delay(40).Wait();
         }
         private void AK2()
         {
             checkTime = checkTime + t2;//для фиксации общего времени проверки в канале
-            prepTime = t0 + t2;
+            prepTime = t0;
             OutSignalCounter++;//считаем количесво исходящих сигналов
+
+            //Определим где наименьшая очередь
+            for (int i = 0; i < compList.Count(); i++)
+            {
+                if(compList[min].capacity >compList[i].capacity)
+                {
+                    min = i;
+                }
+            }             
+
             Task.Delay(40).Wait();
         }
 
         private void AK3()
         {
-            prepTime = t0;
-            if((compList[min].capacity == 0) )
+            
+            if ((compList[min].in_work == false)&&(compList[min].capacity>=0))
             {
-              compList[min].in_work = true;
-              
+                prepTimeComp = t0;
+                prepSignal++;
+                compList[min].in_work = true;
+                if(compList[min].capacity >0)
+                {
+                    compList[min].capacity--;
+                }            
             }
             else
             {
-                if ((compList[min].in_work == true)||(compList[min].capacity <= 4))
+                if((compList[min].in_work == true)&&(compList[min].capacity<=4))
                 {
-                 compList[min].capacity++;
-                 
+                    compList[min].capacity++;
                 }
             }
-
-
-            
-            for (int i = 0; i < N; i++)
-            {
-                if (compList[min].capacity > compList[i].capacity)
-                {
-                    min = i;
-                }
-            }
-            //обработка
-              prepTimeComp = t0 + t3;
-              prepSignal++;
-
-            prepSignal++;
-            if (compList[min].capacity <= 4)
-            {
-                prepTimeComp = t0 + t3;
-            }
-            else
-            {
-                if (compList[min].capacity >= 4)
-                {
-                    compList[min].capacity = 0;
-                }
-
-            }
-            
+ 
             Task.Delay(40).Wait();
         }
+
         private void Count()
         {
-                for (; prepSignal <= 1000; t0 += detT)
+                for (; prepSignal <= 5; t0 += detT)
                 {
                    
-                    if (t0 >= arivTime)
+                    if ((t0 - arivTime) > t1)
                     {
                         AK1();//выполнение первого действия
                     }
-                    if (t0 >= prepTime)
+                    if ((t0- prepTime)>t2)
                     {
                         AK2();//выполнение обработки в канале
                     }
-                    //if (signalCounter+OutSignalCounter >0)
-                    if (t0 >= prepTimeComp)
+                    if ((t0 - prepTimeComp) > t3)
                     {
-                        AK3(); //установка в очередь перед компьютером
+                       compList[min].in_work = false;
+                       AK3();
+                    }
+                    else
+                    {
+                        AK3(); //обработка в ПК                       
                     }
                 }
         } 
@@ -170,21 +163,20 @@ namespace lw_sm_1
         {
             route.Text = signalCounter.ToString();
            
-            if (t0 >= arivTime)
+            if ((t0 - arivTime) == t1)
             {
                 logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
-" ", " ", " ", " ", "Прием сигнала");
+                    " ", " ", " ", " ", " ", "Прием сигнала");
             }
-            if (t0 >= prepTime)
+            if ((t0 - prepTime) > t2)
             {
-                logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
-                Convert.ToString(prepTime), " ", " ", " ", "Обработка в канале");
+                logTable.Rows.Add(Convert.ToString(t0), " ",
+                Convert.ToString(prepTime), " ", " ", " ", " ", "Обработка в канале");
             }
-            //if (signalCounter+OutSignalCounter >0)
-            if (t0 >= prepTimeComp)
+            if ((t0 - prepTimeComp) > t3)
             {
                 logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
-                Convert.ToString(min), Convert.ToString(prepSignal), "Обработка в ЭВМ");
+                Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), "Обработка в ЭВМ");
             }
 
             switch (min)
@@ -198,7 +190,7 @@ namespace lw_sm_1
                 default:
                     break;
             }
-            if (signalCounter >= 1000)
+            if (prepSignal ==5 )
             {
                signalCounter = 0;
                tmr.Enabled = false; //старт/стоп

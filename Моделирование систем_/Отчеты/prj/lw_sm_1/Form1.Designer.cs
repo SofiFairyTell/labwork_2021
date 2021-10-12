@@ -56,6 +56,7 @@ namespace lw_sm_1
             this.TimePrep = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimeComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrepSign = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -249,12 +250,13 @@ namespace lw_sm_1
             this.TimePrep,
             this.TimeComp,
             this.NumComp,
+            this.CapComp,
             this.PrepSign,
             this.ActionData});
             this.logTable.Location = new System.Drawing.Point(6, 6);
             this.logTable.Name = "logTable";
             this.logTable.RowTemplate.Height = 25;
-            this.logTable.Size = new System.Drawing.Size(761, 337);
+            this.logTable.Size = new System.Drawing.Size(794, 337);
             this.logTable.TabIndex = 10;
             // 
             // tbModel
@@ -321,9 +323,14 @@ namespace lw_sm_1
             this.NumComp.HeaderText = "№ЭВМ";
             this.NumComp.Name = "NumComp";
             // 
+            // CapComp
+            // 
+            this.CapComp.HeaderText = "Емк.ЭВМ";
+            this.CapComp.Name = "CapComp";
+            // 
             // PrepSign
             // 
-            this.PrepSign.HeaderText = "Обр.сигналов";
+            this.PrepSign.HeaderText = "№Обр_Сигнал";
             this.PrepSign.Name = "PrepSign";
             // 
             // ActionData
@@ -385,6 +392,7 @@ namespace lw_sm_1
         private System.Windows.Forms.DataGridViewTextBoxColumn TimePrep;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeComp;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumComp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapComp;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrepSign;
         private System.Windows.Forms.DataGridViewTextBoxColumn ActionData;
     }
