@@ -23,7 +23,7 @@ namespace lw_sm_1
         //для детерминированной СМО
         int t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 10;
         //Локальное время обработки
-        int arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0;
+        int arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0, lostSignal=0;
         //Для координат
         int StartX = 0, StartY = 0;
         public Form1()
@@ -67,15 +67,30 @@ namespace lw_sm_1
         {
             DrawSignal();
             signalCounter = 0;
-            tmr.Enabled = true; //старт/стоп       
-            for (int i = 0; i < N; i++)
+            t0 = 0;
+            arivTime = 0; prepTime = 0; checkTime = 0; prepTimeComp = 0; prepSignal = 0; OutSignalCounter = 0;lostSignal = 0;
+
+            if (tmr.Enabled==false)
             {
-                compList.Add(new comp());
+                tmr.Enabled = true; //старт/стоп       
+                for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
+                {
+                    compList.Add(new comp());
+                }
+                 lbComp1.Text = Convert.ToString(compList[0].capacity); 
+                 lbComp2.Text = Convert.ToString(compList[1].capacity); 
+                 lbComp3.Text = Convert.ToString(compList[2].capacity); 
+
+                Task.Run(() =>
+                    {
+                        Count();
+                    });
             }
-            Task.Run(() =>
+            else
             {
-                Count();
-            });
+                tmr.Enabled = false; //старт/стоп
+            }
+           
         }
 
         private void SlideLeft()
@@ -117,7 +132,7 @@ namespace lw_sm_1
             {
                 prepTimeComp = t0;
                 prepSignal++;
-                compList[min].in_work = true;
+                //compList[min].in_work = true;
                 if(compList[min].capacity >0)
                 {
                     compList[min].capacity--;
@@ -125,9 +140,16 @@ namespace lw_sm_1
             }
             else
             {
-                if((compList[min].in_work == true)&&(compList[min].capacity<=4))
+                if((compList[min].in_work == true)&&(compList[min].capacity<4))
                 {
                     compList[min].capacity++;
+                }
+                else
+                {
+                    if ((compList[min].in_work == true) && (compList[min].capacity == 4))
+                    {
+                        lostSignal++;
+                    }
                 }
             }
  
@@ -136,7 +158,7 @@ namespace lw_sm_1
 
         private void Count()
         {
-                for (; prepSignal <= 5; t0 += detT)
+                for (; prepSignal <= Convert.ToDouble(tbNumSignal.Text.Trim()); t0 += detT)
                 {
                    
                     if ((t0 - arivTime) > t1)
@@ -154,6 +176,7 @@ namespace lw_sm_1
                     }
                     else
                     {
+                        compList[min].in_work = true;
                         AK3(); //обработка в ПК                       
                     }
                 }
@@ -190,10 +213,16 @@ namespace lw_sm_1
                 default:
                     break;
             }
-            if (prepSignal ==5 )
+            if (prepSignal == Convert.ToDouble(tbNumSignal.Text.Trim()))
             {
-               signalCounter = 0;
-               tmr.Enabled = false; //старт/стоп
+                //signalCounter = 0;
+                tmr.Enabled = false; //старт/стоп
+                lbSignalCounter.Text = signalCounter.ToString();
+                lbPrepSignal.Text = prepSignal.ToString();
+                lbOuterSignal.Text = OutSignalCounter.ToString();
+                lbLostSignal.Text = lostSignal.ToString();
+                lbAllCapacity.Text = (signalCounter - prepSignal).ToString();
+                
             }
         }
 

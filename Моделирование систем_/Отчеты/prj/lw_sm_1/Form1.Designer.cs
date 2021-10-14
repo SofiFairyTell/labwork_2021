@@ -36,6 +36,8 @@ namespace lw_sm_1
             this.btnStart = new System.Windows.Forms.Button();
             this.signal = new System.Windows.Forms.PictureBox();
             this.grProperties = new System.Windows.Forms.GroupBox();
+            this.tbNumSignal = new System.Windows.Forms.TextBox();
+            this.lbSignal = new System.Windows.Forms.Label();
             this.tbT3 = new System.Windows.Forms.TextBox();
             this.lbT3 = new System.Windows.Forms.Label();
             this.tbT2 = new System.Windows.Forms.TextBox();
@@ -48,9 +50,6 @@ namespace lw_sm_1
             this.lbComp2 = new System.Windows.Forms.Label();
             this.lbComp3 = new System.Windows.Forms.Label();
             this.logTable = new System.Windows.Forms.DataGridView();
-            this.tbModel = new System.Windows.Forms.TabControl();
-            this.tabModel = new System.Windows.Forms.TabPage();
-            this.tabData = new System.Windows.Forms.TabPage();
             this.TimeArrive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimeArriv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimePrep = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +58,20 @@ namespace lw_sm_1
             this.CapComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrepSign = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbModel = new System.Windows.Forms.TabControl();
+            this.tabModel = new System.Windows.Forms.TabPage();
+            this.tabData = new System.Windows.Forms.TabPage();
+            this.tabStat = new System.Windows.Forms.TabPage();
+            this.lbOuterSignal = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbAllCapacity = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lbPrepSignal = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbSignalCounter = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbLostSignal = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -68,6 +81,7 @@ namespace lw_sm_1
             this.tbModel.SuspendLayout();
             this.tabModel.SuspendLayout();
             this.tabData.SuspendLayout();
+            this.tabStat.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -134,6 +148,8 @@ namespace lw_sm_1
             // 
             // grProperties
             // 
+            this.grProperties.Controls.Add(this.tbNumSignal);
+            this.grProperties.Controls.Add(this.lbSignal);
             this.grProperties.Controls.Add(this.tbT3);
             this.grProperties.Controls.Add(this.lbT3);
             this.grProperties.Controls.Add(this.tbT2);
@@ -149,6 +165,22 @@ namespace lw_sm_1
             this.grProperties.TabIndex = 6;
             this.grProperties.TabStop = false;
             this.grProperties.Text = "Параметры моделирования";
+            // 
+            // tbNumSignal
+            // 
+            this.tbNumSignal.Location = new System.Drawing.Point(111, 231);
+            this.tbNumSignal.Name = "tbNumSignal";
+            this.tbNumSignal.Size = new System.Drawing.Size(100, 23);
+            this.tbNumSignal.TabIndex = 14;
+            // 
+            // lbSignal
+            // 
+            this.lbSignal.AutoSize = true;
+            this.lbSignal.Location = new System.Drawing.Point(7, 231);
+            this.lbSignal.Name = "lbSignal";
+            this.lbSignal.Size = new System.Drawing.Size(88, 30);
+            this.lbSignal.TabIndex = 13;
+            this.lbSignal.Text = "N_сигналов\r\nдля обработки";
             // 
             // tbT3
             // 
@@ -168,7 +200,7 @@ namespace lw_sm_1
             // 
             // tbT2
             // 
-            this.tbT2.Location = new System.Drawing.Point(111, 139);
+            this.tbT2.Location = new System.Drawing.Point(111, 142);
             this.tbT2.Name = "tbT2";
             this.tbT2.Size = new System.Drawing.Size(100, 23);
             this.tbT2.TabIndex = 10;
@@ -176,7 +208,7 @@ namespace lw_sm_1
             // lbT2
             // 
             this.lbT2.AutoSize = true;
-            this.lbT2.Location = new System.Drawing.Point(7, 142);
+            this.lbT2.Location = new System.Drawing.Point(6, 147);
             this.lbT2.Name = "lbT2";
             this.lbT2.Size = new System.Drawing.Size(17, 15);
             this.lbT2.TabIndex = 9;
@@ -259,45 +291,6 @@ namespace lw_sm_1
             this.logTable.Size = new System.Drawing.Size(794, 337);
             this.logTable.TabIndex = 10;
             // 
-            // tbModel
-            // 
-            this.tbModel.Controls.Add(this.tabModel);
-            this.tbModel.Controls.Add(this.tabData);
-            this.tbModel.Location = new System.Drawing.Point(13, 22);
-            this.tbModel.Name = "tbModel";
-            this.tbModel.SelectedIndex = 0;
-            this.tbModel.Size = new System.Drawing.Size(811, 377);
-            this.tbModel.TabIndex = 11;
-            // 
-            // tabModel
-            // 
-            this.tabModel.Controls.Add(this.signal);
-            this.tabModel.Controls.Add(this.route);
-            this.tabModel.Controls.Add(this.lbComp1);
-            this.tabModel.Controls.Add(this.pictureBox3);
-            this.tabModel.Controls.Add(this.lbComp3);
-            this.tabModel.Controls.Add(this.pictureBox2);
-            this.tabModel.Controls.Add(this.lbComp2);
-            this.tabModel.Controls.Add(this.pictureBox1);
-            this.tabModel.Location = new System.Drawing.Point(4, 24);
-            this.tabModel.Name = "tabModel";
-            this.tabModel.Padding = new System.Windows.Forms.Padding(3);
-            this.tabModel.Size = new System.Drawing.Size(803, 349);
-            this.tabModel.TabIndex = 0;
-            this.tabModel.Text = "Модель";
-            this.tabModel.UseVisualStyleBackColor = true;
-            // 
-            // tabData
-            // 
-            this.tabData.Controls.Add(this.logTable);
-            this.tabData.Location = new System.Drawing.Point(4, 24);
-            this.tabData.Name = "tabData";
-            this.tabData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabData.Size = new System.Drawing.Size(803, 349);
-            this.tabData.TabIndex = 1;
-            this.tabData.Text = "Данные";
-            this.tabData.UseVisualStyleBackColor = true;
-            // 
             // TimeArrive
             // 
             this.TimeArrive.HeaderText = "t0";
@@ -338,6 +331,162 @@ namespace lw_sm_1
             this.ActionData.HeaderText = "Вып.действие";
             this.ActionData.Name = "ActionData";
             // 
+            // tbModel
+            // 
+            this.tbModel.Controls.Add(this.tabModel);
+            this.tbModel.Controls.Add(this.tabData);
+            this.tbModel.Controls.Add(this.tabStat);
+            this.tbModel.Location = new System.Drawing.Point(13, 22);
+            this.tbModel.Name = "tbModel";
+            this.tbModel.SelectedIndex = 0;
+            this.tbModel.Size = new System.Drawing.Size(811, 377);
+            this.tbModel.TabIndex = 11;
+            // 
+            // tabModel
+            // 
+            this.tabModel.Controls.Add(this.signal);
+            this.tabModel.Controls.Add(this.route);
+            this.tabModel.Controls.Add(this.lbComp1);
+            this.tabModel.Controls.Add(this.pictureBox3);
+            this.tabModel.Controls.Add(this.lbComp3);
+            this.tabModel.Controls.Add(this.pictureBox2);
+            this.tabModel.Controls.Add(this.lbComp2);
+            this.tabModel.Controls.Add(this.pictureBox1);
+            this.tabModel.Location = new System.Drawing.Point(4, 24);
+            this.tabModel.Name = "tabModel";
+            this.tabModel.Padding = new System.Windows.Forms.Padding(3);
+            this.tabModel.Size = new System.Drawing.Size(803, 349);
+            this.tabModel.TabIndex = 0;
+            this.tabModel.Text = "Модель";
+            this.tabModel.UseVisualStyleBackColor = true;
+            // 
+            // tabData
+            // 
+            this.tabData.Controls.Add(this.logTable);
+            this.tabData.Location = new System.Drawing.Point(4, 24);
+            this.tabData.Name = "tabData";
+            this.tabData.Padding = new System.Windows.Forms.Padding(3);
+            this.tabData.Size = new System.Drawing.Size(803, 349);
+            this.tabData.TabIndex = 1;
+            this.tabData.Text = "Данные";
+            this.tabData.UseVisualStyleBackColor = true;
+            // 
+            // tabStat
+            // 
+            this.tabStat.Controls.Add(this.lbLostSignal);
+            this.tabStat.Controls.Add(this.label6);
+            this.tabStat.Controls.Add(this.lbOuterSignal);
+            this.tabStat.Controls.Add(this.label5);
+            this.tabStat.Controls.Add(this.lbAllCapacity);
+            this.tabStat.Controls.Add(this.label3);
+            this.tabStat.Controls.Add(this.lbPrepSignal);
+            this.tabStat.Controls.Add(this.label2);
+            this.tabStat.Controls.Add(this.lbSignalCounter);
+            this.tabStat.Controls.Add(this.label1);
+            this.tabStat.Location = new System.Drawing.Point(4, 24);
+            this.tabStat.Name = "tabStat";
+            this.tabStat.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStat.Size = new System.Drawing.Size(803, 349);
+            this.tabStat.TabIndex = 2;
+            this.tabStat.Text = "Статистика";
+            this.tabStat.UseVisualStyleBackColor = true;
+            // 
+            // lbOuterSignal
+            // 
+            this.lbOuterSignal.AutoSize = true;
+            this.lbOuterSignal.BackColor = System.Drawing.Color.Gold;
+            this.lbOuterSignal.Location = new System.Drawing.Point(217, 69);
+            this.lbOuterSignal.Name = "lbOuterSignal";
+            this.lbOuterSignal.Size = new System.Drawing.Size(13, 15);
+            this.lbOuterSignal.TabIndex = 7;
+            this.lbOuterSignal.Text = "0";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 69);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(178, 15);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Прошло через канал сигналов";
+            // 
+            // lbAllCapacity
+            // 
+            this.lbAllCapacity.AutoSize = true;
+            this.lbAllCapacity.BackColor = System.Drawing.Color.Gold;
+            this.lbAllCapacity.Location = new System.Drawing.Point(217, 170);
+            this.lbAllCapacity.Name = "lbAllCapacity";
+            this.lbAllCapacity.Size = new System.Drawing.Size(13, 15);
+            this.lbAllCapacity.TabIndex = 5;
+            this.lbAllCapacity.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 170);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(121, 15);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Осталось в очередях";
+            // 
+            // lbPrepSignal
+            // 
+            this.lbPrepSignal.AutoSize = true;
+            this.lbPrepSignal.BackColor = System.Drawing.Color.Gold;
+            this.lbPrepSignal.Location = new System.Drawing.Point(217, 104);
+            this.lbPrepSignal.Name = "lbPrepSignal";
+            this.lbPrepSignal.Size = new System.Drawing.Size(13, 15);
+            this.lbPrepSignal.TabIndex = 3;
+            this.lbPrepSignal.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 104);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(129, 15);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Обработано сигналов";
+            // 
+            // lbSignalCounter
+            // 
+            this.lbSignalCounter.AutoSize = true;
+            this.lbSignalCounter.BackColor = System.Drawing.Color.Gold;
+            this.lbSignalCounter.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbSignalCounter.Location = new System.Drawing.Point(217, 30);
+            this.lbSignalCounter.Name = "lbSignalCounter";
+            this.lbSignalCounter.Size = new System.Drawing.Size(13, 15);
+            this.lbSignalCounter.TabIndex = 1;
+            this.lbSignalCounter.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Принято сигналов";
+            // 
+            // lbLostSignal
+            // 
+            this.lbLostSignal.AutoSize = true;
+            this.lbLostSignal.BackColor = System.Drawing.Color.Gold;
+            this.lbLostSignal.Location = new System.Drawing.Point(217, 138);
+            this.lbLostSignal.Name = "lbLostSignal";
+            this.lbLostSignal.Size = new System.Drawing.Size(13, 15);
+            this.lbLostSignal.TabIndex = 9;
+            this.lbLostSignal.Text = "0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(16, 138);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(115, 15);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Потеряно сигналов";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -359,6 +508,8 @@ namespace lw_sm_1
             this.tabModel.ResumeLayout(false);
             this.tabModel.PerformLayout();
             this.tabData.ResumeLayout(false);
+            this.tabStat.ResumeLayout(false);
+            this.tabStat.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -395,5 +546,18 @@ namespace lw_sm_1
         private System.Windows.Forms.DataGridViewTextBoxColumn CapComp;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrepSign;
         private System.Windows.Forms.DataGridViewTextBoxColumn ActionData;
+        private System.Windows.Forms.TabPage tabStat;
+        private System.Windows.Forms.Label lbSignalCounter;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbPrepSignal;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbAllCapacity;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbOuterSignal;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tbNumSignal;
+        private System.Windows.Forms.Label lbSignal;
+        private System.Windows.Forms.Label lbLostSignal;
+        private System.Windows.Forms.Label label6;
     }
 }
