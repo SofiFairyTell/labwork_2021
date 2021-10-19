@@ -62,6 +62,8 @@ namespace lw_sm_1
             this.tabModel = new System.Windows.Forms.TabPage();
             this.tabData = new System.Windows.Forms.TabPage();
             this.tabStat = new System.Windows.Forms.TabPage();
+            this.lbLostSignal = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.lbOuterSignal = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lbAllCapacity = new System.Windows.Forms.Label();
@@ -70,8 +72,6 @@ namespace lw_sm_1
             this.label2 = new System.Windows.Forms.Label();
             this.lbSignalCounter = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lbLostSignal = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -87,7 +87,7 @@ namespace lw_sm_1
             // pictureBox1
             // 
             this.pictureBox1.Image = global::lw_sm_1.Properties.Resources.comp;
-            this.pictureBox1.Location = new System.Drawing.Point(310, 23);
+            this.pictureBox1.Location = new System.Drawing.Point(510, 19);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(138, 100);
@@ -97,7 +97,7 @@ namespace lw_sm_1
             // pictureBox2
             // 
             this.pictureBox2.Image = global::lw_sm_1.Properties.Resources.comp;
-            this.pictureBox2.Location = new System.Drawing.Point(310, 141);
+            this.pictureBox2.Location = new System.Drawing.Point(510, 138);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(138, 92);
@@ -107,7 +107,7 @@ namespace lw_sm_1
             // pictureBox3
             // 
             this.pictureBox3.Image = global::lw_sm_1.Properties.Resources.comp;
-            this.pictureBox3.Location = new System.Drawing.Point(310, 248);
+            this.pictureBox3.Location = new System.Drawing.Point(510, 244);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(138, 84);
@@ -119,7 +119,7 @@ namespace lw_sm_1
             this.route.AutoSize = true;
             this.route.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.route.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.route.Location = new System.Drawing.Point(58, 124);
+            this.route.Location = new System.Drawing.Point(138, 137);
             this.route.Name = "route";
             this.route.Size = new System.Drawing.Size(153, 65);
             this.route.TabIndex = 3;
@@ -139,7 +139,7 @@ namespace lw_sm_1
             // signal
             // 
             this.signal.BackColor = System.Drawing.Color.Maroon;
-            this.signal.Location = new System.Drawing.Point(6, 141);
+            this.signal.Location = new System.Drawing.Point(31, 151);
             this.signal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.signal.Name = "signal";
             this.signal.Size = new System.Drawing.Size(37, 36);
@@ -249,29 +249,32 @@ namespace lw_sm_1
             // lbComp1
             // 
             this.lbComp1.AutoSize = true;
-            this.lbComp1.Location = new System.Drawing.Point(249, 58);
+            this.lbComp1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbComp1.Location = new System.Drawing.Point(390, 58);
             this.lbComp1.Name = "lbComp1";
-            this.lbComp1.Size = new System.Drawing.Size(38, 15);
+            this.lbComp1.Size = new System.Drawing.Size(22, 25);
             this.lbComp1.TabIndex = 7;
-            this.lbComp1.Text = "label1";
+            this.lbComp1.Text = "0";
             // 
             // lbComp2
             // 
             this.lbComp2.AutoSize = true;
-            this.lbComp2.Location = new System.Drawing.Point(249, 162);
+            this.lbComp2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbComp2.Location = new System.Drawing.Point(390, 162);
             this.lbComp2.Name = "lbComp2";
-            this.lbComp2.Size = new System.Drawing.Size(38, 15);
+            this.lbComp2.Size = new System.Drawing.Size(22, 25);
             this.lbComp2.TabIndex = 8;
-            this.lbComp2.Text = "label1";
+            this.lbComp2.Text = "0";
             // 
             // lbComp3
             // 
             this.lbComp3.AutoSize = true;
-            this.lbComp3.Location = new System.Drawing.Point(249, 282);
+            this.lbComp3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbComp3.Location = new System.Drawing.Point(390, 282);
             this.lbComp3.Name = "lbComp3";
-            this.lbComp3.Size = new System.Drawing.Size(38, 15);
+            this.lbComp3.Size = new System.Drawing.Size(22, 25);
             this.lbComp3.TabIndex = 9;
-            this.lbComp3.Text = "label1";
+            this.lbComp3.Text = "0";
             // 
             // logTable
             // 
@@ -391,6 +394,25 @@ namespace lw_sm_1
             this.tabStat.Text = "Статистика";
             this.tabStat.UseVisualStyleBackColor = true;
             // 
+            // lbLostSignal
+            // 
+            this.lbLostSignal.AutoSize = true;
+            this.lbLostSignal.BackColor = System.Drawing.Color.Gold;
+            this.lbLostSignal.Location = new System.Drawing.Point(217, 138);
+            this.lbLostSignal.Name = "lbLostSignal";
+            this.lbLostSignal.Size = new System.Drawing.Size(13, 15);
+            this.lbLostSignal.TabIndex = 9;
+            this.lbLostSignal.Text = "0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(16, 138);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(115, 15);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Потеряно сигналов";
+            // 
             // lbOuterSignal
             // 
             this.lbOuterSignal.AutoSize = true;
@@ -467,25 +489,6 @@ namespace lw_sm_1
             this.label1.Size = new System.Drawing.Size(109, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Принято сигналов";
-            // 
-            // lbLostSignal
-            // 
-            this.lbLostSignal.AutoSize = true;
-            this.lbLostSignal.BackColor = System.Drawing.Color.Gold;
-            this.lbLostSignal.Location = new System.Drawing.Point(217, 138);
-            this.lbLostSignal.Name = "lbLostSignal";
-            this.lbLostSignal.Size = new System.Drawing.Size(13, 15);
-            this.lbLostSignal.TabIndex = 9;
-            this.lbLostSignal.Text = "0";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 138);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(115, 15);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Потеряно сигналов";
             // 
             // Form1
             // 

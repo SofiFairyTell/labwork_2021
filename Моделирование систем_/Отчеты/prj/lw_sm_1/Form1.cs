@@ -13,19 +13,19 @@ namespace lw_sm_1
     public partial class Form1 : Form
     {
         public static List<comp> compList = new List<comp>();
-
-        Timer tmr = new Timer();
-        int sign = 1;
+        readonly Timer tmr = new Timer();
         //счетчик канала
-        int min = 0, max = 10, signalCounter = 0, OutSignalCounter = 0;
-        //для компьютеров
-        private bool emptyComp = true;
+        int min = 0, signalCounter = 0, OutSignalCounter = 0;
+
         //для детерминированной СМО
         int t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 10;
         //Локальное время обработки
         int arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0, lostSignal=0;
+
         //Для координат
-        int StartX = 0, StartY = 0;
+        private int StartX = 0;
+        private readonly int StartY = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace lw_sm_1
             StartY = signal.Location.Y;
         }
 
-        private void DrawSignal()
+        private async void DrawSignal()
         {
             Bitmap mybit = new Bitmap(signal.Width, signal.Height);
             Graphics g = Graphics.FromImage(mybit);
@@ -48,24 +48,25 @@ namespace lw_sm_1
 
         private void SignalMovement()
         {
-            do
-            {
+            //do
+            //{
                 if (signal.Location.X < 100)
                 {
                     SlideLeft();
                 }
                 else
                 {
-                    if (signal.Location.X == 106)
+                    if ((signal.Location.X >= 100)&&(signal.Location.X < 150))
                     {
+                        
                         SlideUp();
                     }
                 }
-            } while (signal.Location.Y >= 50);
+            //} while (signal.Location.Y >= 50);
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
-            DrawSignal();
+           // DrawSignal();
             signalCounter = 0;
             t0 = 0;
             arivTime = 0; prepTime = 0; checkTime = 0; prepTimeComp = 0; prepSignal = 0; OutSignalCounter = 0;lostSignal = 0;
@@ -84,6 +85,7 @@ namespace lw_sm_1
                 Task.Run(() =>
                     {
                         Count();
+                        //DrawSignal();
                     });
             }
             else
@@ -96,10 +98,12 @@ namespace lw_sm_1
         private void SlideLeft()
         {
             signal.Location = new Point(signal.Location.X + 50, signal.Location.Y);
+            Task.Delay(50).Wait();
         }
         private void SlideUp()
         {
             signal.Location = new Point(signal.Location.X, signal.Location.Y - 50);
+            Task.Delay(40).Wait();
         }
         private void AK1()
         {
@@ -109,7 +113,7 @@ namespace lw_sm_1
         }
         private void AK2()
         {
-            checkTime = checkTime + t2;//для фиксации общего времени проверки в канале
+            checkTime += t2;//для фиксации общего времени проверки в канале
             prepTime = t0;
             OutSignalCounter++;//считаем количесво исходящих сигналов
 
@@ -184,6 +188,7 @@ namespace lw_sm_1
 
          async void tmr_Tick(object sender, EventArgs e)
         {
+            //DrawSignal();
             route.Text = signalCounter.ToString();
            
             if ((t0 - arivTime) == t1)
@@ -201,7 +206,7 @@ namespace lw_sm_1
                 logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
                 Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), "Обработка в ЭВМ");
             }
-
+            SignalMovement();
             switch (min)
             {
                 case 0:
