@@ -72,6 +72,8 @@ namespace lw_sm_1
             this.label2 = new System.Windows.Forms.Label();
             this.lbSignalCounter = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lbProd = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -376,6 +378,8 @@ namespace lw_sm_1
             // 
             // tabStat
             // 
+            this.tabStat.Controls.Add(this.lbProd);
+            this.tabStat.Controls.Add(this.label7);
             this.tabStat.Controls.Add(this.lbLostSignal);
             this.tabStat.Controls.Add(this.label6);
             this.tabStat.Controls.Add(this.lbOuterSignal);
@@ -490,6 +494,26 @@ namespace lw_sm_1
             this.label1.TabIndex = 0;
             this.label1.Text = "Принято сигналов";
             // 
+            // lbProd
+            // 
+            this.lbProd.AutoSize = true;
+            this.lbProd.BackColor = System.Drawing.Color.Gold;
+            this.lbProd.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbProd.Location = new System.Drawing.Point(483, 30);
+            this.lbProd.Name = "lbProd";
+            this.lbProd.Size = new System.Drawing.Size(13, 15);
+            this.lbProd.TabIndex = 11;
+            this.lbProd.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(282, 30);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(174, 15);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Производительность системы";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -562,5 +586,7 @@ namespace lw_sm_1
         private System.Windows.Forms.Label lbSignal;
         private System.Windows.Forms.Label lbLostSignal;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbProd;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -18,9 +18,9 @@ namespace lw_sm_1
         int min = 0, signalCounter = 0, OutSignalCounter = 0;
 
         //для детерминированной СМО
-        int t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 10;
+        double t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 10;
         //Локальное время обработки
-        int arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0, lostSignal=0;
+        double arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0, lostSignal=0;
 
         //Для координат
         private int StartX = 0;
@@ -73,6 +73,9 @@ namespace lw_sm_1
 
             if (tmr.Enabled==false)
             {
+                t1 = Convert.ToDouble(tbT1.Text.Trim());
+                t2 = Convert.ToDouble(tbT2.Text.Trim());
+                t3 = Convert.ToDouble(tbT3.Text.Trim());
                 tmr.Enabled = true; //старт/стоп       
                 for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
                 {
@@ -190,7 +193,7 @@ namespace lw_sm_1
         {
             //DrawSignal();
             route.Text = signalCounter.ToString();
-           
+            
             if ((t0 - arivTime) == t1)
             {
                 logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
@@ -227,7 +230,7 @@ namespace lw_sm_1
                 lbOuterSignal.Text = OutSignalCounter.ToString();
                 lbLostSignal.Text = lostSignal.ToString();
                 lbAllCapacity.Text = (signalCounter - prepSignal).ToString();
-                
+                lbProd.Text = "Обработано "+ ((prepSignal / signalCounter)/ t0).ToString() + " сигналов в секунду ";
             }
         }
 
