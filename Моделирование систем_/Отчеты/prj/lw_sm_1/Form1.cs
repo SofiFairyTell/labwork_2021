@@ -34,6 +34,13 @@ namespace lw_sm_1
             route.Text = signalCounter.ToString();
             StartX = signal.Location.X;
             StartY = signal.Location.Y;
+            tbT1.Text = "10";
+            tbT2.Text = "10";
+            tbT3.Text = "33";
+            tbEpsilon.Text = "3";
+            tbNumComp.Text = "3";
+            tbNumSignal.Text = "1000";
+
         }
 
         private async void DrawSignal()
@@ -230,7 +237,8 @@ namespace lw_sm_1
                 lbOuterSignal.Text = OutSignalCounter.ToString();
                 lbLostSignal.Text = lostSignal.ToString();
                 lbAllCapacity.Text = (signalCounter - prepSignal).ToString();
-                lbProd.Text = "Обработано "+ ((prepSignal / signalCounter)/ t0).ToString() + " сигналов в секунду ";
+                lbPSignal.Text = ((lostSignal/prepSignal)*100).ToString("F"+tbEpsilon.Text.Trim())+"%";
+                lbProd.Text = "Обработано "+ ((prepSignal / signalCounter)/ t0).ToString("F" + tbEpsilon.Text.Trim()) + " сигналов в секунду ";
             }
         }
 

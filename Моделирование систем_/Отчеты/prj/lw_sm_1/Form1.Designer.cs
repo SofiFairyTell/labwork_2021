@@ -62,6 +62,10 @@ namespace lw_sm_1
             this.tabModel = new System.Windows.Forms.TabPage();
             this.tabData = new System.Windows.Forms.TabPage();
             this.tabStat = new System.Windows.Forms.TabPage();
+            this.lbPSignal = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lbProd = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.lbLostSignal = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lbOuterSignal = new System.Windows.Forms.Label();
@@ -72,8 +76,8 @@ namespace lw_sm_1
             this.label2 = new System.Windows.Forms.Label();
             this.lbSignalCounter = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lbProd = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.tbEpsilon = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -150,6 +154,8 @@ namespace lw_sm_1
             // 
             // grProperties
             // 
+            this.grProperties.Controls.Add(this.tbEpsilon);
+            this.grProperties.Controls.Add(this.label4);
             this.grProperties.Controls.Add(this.tbNumSignal);
             this.grProperties.Controls.Add(this.lbSignal);
             this.grProperties.Controls.Add(this.tbT3);
@@ -161,24 +167,24 @@ namespace lw_sm_1
             this.grProperties.Controls.Add(this.tbNumComp);
             this.grProperties.Controls.Add(this.lbNumComp);
             this.grProperties.Controls.Add(this.btnStart);
-            this.grProperties.Location = new System.Drawing.Point(878, 42);
+            this.grProperties.Location = new System.Drawing.Point(829, 42);
             this.grProperties.Name = "grProperties";
-            this.grProperties.Size = new System.Drawing.Size(227, 347);
+            this.grProperties.Size = new System.Drawing.Size(276, 347);
             this.grProperties.TabIndex = 6;
             this.grProperties.TabStop = false;
             this.grProperties.Text = "Параметры моделирования";
             // 
             // tbNumSignal
             // 
-            this.tbNumSignal.Location = new System.Drawing.Point(111, 231);
+            this.tbNumSignal.Location = new System.Drawing.Point(111, 166);
             this.tbNumSignal.Name = "tbNumSignal";
-            this.tbNumSignal.Size = new System.Drawing.Size(100, 23);
+            this.tbNumSignal.Size = new System.Drawing.Size(117, 23);
             this.tbNumSignal.TabIndex = 14;
             // 
             // lbSignal
             // 
             this.lbSignal.AutoSize = true;
-            this.lbSignal.Location = new System.Drawing.Point(7, 231);
+            this.lbSignal.Location = new System.Drawing.Point(7, 155);
             this.lbSignal.Name = "lbSignal";
             this.lbSignal.Size = new System.Drawing.Size(88, 30);
             this.lbSignal.TabIndex = 13;
@@ -186,15 +192,15 @@ namespace lw_sm_1
             // 
             // tbT3
             // 
-            this.tbT3.Location = new System.Drawing.Point(111, 183);
+            this.tbT3.Location = new System.Drawing.Point(187, 106);
             this.tbT3.Name = "tbT3";
-            this.tbT3.Size = new System.Drawing.Size(100, 23);
+            this.tbT3.Size = new System.Drawing.Size(41, 23);
             this.tbT3.TabIndex = 12;
             // 
             // lbT3
             // 
             this.lbT3.AutoSize = true;
-            this.lbT3.Location = new System.Drawing.Point(7, 191);
+            this.lbT3.Location = new System.Drawing.Point(164, 106);
             this.lbT3.Name = "lbT3";
             this.lbT3.Size = new System.Drawing.Size(17, 15);
             this.lbT3.TabIndex = 11;
@@ -202,15 +208,15 @@ namespace lw_sm_1
             // 
             // tbT2
             // 
-            this.tbT2.Location = new System.Drawing.Point(111, 142);
+            this.tbT2.Location = new System.Drawing.Point(111, 106);
             this.tbT2.Name = "tbT2";
-            this.tbT2.Size = new System.Drawing.Size(100, 23);
+            this.tbT2.Size = new System.Drawing.Size(41, 23);
             this.tbT2.TabIndex = 10;
             // 
             // lbT2
             // 
             this.lbT2.AutoSize = true;
-            this.lbT2.Location = new System.Drawing.Point(6, 147);
+            this.lbT2.Location = new System.Drawing.Point(87, 106);
             this.lbT2.Name = "lbT2";
             this.lbT2.Size = new System.Drawing.Size(17, 15);
             this.lbT2.TabIndex = 9;
@@ -218,9 +224,9 @@ namespace lw_sm_1
             // 
             // tbT1
             // 
-            this.tbT1.Location = new System.Drawing.Point(111, 100);
+            this.tbT1.Location = new System.Drawing.Point(30, 103);
             this.tbT1.Name = "tbT1";
-            this.tbT1.Size = new System.Drawing.Size(100, 23);
+            this.tbT1.Size = new System.Drawing.Size(41, 23);
             this.tbT1.TabIndex = 8;
             // 
             // lbT1
@@ -236,7 +242,7 @@ namespace lw_sm_1
             // 
             this.tbNumComp.Location = new System.Drawing.Point(111, 56);
             this.tbNumComp.Name = "tbNumComp";
-            this.tbNumComp.Size = new System.Drawing.Size(100, 23);
+            this.tbNumComp.Size = new System.Drawing.Size(117, 23);
             this.tbNumComp.TabIndex = 6;
             // 
             // lbNumComp
@@ -344,7 +350,7 @@ namespace lw_sm_1
             this.tbModel.Location = new System.Drawing.Point(13, 22);
             this.tbModel.Name = "tbModel";
             this.tbModel.SelectedIndex = 0;
-            this.tbModel.Size = new System.Drawing.Size(811, 377);
+            this.tbModel.Size = new System.Drawing.Size(810, 377);
             this.tbModel.TabIndex = 11;
             // 
             // tabModel
@@ -360,7 +366,7 @@ namespace lw_sm_1
             this.tabModel.Location = new System.Drawing.Point(4, 24);
             this.tabModel.Name = "tabModel";
             this.tabModel.Padding = new System.Windows.Forms.Padding(3);
-            this.tabModel.Size = new System.Drawing.Size(803, 349);
+            this.tabModel.Size = new System.Drawing.Size(802, 349);
             this.tabModel.TabIndex = 0;
             this.tabModel.Text = "Модель";
             this.tabModel.UseVisualStyleBackColor = true;
@@ -378,6 +384,8 @@ namespace lw_sm_1
             // 
             // tabStat
             // 
+            this.tabStat.Controls.Add(this.lbPSignal);
+            this.tabStat.Controls.Add(this.label8);
             this.tabStat.Controls.Add(this.lbProd);
             this.tabStat.Controls.Add(this.label7);
             this.tabStat.Controls.Add(this.lbLostSignal);
@@ -397,6 +405,46 @@ namespace lw_sm_1
             this.tabStat.TabIndex = 2;
             this.tabStat.Text = "Статистика";
             this.tabStat.UseVisualStyleBackColor = true;
+            // 
+            // lbPSignal
+            // 
+            this.lbPSignal.AutoSize = true;
+            this.lbPSignal.BackColor = System.Drawing.Color.Gold;
+            this.lbPSignal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbPSignal.Location = new System.Drawing.Point(483, 69);
+            this.lbPSignal.Name = "lbPSignal";
+            this.lbPSignal.Size = new System.Drawing.Size(13, 15);
+            this.lbPSignal.TabIndex = 13;
+            this.lbPSignal.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(282, 69);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(165, 15);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Вероятность потери сигнала";
+            // 
+            // lbProd
+            // 
+            this.lbProd.AutoSize = true;
+            this.lbProd.BackColor = System.Drawing.Color.Gold;
+            this.lbProd.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbProd.Location = new System.Drawing.Point(483, 30);
+            this.lbProd.Name = "lbProd";
+            this.lbProd.Size = new System.Drawing.Size(13, 15);
+            this.lbProd.TabIndex = 11;
+            this.lbProd.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(282, 30);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(174, 15);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Производительность системы";
             // 
             // lbLostSignal
             // 
@@ -494,25 +542,21 @@ namespace lw_sm_1
             this.label1.TabIndex = 0;
             this.label1.Text = "Принято сигналов";
             // 
-            // lbProd
+            // tbEpsilon
             // 
-            this.lbProd.AutoSize = true;
-            this.lbProd.BackColor = System.Drawing.Color.Gold;
-            this.lbProd.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lbProd.Location = new System.Drawing.Point(483, 30);
-            this.lbProd.Name = "lbProd";
-            this.lbProd.Size = new System.Drawing.Size(13, 15);
-            this.lbProd.TabIndex = 11;
-            this.lbProd.Text = "0";
+            this.tbEpsilon.Location = new System.Drawing.Point(111, 215);
+            this.tbEpsilon.Name = "tbEpsilon";
+            this.tbEpsilon.Size = new System.Drawing.Size(117, 23);
+            this.tbEpsilon.TabIndex = 16;
             // 
-            // label7
+            // label4
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(282, 30);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(174, 15);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Производительность системы";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 219);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 15);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Точность";
             // 
             // Form1
             // 
@@ -588,5 +632,9 @@ namespace lw_sm_1
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lbProd;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lbPSignal;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox tbEpsilon;
+        private System.Windows.Forms.Label label4;
     }
 }
