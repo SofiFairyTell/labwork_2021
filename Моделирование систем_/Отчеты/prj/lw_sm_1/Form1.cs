@@ -16,7 +16,7 @@ namespace lw_sm_1
         readonly Timer tmr = new Timer();
         //счетчик канала
         int min = 0, signalCounter = 0, OutSignalCounter = 0;
-
+        bool Visible = false;
         //для детерминированной СМО
         double t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 10;
         //Локальное время обработки
@@ -147,6 +147,7 @@ namespace lw_sm_1
                 if(compList[min].capacity >0)
                 {
                     compList[min].capacity--;
+                    Visible = false;
                 }            
             }
             else
@@ -154,6 +155,7 @@ namespace lw_sm_1
                 if((compList[min].in_work == true)&&(compList[min].capacity<4))
                 {
                     compList[min].capacity++;
+                    Visible = true;
                 }
                 else
                 {
@@ -197,6 +199,7 @@ namespace lw_sm_1
         {
             route.Text = signalCounter.ToString();
             signal.Visible = false;
+            //signalRoute.Visible = false;
             if ((t0 - arivTime) == t1)
             {
                 logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
@@ -207,7 +210,6 @@ namespace lw_sm_1
             {
                 logTable.Rows.Add(Convert.ToString(t0), " ",
                 Convert.ToString(prepTime), " ", " ", " ", " ", "Обработка в канале");
-                signalRoute.Visible = true;
                 signal.Visible = false;
             }
             if ((t0 - prepTimeComp) > t3)
@@ -220,29 +222,52 @@ namespace lw_sm_1
             {
                 case 0:
                     lbComp1.Text = Convert.ToString(compList[0].capacity);
-                    signalRoute.Visible = false;
-                    signalPC1.Visible = true;
+                    signalRoute.Visible = Visible;
+                    signalRoute1.Visible = Visible;
+                    signalRoute2.Visible = Visible;
+                    signalRoutePC2_1.Visible = false;
+                    signalRoutePC2_2.Visible = false;
+                    signalRoutePC2_3.Visible = false;
+                    signalRoutePC3_1.Visible = false;
+                    signalRoutePC3_2.Visible = false;
+                    signalRoutePC3_3.Visible = false;
+                    signalPC1.Visible = Visible;
                     signalPC2.Visible = false;
                     signalPC3.Visible = false;
                     break;
                 case 1:
                     lbComp2.Text = Convert.ToString(compList[1].capacity);
                     signalRoute.Visible = false;
+                    signalRoute1.Visible = false;
+                    signalRoute2.Visible = false;
+                    signalRoutePC2_1.Visible = Visible;
+                    signalRoutePC2_2.Visible = Visible;
+                    signalRoutePC2_3.Visible = Visible;
+                    signalRoutePC3_1.Visible = false;
+                    signalRoutePC3_2.Visible = false;
+                    signalRoutePC3_3.Visible = false;
                     signalPC1.Visible = false;
-                    signalPC2.Visible = true;
+                    signalPC2.Visible = Visible;
                     signalPC3.Visible = false; 
                     break;
                 case 2:
                     lbComp3.Text = Convert.ToString(compList[2].capacity);
                     signalRoute.Visible = false;
+                    signalRoute1.Visible = false;
+                    signalRoute2.Visible = false;
+                    signalRoutePC2_1.Visible = false;
+                    signalRoutePC2_2.Visible = false;
+                    signalRoutePC2_3.Visible = false;
+                    signalRoutePC3_1.Visible = Visible;
+                    signalRoutePC3_2.Visible = Visible;
+                    signalRoutePC3_3.Visible = Visible;
                     signalPC1.Visible = false;
                     signalPC2.Visible = false;
-                    signalPC3.Visible = true; 
+                    signalPC3.Visible = Visible; 
                     break;
                 default:
                     break;
             }
-            signalRoute.Visible = true;
             if (prepSignal == Convert.ToDouble(tbNumSignal.Text.Trim()))
             {
                 tmr.Enabled = false; //старт/стоп
