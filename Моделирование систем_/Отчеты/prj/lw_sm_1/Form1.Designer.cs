@@ -36,6 +36,8 @@ namespace lw_sm_1
             this.btnStart = new System.Windows.Forms.Button();
             this.signal = new System.Windows.Forms.PictureBox();
             this.grProperties = new System.Windows.Forms.GroupBox();
+            this.tbEpsilon = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tbNumSignal = new System.Windows.Forms.TextBox();
             this.lbSignal = new System.Windows.Forms.Label();
             this.tbT3 = new System.Windows.Forms.TextBox();
@@ -62,6 +64,8 @@ namespace lw_sm_1
             this.tabModel = new System.Windows.Forms.TabPage();
             this.tabData = new System.Windows.Forms.TabPage();
             this.tabStat = new System.Windows.Forms.TabPage();
+            this.lbWait = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.lbPSignal = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.lbProd = new System.Windows.Forms.Label();
@@ -76,8 +80,10 @@ namespace lw_sm_1
             this.label2 = new System.Windows.Forms.Label();
             this.lbSignalCounter = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tbEpsilon = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.signalRoute = new System.Windows.Forms.PictureBox();
+            this.signalPC1 = new System.Windows.Forms.PictureBox();
+            this.signalPC2 = new System.Windows.Forms.PictureBox();
+            this.signalPC3 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -88,6 +94,10 @@ namespace lw_sm_1
             this.tabModel.SuspendLayout();
             this.tabData.SuspendLayout();
             this.tabStat.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoute)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalPC1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalPC2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalPC3)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -145,12 +155,13 @@ namespace lw_sm_1
             // signal
             // 
             this.signal.BackColor = System.Drawing.Color.Maroon;
-            this.signal.Location = new System.Drawing.Point(31, 151);
+            this.signal.Location = new System.Drawing.Point(47, 149);
             this.signal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.signal.Name = "signal";
             this.signal.Size = new System.Drawing.Size(37, 36);
             this.signal.TabIndex = 5;
             this.signal.TabStop = false;
+            this.signal.Visible = false;
             // 
             // grProperties
             // 
@@ -173,6 +184,22 @@ namespace lw_sm_1
             this.grProperties.TabIndex = 6;
             this.grProperties.TabStop = false;
             this.grProperties.Text = "Параметры моделирования";
+            // 
+            // tbEpsilon
+            // 
+            this.tbEpsilon.Location = new System.Drawing.Point(111, 215);
+            this.tbEpsilon.Name = "tbEpsilon";
+            this.tbEpsilon.Size = new System.Drawing.Size(117, 23);
+            this.tbEpsilon.TabIndex = 16;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 219);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 15);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Точность";
             // 
             // tbNumSignal
             // 
@@ -355,6 +382,10 @@ namespace lw_sm_1
             // 
             // tabModel
             // 
+            this.tabModel.Controls.Add(this.signalPC3);
+            this.tabModel.Controls.Add(this.signalPC2);
+            this.tabModel.Controls.Add(this.signalPC1);
+            this.tabModel.Controls.Add(this.signalRoute);
             this.tabModel.Controls.Add(this.signal);
             this.tabModel.Controls.Add(this.route);
             this.tabModel.Controls.Add(this.lbComp1);
@@ -377,13 +408,15 @@ namespace lw_sm_1
             this.tabData.Location = new System.Drawing.Point(4, 24);
             this.tabData.Name = "tabData";
             this.tabData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabData.Size = new System.Drawing.Size(803, 349);
+            this.tabData.Size = new System.Drawing.Size(802, 349);
             this.tabData.TabIndex = 1;
             this.tabData.Text = "Данные";
             this.tabData.UseVisualStyleBackColor = true;
             // 
             // tabStat
             // 
+            this.tabStat.Controls.Add(this.lbWait);
+            this.tabStat.Controls.Add(this.label10);
             this.tabStat.Controls.Add(this.lbPSignal);
             this.tabStat.Controls.Add(this.label8);
             this.tabStat.Controls.Add(this.lbProd);
@@ -401,10 +434,30 @@ namespace lw_sm_1
             this.tabStat.Location = new System.Drawing.Point(4, 24);
             this.tabStat.Name = "tabStat";
             this.tabStat.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStat.Size = new System.Drawing.Size(803, 349);
+            this.tabStat.Size = new System.Drawing.Size(802, 349);
             this.tabStat.TabIndex = 2;
             this.tabStat.Text = "Статистика";
             this.tabStat.UseVisualStyleBackColor = true;
+            // 
+            // lbWait
+            // 
+            this.lbWait.AutoSize = true;
+            this.lbWait.BackColor = System.Drawing.Color.Gold;
+            this.lbWait.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbWait.Location = new System.Drawing.Point(483, 110);
+            this.lbWait.Name = "lbWait";
+            this.lbWait.Size = new System.Drawing.Size(13, 15);
+            this.lbWait.TabIndex = 15;
+            this.lbWait.Text = "0";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(282, 110);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(192, 15);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Вероятность ожидания в очереди";
             // 
             // lbPSignal
             // 
@@ -542,21 +595,49 @@ namespace lw_sm_1
             this.label1.TabIndex = 0;
             this.label1.Text = "Принято сигналов";
             // 
-            // tbEpsilon
+            // signalRoute
             // 
-            this.tbEpsilon.Location = new System.Drawing.Point(111, 215);
-            this.tbEpsilon.Name = "tbEpsilon";
-            this.tbEpsilon.Size = new System.Drawing.Size(117, 23);
-            this.tbEpsilon.TabIndex = 16;
+            this.signalRoute.BackColor = System.Drawing.Color.Gold;
+            this.signalRoute.Location = new System.Drawing.Point(193, 89);
+            this.signalRoute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalRoute.Name = "signalRoute";
+            this.signalRoute.Size = new System.Drawing.Size(37, 36);
+            this.signalRoute.TabIndex = 10;
+            this.signalRoute.TabStop = false;
+            this.signalRoute.Visible = false;
             // 
-            // label4
+            // signalPC1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 219);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 15);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Точность";
+            this.signalPC1.BackColor = System.Drawing.Color.ForestGreen;
+            this.signalPC1.Location = new System.Drawing.Point(334, 52);
+            this.signalPC1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalPC1.Name = "signalPC1";
+            this.signalPC1.Size = new System.Drawing.Size(37, 36);
+            this.signalPC1.TabIndex = 11;
+            this.signalPC1.TabStop = false;
+            this.signalPC1.Visible = false;
+            // 
+            // signalPC2
+            // 
+            this.signalPC2.BackColor = System.Drawing.Color.ForestGreen;
+            this.signalPC2.Location = new System.Drawing.Point(334, 151);
+            this.signalPC2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalPC2.Name = "signalPC2";
+            this.signalPC2.Size = new System.Drawing.Size(37, 36);
+            this.signalPC2.TabIndex = 12;
+            this.signalPC2.TabStop = false;
+            this.signalPC2.Visible = false;
+            // 
+            // signalPC3
+            // 
+            this.signalPC3.BackColor = System.Drawing.Color.ForestGreen;
+            this.signalPC3.Location = new System.Drawing.Point(334, 271);
+            this.signalPC3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalPC3.Name = "signalPC3";
+            this.signalPC3.Size = new System.Drawing.Size(37, 36);
+            this.signalPC3.TabIndex = 13;
+            this.signalPC3.TabStop = false;
+            this.signalPC3.Visible = false;
             // 
             // Form1
             // 
@@ -581,6 +662,10 @@ namespace lw_sm_1
             this.tabData.ResumeLayout(false);
             this.tabStat.ResumeLayout(false);
             this.tabStat.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoute)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalPC1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalPC2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalPC3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -636,5 +721,11 @@ namespace lw_sm_1
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbEpsilon;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbWait;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox signalPC3;
+        private System.Windows.Forms.PictureBox signalPC2;
+        private System.Windows.Forms.PictureBox signalPC1;
+        private System.Windows.Forms.PictureBox signalRoute;
     }
 }

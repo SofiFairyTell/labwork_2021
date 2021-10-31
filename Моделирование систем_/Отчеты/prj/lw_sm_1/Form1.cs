@@ -55,8 +55,6 @@ namespace lw_sm_1
 
         private void SignalMovement()
         {
-            //do
-            //{
                 if (signal.Location.X < 100)
                 {
                     SlideLeft();
@@ -69,11 +67,9 @@ namespace lw_sm_1
                         SlideUp();
                     }
                 }
-            //} while (signal.Location.Y >= 50);
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
-           // DrawSignal();
             signalCounter = 0;
             t0 = 0;
             arivTime = 0; prepTime = 0; checkTime = 0; prepTimeComp = 0; prepSignal = 0; OutSignalCounter = 0;lostSignal = 0;
@@ -83,7 +79,8 @@ namespace lw_sm_1
                 t1 = Convert.ToDouble(tbT1.Text.Trim());
                 t2 = Convert.ToDouble(tbT2.Text.Trim());
                 t3 = Convert.ToDouble(tbT3.Text.Trim());
-                tmr.Enabled = true; //старт/стоп       
+                tmr.Enabled = true; //старт/стоп
+                compList.Clear();
                 for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
                 {
                     compList.Add(new comp());
@@ -101,6 +98,7 @@ namespace lw_sm_1
             else
             {
                 tmr.Enabled = false; //старт/стоп
+                //StatData();
             }
            
         }
@@ -146,7 +144,6 @@ namespace lw_sm_1
             {
                 prepTimeComp = t0;
                 prepSignal++;
-                //compList[min].in_work = true;
                 if(compList[min].capacity >0)
                 {
                     compList[min].capacity--;
@@ -198,50 +195,72 @@ namespace lw_sm_1
 
          async void tmr_Tick(object sender, EventArgs e)
         {
-            //DrawSignal();
             route.Text = signalCounter.ToString();
-            
+            signal.Visible = false;
             if ((t0 - arivTime) == t1)
             {
                 logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
                     " ", " ", " ", " ", " ", "Прием сигнала");
+                signal.Visible = true;
             }
             if ((t0 - prepTime) > t2)
             {
                 logTable.Rows.Add(Convert.ToString(t0), " ",
                 Convert.ToString(prepTime), " ", " ", " ", " ", "Обработка в канале");
+                signalRoute.Visible = true;
+                signal.Visible = false;
             }
             if ((t0 - prepTimeComp) > t3)
             {
                 logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
                 Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), "Обработка в ЭВМ");
             }
-            SignalMovement();
+           // SignalMovement();
             switch (min)
             {
                 case 0:
-                    lbComp1.Text = Convert.ToString(compList[0].capacity); break;
+                    lbComp1.Text = Convert.ToString(compList[0].capacity);
+                    signalRoute.Visible = false;
+                    signalPC1.Visible = true;
+                    signalPC2.Visible = false;
+                    signalPC3.Visible = false;
+                    break;
                 case 1:
-                    lbComp2.Text = Convert.ToString(compList[1].capacity); break;
+                    lbComp2.Text = Convert.ToString(compList[1].capacity);
+                    signalRoute.Visible = false;
+                    signalPC1.Visible = false;
+                    signalPC2.Visible = true;
+                    signalPC3.Visible = false; 
+                    break;
                 case 2:
-                    lbComp3.Text = Convert.ToString(compList[2].capacity); break;
+                    lbComp3.Text = Convert.ToString(compList[2].capacity);
+                    signalRoute.Visible = false;
+                    signalPC1.Visible = false;
+                    signalPC2.Visible = false;
+                    signalPC3.Visible = true; 
+                    break;
                 default:
                     break;
             }
+            signalRoute.Visible = true;
             if (prepSignal == Convert.ToDouble(tbNumSignal.Text.Trim()))
             {
-                //signalCounter = 0;
                 tmr.Enabled = false; //старт/стоп
-                lbSignalCounter.Text = signalCounter.ToString();
-                lbPrepSignal.Text = prepSignal.ToString();
-                lbOuterSignal.Text = OutSignalCounter.ToString();
-                lbLostSignal.Text = lostSignal.ToString();
-                lbAllCapacity.Text = (signalCounter - prepSignal).ToString();
-                lbPSignal.Text = ((lostSignal/prepSignal)*100).ToString("F"+tbEpsilon.Text.Trim())+"%";
-                lbProd.Text = "Обработано "+ ((prepSignal / signalCounter)/ t0).ToString("F" + tbEpsilon.Text.Trim()) + " сигналов в секунду ";
+                StatData();
             }
         }
 
+        private async void StatData()
+        {
+            lbSignalCounter.Text = signalCounter.ToString();
+            lbPrepSignal.Text = prepSignal.ToString();
+            lbOuterSignal.Text = OutSignalCounter.ToString();
+            lbLostSignal.Text = lostSignal.ToString();
+            lbAllCapacity.Text = (signalCounter - prepSignal).ToString();
+            lbPSignal.Text = ((lostSignal / signalCounter) * 100).ToString("F" + tbEpsilon.Text.Trim()) + "%";
+            lbWait.Text = (((signalCounter - prepSignal) / signalCounter) * 100).ToString("F" + tbEpsilon.Text.Trim()) + "%";
+            lbProd.Text = "Обработано " + ((prepSignal / signalCounter) / t0).ToString("F" + tbEpsilon.Text.Trim()) + " сигналов в секунду ";
+        }
 //двойная буферизация
         protected override CreateParams CreateParams
         {
