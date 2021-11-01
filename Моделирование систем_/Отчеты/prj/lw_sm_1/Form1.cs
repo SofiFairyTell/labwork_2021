@@ -32,8 +32,8 @@ namespace lw_sm_1
             tmr.Interval = 10;
             tmr.Tick += new EventHandler(tmr_Tick);
             route.Text = signalCounter.ToString();
-            StartX = signal.Location.X;
-            StartY = signal.Location.Y;
+            StartX = 16;
+            StartY = 151;
             tbT1.Text = "10";
             tbT2.Text = "10";
             tbT3.Text = "33";
@@ -55,17 +55,21 @@ namespace lw_sm_1
 
         private void SignalMovement()
         {
-                if (signal.Location.X < 100)
+                if (signal.Location.X < 62)
                 {
                     SlideLeft();
                 }
                 else
                 {
-                    if ((signal.Location.X >= 100)&&(signal.Location.X < 150))
+                    if ((signal.Location.X >= 62)&&(signal.Location.Y > 140))
                     {
                         
                         SlideUp();
                     }
+                    else
+                        {
+                            SlideStart();
+                        }
                 }
         }
         private void btnStart_Click(object sender, EventArgs e)
@@ -111,6 +115,11 @@ namespace lw_sm_1
         private void SlideUp()
         {
             signal.Location = new Point(signal.Location.X, signal.Location.Y - 50);
+            Task.Delay(40).Wait();
+        }
+        private void SlideStart()
+        {
+            signal.Location = new Point(StartX, StartY);
             Task.Delay(40).Wait();
         }
         private void AK1()
@@ -217,7 +226,7 @@ namespace lw_sm_1
                 logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
                 Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), "Обработка в ЭВМ");
             }
-           // SignalMovement();
+           SignalMovement();
             switch (min)
             {
                 case 0:
