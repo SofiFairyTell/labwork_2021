@@ -25,7 +25,9 @@ namespace lw_sm_1
         //Для координат
         private int StartX = 0;
         private readonly int StartY = 0;
-
+        private int SignalWidth = 0;
+        private int SignalHeight = 0;
+        private int Delay = 40;
         public Form1()
         {
             InitializeComponent();
@@ -34,6 +36,8 @@ namespace lw_sm_1
             route.Text = signalCounter.ToString();
             StartX = 16;
             StartY = 151;
+            SignalWidth = 36;
+            SignalHeight = 36;
             tbT1.Text = "10";
             tbT2.Text = "10";
             tbT3.Text = "33";
@@ -61,10 +65,42 @@ namespace lw_sm_1
                 }
                 else
                 {
-                    if ((signal.Location.X >= 62)&&(signal.Location.Y > 140))
+                   // if ((signal.Location.X >= 65)&&(signal.Location.Y> 149))
+                    if (signal.Location.X >= 65 && (signal.Location.Y >= 150))
                     {
-                        
-                        SlideUp();
+                        ChangeBox(Color.Gold);
+                        switch (min)
+                        {
+                            case 0:
+                                while (signal.Location.Y >= 50)
+                                {
+                                    SlideUp();
+                                }
+                                while (signal.Location.X < 340)
+                                {
+                                    SlideLeft();
+                                }                           
+                                break;
+                            case 1:
+                                while (signal.Location.X < 340)
+                                {
+                                    SlideLeft();
+                                }
+                                break;
+                            case 2:
+                                while (signal.Location.Y <260)
+                                {
+                                    SlideDown();
+                                }
+                                while (signal.Location.X < 340)
+                                {
+                                    SlideLeft();
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        //SlideUp();
                     }
                     else
                         {
@@ -72,6 +108,8 @@ namespace lw_sm_1
                         }
                 }
         }
+
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             signalCounter = 0;
@@ -110,17 +148,33 @@ namespace lw_sm_1
         private void SlideLeft()
         {
             signal.Location = new Point(signal.Location.X + 50, signal.Location.Y);
-            Task.Delay(50).Wait();
+            Task.Delay(Delay).Wait();
         }
+
+        private void ChangeBox(Color color)
+        {         
+            signal.BackColor = color;
+            signal.Width = Convert.ToInt32( SignalWidth/1.5 );
+            signal.Height = Convert.ToInt32(SignalHeight/1.5);
+        }
+
         private void SlideUp()
         {
             signal.Location = new Point(signal.Location.X, signal.Location.Y - 50);
-            Task.Delay(40).Wait();
+            Task.Delay(Delay).Wait();
+        }
+        private void SlideDown()
+        {
+            signal.Location = new Point(signal.Location.X, signal.Location.Y + 50);
+            Task.Delay(Delay).Wait();
         }
         private void SlideStart()
         {
             signal.Location = new Point(StartX, StartY);
-            Task.Delay(40).Wait();
+            signal.Width = SignalWidth;
+            signal.Height = SignalHeight;
+            signal.BackColor = Color.Maroon;
+            Task.Delay(Delay).Wait();
         }
         private void AK1()
         {
@@ -202,13 +256,36 @@ namespace lw_sm_1
                         AK3(); //обработка в ПК                       
                     }
                 }
-        } 
+        }
 
-         async void tmr_Tick(object sender, EventArgs e)
+        private void tbSpeed_Scroll(object sender, EventArgs e)
         {
+            label1.Text = String.Format("{0}", tbSpeed.Value);
+            if (tbSpeed.Value >10)
+            {
+                Delay += tbSpeed.Value;
+            }
+            else
+            {
+                if (tbSpeed.Value > 2)
+                {
+                    Delay -= tbSpeed.Value;
+                }
+                else
+                {
+                    Delay = 40;
+                }
+                
+            }
+            
+        }
+        async void tmr_Tick(object sender, EventArgs e)
+        {
+           
             route.Text = signalCounter.ToString();
-            signal.Visible = false;
+            signal.Visible = true;
             //signalRoute.Visible = false;
+            tbSpeed.Scroll += tbSpeed_Scroll;
             if ((t0 - arivTime) == t1)
             {
                 logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
@@ -226,53 +303,53 @@ namespace lw_sm_1
                 logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
                 Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), "Обработка в ЭВМ");
             }
-           SignalMovement();
+            SignalMovement();
             switch (min)
             {
                 case 0:
                     lbComp1.Text = Convert.ToString(compList[0].capacity);
-                    signalRoute.Visible = Visible;
-                    signalRoute1.Visible = Visible;
-                    signalRoute2.Visible = Visible;
-                    signalRoutePC2_1.Visible = false;
-                    signalRoutePC2_2.Visible = false;
-                    signalRoutePC2_3.Visible = false;
-                    signalRoutePC3_1.Visible = false;
-                    signalRoutePC3_2.Visible = false;
-                    signalRoutePC3_3.Visible = false;
-                    signalPC1.Visible = Visible;
-                    signalPC2.Visible = false;
-                    signalPC3.Visible = false;
+                    //signalRoute.Visible = Visible;
+                    //signalRoute1.Visible = Visible;
+                    //signalRoute2.Visible = Visible;
+                    //signalRoutePC2_1.Visible = false;
+                    //signalRoutePC2_2.Visible = false;
+                    //signalRoutePC2_3.Visible = false;
+                    //signalRoutePC3_1.Visible = false;
+                    //signalRoutePC3_2.Visible = false;
+                    //signalRoutePC3_3.Visible = false;
+                    //signalPC1.Visible = Visible;
+                    //signalPC2.Visible = false;
+                    //signalPC3.Visible = false;
                     break;
                 case 1:
                     lbComp2.Text = Convert.ToString(compList[1].capacity);
-                    signalRoute.Visible = false;
-                    signalRoute1.Visible = false;
-                    signalRoute2.Visible = false;
-                    signalRoutePC2_1.Visible = Visible;
-                    signalRoutePC2_2.Visible = Visible;
-                    signalRoutePC2_3.Visible = Visible;
-                    signalRoutePC3_1.Visible = false;
-                    signalRoutePC3_2.Visible = false;
-                    signalRoutePC3_3.Visible = false;
-                    signalPC1.Visible = false;
-                    signalPC2.Visible = Visible;
-                    signalPC3.Visible = false; 
+                    //signalRoute.Visible = false;
+                    //signalRoute1.Visible = false;
+                    //signalRoute2.Visible = false;
+                    //signalRoutePC2_1.Visible = Visible;
+                    //signalRoutePC2_2.Visible = Visible;
+                    //signalRoutePC2_3.Visible = Visible;
+                    //signalRoutePC3_1.Visible = false;
+                    //signalRoutePC3_2.Visible = false;
+                    //signalRoutePC3_3.Visible = false;
+                    //signalPC1.Visible = false;
+                    //signalPC2.Visible = Visible;
+                    //signalPC3.Visible = false; 
                     break;
                 case 2:
                     lbComp3.Text = Convert.ToString(compList[2].capacity);
-                    signalRoute.Visible = false;
-                    signalRoute1.Visible = false;
-                    signalRoute2.Visible = false;
-                    signalRoutePC2_1.Visible = false;
-                    signalRoutePC2_2.Visible = false;
-                    signalRoutePC2_3.Visible = false;
-                    signalRoutePC3_1.Visible = Visible;
-                    signalRoutePC3_2.Visible = Visible;
-                    signalRoutePC3_3.Visible = Visible;
-                    signalPC1.Visible = false;
-                    signalPC2.Visible = false;
-                    signalPC3.Visible = Visible; 
+                    //signalRoute.Visible = false;
+                    //signalRoute1.Visible = false;
+                    //signalRoute2.Visible = false;
+                    //signalRoutePC2_1.Visible = false;
+                    //signalRoutePC2_2.Visible = false;
+                    //signalRoutePC2_3.Visible = false;
+                    //signalRoutePC3_1.Visible = Visible;
+                    //signalRoutePC3_2.Visible = Visible;
+                    //signalRoutePC3_3.Visible = Visible;
+                    //signalPC1.Visible = false;
+                    //signalPC2.Visible = false;
+                    //signalPC3.Visible = Visible; 
                     break;
                 default:
                     break;

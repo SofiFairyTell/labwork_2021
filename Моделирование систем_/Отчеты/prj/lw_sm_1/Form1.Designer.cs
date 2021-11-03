@@ -29,6 +29,7 @@ namespace lw_sm_1
         /// </summary>
         private void InitializeComponent()
         {
+            this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -62,6 +63,15 @@ namespace lw_sm_1
             this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbModel = new System.Windows.Forms.TabControl();
             this.tabModel = new System.Windows.Forms.TabPage();
+            this.signalRoutePC3_3 = new System.Windows.Forms.PictureBox();
+            this.signalRoutePC3_2 = new System.Windows.Forms.PictureBox();
+            this.signalRoutePC3_1 = new System.Windows.Forms.PictureBox();
+            this.signalRoute2 = new System.Windows.Forms.PictureBox();
+            this.signalRoutePC2_3 = new System.Windows.Forms.PictureBox();
+            this.signalRoutePC2_1 = new System.Windows.Forms.PictureBox();
+            this.signalRoutePC2_2 = new System.Windows.Forms.PictureBox();
+            this.signalRoute1 = new System.Windows.Forms.PictureBox();
+            this.gbPC = new System.Windows.Forms.GroupBox();
             this.signalPC3 = new System.Windows.Forms.PictureBox();
             this.signalPC2 = new System.Windows.Forms.PictureBox();
             this.signalPC1 = new System.Windows.Forms.PictureBox();
@@ -84,15 +94,7 @@ namespace lw_sm_1
             this.label2 = new System.Windows.Forms.Label();
             this.lbSignalCounter = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.gbPC = new System.Windows.Forms.GroupBox();
-            this.signalRoute1 = new System.Windows.Forms.PictureBox();
-            this.signalRoutePC2_2 = new System.Windows.Forms.PictureBox();
-            this.signalRoutePC2_1 = new System.Windows.Forms.PictureBox();
-            this.signalRoutePC2_3 = new System.Windows.Forms.PictureBox();
-            this.signalRoute2 = new System.Windows.Forms.PictureBox();
-            this.signalRoutePC3_1 = new System.Windows.Forms.PictureBox();
-            this.signalRoutePC3_2 = new System.Windows.Forms.PictureBox();
-            this.signalRoutePC3_3 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -101,22 +103,33 @@ namespace lw_sm_1
             ((System.ComponentModel.ISupportInitialize)(this.logTable)).BeginInit();
             this.tbModel.SuspendLayout();
             this.tabModel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoute2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoute1)).BeginInit();
+            this.gbPC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalPC3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalPC2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalPC1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalRoute)).BeginInit();
             this.tabData.SuspendLayout();
             this.tabStat.SuspendLayout();
-            this.gbPC.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoute1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoute2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_3)).BeginInit();
             this.SuspendLayout();
+            // 
+            // tbSpeed
+            // 
+            this.tbSpeed.Location = new System.Drawing.Point(234, 10);
+            this.tbSpeed.Maximum = 30;
+            this.tbSpeed.Name = "tbSpeed";
+            this.tbSpeed.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.tbSpeed.Size = new System.Drawing.Size(45, 330);
+            this.tbSpeed.SmallChange = 10;
+            this.tbSpeed.TabIndex = 17;
+            this.tbSpeed.TickFrequency = 10;
             // 
             // pictureBox1
             // 
@@ -173,7 +186,7 @@ namespace lw_sm_1
             // signal
             // 
             this.signal.BackColor = System.Drawing.Color.Maroon;
-            this.signal.Location = new System.Drawing.Point(16, 151);
+            this.signal.Location = new System.Drawing.Point(15, 150);
             this.signal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.signal.Name = "signal";
             this.signal.Size = new System.Drawing.Size(37, 36);
@@ -183,6 +196,7 @@ namespace lw_sm_1
             // 
             // grProperties
             // 
+            this.grProperties.Controls.Add(this.tbSpeed);
             this.grProperties.Controls.Add(this.tbEpsilon);
             this.grProperties.Controls.Add(this.label4);
             this.grProperties.Controls.Add(this.tbNumSignal);
@@ -423,6 +437,112 @@ namespace lw_sm_1
             this.tabModel.Text = "Модель";
             this.tabModel.UseVisualStyleBackColor = true;
             // 
+            // signalRoutePC3_3
+            // 
+            this.signalRoutePC3_3.BackColor = System.Drawing.Color.Gold;
+            this.signalRoutePC3_3.Location = new System.Drawing.Point(339, 261);
+            this.signalRoutePC3_3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalRoutePC3_3.Name = "signalRoutePC3_3";
+            this.signalRoutePC3_3.Size = new System.Drawing.Size(24, 24);
+            this.signalRoutePC3_3.TabIndex = 25;
+            this.signalRoutePC3_3.TabStop = false;
+            this.signalRoutePC3_3.Visible = false;
+            // 
+            // signalRoutePC3_2
+            // 
+            this.signalRoutePC3_2.BackColor = System.Drawing.Color.Gold;
+            this.signalRoutePC3_2.Location = new System.Drawing.Point(283, 261);
+            this.signalRoutePC3_2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalRoutePC3_2.Name = "signalRoutePC3_2";
+            this.signalRoutePC3_2.Size = new System.Drawing.Size(24, 24);
+            this.signalRoutePC3_2.TabIndex = 24;
+            this.signalRoutePC3_2.TabStop = false;
+            this.signalRoutePC3_2.Visible = false;
+            // 
+            // signalRoutePC3_1
+            // 
+            this.signalRoutePC3_1.BackColor = System.Drawing.Color.Gold;
+            this.signalRoutePC3_1.Location = new System.Drawing.Point(241, 217);
+            this.signalRoutePC3_1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalRoutePC3_1.Name = "signalRoutePC3_1";
+            this.signalRoutePC3_1.Size = new System.Drawing.Size(24, 24);
+            this.signalRoutePC3_1.TabIndex = 23;
+            this.signalRoutePC3_1.TabStop = false;
+            this.signalRoutePC3_1.Visible = false;
+            // 
+            // signalRoute2
+            // 
+            this.signalRoute2.BackColor = System.Drawing.Color.Gold;
+            this.signalRoute2.Location = new System.Drawing.Point(283, 53);
+            this.signalRoute2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalRoute2.Name = "signalRoute2";
+            this.signalRoute2.Size = new System.Drawing.Size(24, 24);
+            this.signalRoute2.TabIndex = 22;
+            this.signalRoute2.TabStop = false;
+            this.signalRoute2.Visible = false;
+            // 
+            // signalRoutePC2_3
+            // 
+            this.signalRoutePC2_3.BackColor = System.Drawing.Color.Gold;
+            this.signalRoutePC2_3.Location = new System.Drawing.Point(339, 157);
+            this.signalRoutePC2_3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalRoutePC2_3.Name = "signalRoutePC2_3";
+            this.signalRoutePC2_3.Size = new System.Drawing.Size(24, 24);
+            this.signalRoutePC2_3.TabIndex = 21;
+            this.signalRoutePC2_3.TabStop = false;
+            this.signalRoutePC2_3.Visible = false;
+            // 
+            // signalRoutePC2_1
+            // 
+            this.signalRoutePC2_1.BackColor = System.Drawing.Color.Gold;
+            this.signalRoutePC2_1.Location = new System.Drawing.Point(241, 157);
+            this.signalRoutePC2_1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalRoutePC2_1.Name = "signalRoutePC2_1";
+            this.signalRoutePC2_1.Size = new System.Drawing.Size(24, 24);
+            this.signalRoutePC2_1.TabIndex = 20;
+            this.signalRoutePC2_1.TabStop = false;
+            this.signalRoutePC2_1.Visible = false;
+            // 
+            // signalRoutePC2_2
+            // 
+            this.signalRoutePC2_2.BackColor = System.Drawing.Color.Gold;
+            this.signalRoutePC2_2.Location = new System.Drawing.Point(292, 157);
+            this.signalRoutePC2_2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalRoutePC2_2.Name = "signalRoutePC2_2";
+            this.signalRoutePC2_2.Size = new System.Drawing.Size(24, 24);
+            this.signalRoutePC2_2.TabIndex = 19;
+            this.signalRoutePC2_2.TabStop = false;
+            this.signalRoutePC2_2.Visible = false;
+            // 
+            // signalRoute1
+            // 
+            this.signalRoute1.BackColor = System.Drawing.Color.Gold;
+            this.signalRoute1.Location = new System.Drawing.Point(241, 90);
+            this.signalRoute1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.signalRoute1.Name = "signalRoute1";
+            this.signalRoute1.Size = new System.Drawing.Size(24, 24);
+            this.signalRoute1.TabIndex = 18;
+            this.signalRoute1.TabStop = false;
+            this.signalRoute1.Visible = false;
+            // 
+            // gbPC
+            // 
+            this.gbPC.BackColor = System.Drawing.Color.LightGray;
+            this.gbPC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.gbPC.Controls.Add(this.pictureBox1);
+            this.gbPC.Controls.Add(this.pictureBox2);
+            this.gbPC.Controls.Add(this.pictureBox3);
+            this.gbPC.Controls.Add(this.lbComp1);
+            this.gbPC.Controls.Add(this.lbComp2);
+            this.gbPC.Controls.Add(this.lbComp3);
+            this.gbPC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbPC.Location = new System.Drawing.Point(453, 6);
+            this.gbPC.Name = "gbPC";
+            this.gbPC.Size = new System.Drawing.Size(245, 330);
+            this.gbPC.TabIndex = 17;
+            this.gbPC.TabStop = false;
+            this.gbPC.Text = "Компьютеры для обработки сигналов";
+            // 
             // signalPC3
             // 
             this.signalPC3.BackColor = System.Drawing.Color.ForestGreen;
@@ -660,112 +780,6 @@ namespace lw_sm_1
             this.label1.TabIndex = 0;
             this.label1.Text = "Принято сигналов";
             // 
-            // gbPC
-            // 
-            this.gbPC.BackColor = System.Drawing.Color.LightGray;
-            this.gbPC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.gbPC.Controls.Add(this.pictureBox1);
-            this.gbPC.Controls.Add(this.pictureBox2);
-            this.gbPC.Controls.Add(this.pictureBox3);
-            this.gbPC.Controls.Add(this.lbComp1);
-            this.gbPC.Controls.Add(this.lbComp2);
-            this.gbPC.Controls.Add(this.lbComp3);
-            this.gbPC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gbPC.Location = new System.Drawing.Point(453, 6);
-            this.gbPC.Name = "gbPC";
-            this.gbPC.Size = new System.Drawing.Size(245, 330);
-            this.gbPC.TabIndex = 17;
-            this.gbPC.TabStop = false;
-            this.gbPC.Text = "Компьютеры для обработки сигналов";
-            // 
-            // signalRoute1
-            // 
-            this.signalRoute1.BackColor = System.Drawing.Color.Gold;
-            this.signalRoute1.Location = new System.Drawing.Point(241, 90);
-            this.signalRoute1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.signalRoute1.Name = "signalRoute1";
-            this.signalRoute1.Size = new System.Drawing.Size(24, 24);
-            this.signalRoute1.TabIndex = 18;
-            this.signalRoute1.TabStop = false;
-            this.signalRoute1.Visible = false;
-            // 
-            // signalRoutePC2_2
-            // 
-            this.signalRoutePC2_2.BackColor = System.Drawing.Color.Gold;
-            this.signalRoutePC2_2.Location = new System.Drawing.Point(292, 157);
-            this.signalRoutePC2_2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.signalRoutePC2_2.Name = "signalRoutePC2_2";
-            this.signalRoutePC2_2.Size = new System.Drawing.Size(24, 24);
-            this.signalRoutePC2_2.TabIndex = 19;
-            this.signalRoutePC2_2.TabStop = false;
-            this.signalRoutePC2_2.Visible = false;
-            // 
-            // signalRoutePC2_1
-            // 
-            this.signalRoutePC2_1.BackColor = System.Drawing.Color.Gold;
-            this.signalRoutePC2_1.Location = new System.Drawing.Point(241, 157);
-            this.signalRoutePC2_1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.signalRoutePC2_1.Name = "signalRoutePC2_1";
-            this.signalRoutePC2_1.Size = new System.Drawing.Size(24, 24);
-            this.signalRoutePC2_1.TabIndex = 20;
-            this.signalRoutePC2_1.TabStop = false;
-            this.signalRoutePC2_1.Visible = false;
-            // 
-            // signalRoutePC2_3
-            // 
-            this.signalRoutePC2_3.BackColor = System.Drawing.Color.Gold;
-            this.signalRoutePC2_3.Location = new System.Drawing.Point(339, 157);
-            this.signalRoutePC2_3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.signalRoutePC2_3.Name = "signalRoutePC2_3";
-            this.signalRoutePC2_3.Size = new System.Drawing.Size(24, 24);
-            this.signalRoutePC2_3.TabIndex = 21;
-            this.signalRoutePC2_3.TabStop = false;
-            this.signalRoutePC2_3.Visible = false;
-            // 
-            // signalRoute2
-            // 
-            this.signalRoute2.BackColor = System.Drawing.Color.Gold;
-            this.signalRoute2.Location = new System.Drawing.Point(283, 53);
-            this.signalRoute2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.signalRoute2.Name = "signalRoute2";
-            this.signalRoute2.Size = new System.Drawing.Size(24, 24);
-            this.signalRoute2.TabIndex = 22;
-            this.signalRoute2.TabStop = false;
-            this.signalRoute2.Visible = false;
-            // 
-            // signalRoutePC3_1
-            // 
-            this.signalRoutePC3_1.BackColor = System.Drawing.Color.Gold;
-            this.signalRoutePC3_1.Location = new System.Drawing.Point(241, 217);
-            this.signalRoutePC3_1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.signalRoutePC3_1.Name = "signalRoutePC3_1";
-            this.signalRoutePC3_1.Size = new System.Drawing.Size(24, 24);
-            this.signalRoutePC3_1.TabIndex = 23;
-            this.signalRoutePC3_1.TabStop = false;
-            this.signalRoutePC3_1.Visible = false;
-            // 
-            // signalRoutePC3_2
-            // 
-            this.signalRoutePC3_2.BackColor = System.Drawing.Color.Gold;
-            this.signalRoutePC3_2.Location = new System.Drawing.Point(283, 261);
-            this.signalRoutePC3_2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.signalRoutePC3_2.Name = "signalRoutePC3_2";
-            this.signalRoutePC3_2.Size = new System.Drawing.Size(24, 24);
-            this.signalRoutePC3_2.TabIndex = 24;
-            this.signalRoutePC3_2.TabStop = false;
-            this.signalRoutePC3_2.Visible = false;
-            // 
-            // signalRoutePC3_3
-            // 
-            this.signalRoutePC3_3.BackColor = System.Drawing.Color.Gold;
-            this.signalRoutePC3_3.Location = new System.Drawing.Point(339, 261);
-            this.signalRoutePC3_3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.signalRoutePC3_3.Name = "signalRoutePC3_3";
-            this.signalRoutePC3_3.Size = new System.Drawing.Size(24, 24);
-            this.signalRoutePC3_3.TabIndex = 25;
-            this.signalRoutePC3_3.TabStop = false;
-            this.signalRoutePC3_3.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -776,6 +790,7 @@ namespace lw_sm_1
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -786,6 +801,16 @@ namespace lw_sm_1
             this.tbModel.ResumeLayout(false);
             this.tabModel.ResumeLayout(false);
             this.tabModel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoute2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signalRoute1)).EndInit();
+            this.gbPC.ResumeLayout(false);
+            this.gbPC.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalPC3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalPC2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalPC1)).EndInit();
@@ -793,16 +818,6 @@ namespace lw_sm_1
             this.tabData.ResumeLayout(false);
             this.tabStat.ResumeLayout(false);
             this.tabStat.PerformLayout();
-            this.gbPC.ResumeLayout(false);
-            this.gbPC.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoute1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC2_3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoute2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -873,5 +888,6 @@ namespace lw_sm_1
         private System.Windows.Forms.PictureBox signalRoutePC2_2;
         private System.Windows.Forms.PictureBox signalRoute1;
         private System.Windows.Forms.GroupBox gbPC;
+        public System.Windows.Forms.TrackBar tbSpeed;
     }
 }
