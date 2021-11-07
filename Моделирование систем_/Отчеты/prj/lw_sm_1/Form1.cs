@@ -44,6 +44,7 @@ namespace lw_sm_1
             tbEpsilon.Text = "3";
             tbNumComp.Text = "3";
             tbNumSignal.Text = "1000";
+            //tbSpeed.Scroll += tbSpeed_Scroll;
 
         }
 
@@ -81,12 +82,14 @@ namespace lw_sm_1
                                     SlideLeft();
                                 }                           
                                 break;
+                                SlideStart();
                             case 1:
                                 while (signal.Location.X < 340)
                                 {
                                     SlideLeft();
                                 }
-                                break;
+                                SlideStart();
+                            break;
                             case 2:
                                 while (signal.Location.Y <260)
                                 {
@@ -96,9 +99,11 @@ namespace lw_sm_1
                                 {
                                     SlideLeft();
                                 }
+                                SlideStart();
                                 break;
                             default:
-                                break;
+                                SlideStart();
+                            break;
                         }
                         //SlideUp();
                     }
@@ -174,7 +179,7 @@ namespace lw_sm_1
             signal.Width = SignalWidth;
             signal.Height = SignalHeight;
             signal.BackColor = Color.Maroon;
-            Task.Delay(Delay).Wait();
+            //Task.Delay(Delay).Wait();
         }
         private void AK1()
         {
@@ -260,20 +265,23 @@ namespace lw_sm_1
 
         private void tbSpeed_Scroll(object sender, EventArgs e)
         {
-            label1.Text = String.Format("{0}", tbSpeed.Value);
-            if (tbSpeed.Value >10)
+            if (tbSpeed.Value >= 20)
             {
-                Delay += tbSpeed.Value;
+                Delay = 100;
             }
             else
             {
-                if (tbSpeed.Value > 2)
+                if ((tbSpeed.Value >= 10)|| (tbSpeed.Value <= 20))
                 {
-                    Delay -= tbSpeed.Value;
+                    Delay = 50;
                 }
                 else
                 {
-                    Delay = 40;
+                    if ((tbSpeed.Value >= 0) || (tbSpeed.Value <= 10))
+                    {
+                            Delay = 10;
+                    }
+                    
                 }
                 
             }
@@ -286,6 +294,8 @@ namespace lw_sm_1
             signal.Visible = true;
             //signalRoute.Visible = false;
             tbSpeed.Scroll += tbSpeed_Scroll;
+            //SignalMovement();
+
             if ((t0 - arivTime) == t1)
             {
                 logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
@@ -308,48 +318,12 @@ namespace lw_sm_1
             {
                 case 0:
                     lbComp1.Text = Convert.ToString(compList[0].capacity);
-                    //signalRoute.Visible = Visible;
-                    //signalRoute1.Visible = Visible;
-                    //signalRoute2.Visible = Visible;
-                    //signalRoutePC2_1.Visible = false;
-                    //signalRoutePC2_2.Visible = false;
-                    //signalRoutePC2_3.Visible = false;
-                    //signalRoutePC3_1.Visible = false;
-                    //signalRoutePC3_2.Visible = false;
-                    //signalRoutePC3_3.Visible = false;
-                    //signalPC1.Visible = Visible;
-                    //signalPC2.Visible = false;
-                    //signalPC3.Visible = false;
                     break;
                 case 1:
                     lbComp2.Text = Convert.ToString(compList[1].capacity);
-                    //signalRoute.Visible = false;
-                    //signalRoute1.Visible = false;
-                    //signalRoute2.Visible = false;
-                    //signalRoutePC2_1.Visible = Visible;
-                    //signalRoutePC2_2.Visible = Visible;
-                    //signalRoutePC2_3.Visible = Visible;
-                    //signalRoutePC3_1.Visible = false;
-                    //signalRoutePC3_2.Visible = false;
-                    //signalRoutePC3_3.Visible = false;
-                    //signalPC1.Visible = false;
-                    //signalPC2.Visible = Visible;
-                    //signalPC3.Visible = false; 
                     break;
                 case 2:
                     lbComp3.Text = Convert.ToString(compList[2].capacity);
-                    //signalRoute.Visible = false;
-                    //signalRoute1.Visible = false;
-                    //signalRoute2.Visible = false;
-                    //signalRoutePC2_1.Visible = false;
-                    //signalRoutePC2_2.Visible = false;
-                    //signalRoutePC2_3.Visible = false;
-                    //signalRoutePC3_1.Visible = Visible;
-                    //signalRoutePC3_2.Visible = Visible;
-                    //signalRoutePC3_3.Visible = Visible;
-                    //signalPC1.Visible = false;
-                    //signalPC2.Visible = false;
-                    //signalPC3.Visible = Visible; 
                     break;
                 default:
                     break;

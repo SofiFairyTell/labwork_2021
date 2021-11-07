@@ -29,7 +29,6 @@ namespace lw_sm_1
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -49,6 +48,7 @@ namespace lw_sm_1
             this.lbT1 = new System.Windows.Forms.Label();
             this.tbNumComp = new System.Windows.Forms.TextBox();
             this.lbNumComp = new System.Windows.Forms.Label();
+            this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.lbComp1 = new System.Windows.Forms.Label();
             this.lbComp2 = new System.Windows.Forms.Label();
             this.lbComp3 = new System.Windows.Forms.Label();
@@ -94,12 +94,17 @@ namespace lw_sm_1
             this.label2 = new System.Windows.Forms.Label();
             this.lbSignalCounter = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signal)).BeginInit();
             this.grProperties.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logTable)).BeginInit();
             this.tbModel.SuspendLayout();
             this.tabModel.SuspendLayout();
@@ -119,17 +124,6 @@ namespace lw_sm_1
             this.tabData.SuspendLayout();
             this.tabStat.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tbSpeed
-            // 
-            this.tbSpeed.Location = new System.Drawing.Point(234, 10);
-            this.tbSpeed.Maximum = 30;
-            this.tbSpeed.Name = "tbSpeed";
-            this.tbSpeed.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbSpeed.Size = new System.Drawing.Size(45, 330);
-            this.tbSpeed.SmallChange = 10;
-            this.tbSpeed.TabIndex = 17;
-            this.tbSpeed.TickFrequency = 10;
             // 
             // pictureBox1
             // 
@@ -196,7 +190,6 @@ namespace lw_sm_1
             // 
             // grProperties
             // 
-            this.grProperties.Controls.Add(this.tbSpeed);
             this.grProperties.Controls.Add(this.tbEpsilon);
             this.grProperties.Controls.Add(this.label4);
             this.grProperties.Controls.Add(this.tbNumSignal);
@@ -212,7 +205,7 @@ namespace lw_sm_1
             this.grProperties.Controls.Add(this.btnStart);
             this.grProperties.Location = new System.Drawing.Point(829, 42);
             this.grProperties.Name = "grProperties";
-            this.grProperties.Size = new System.Drawing.Size(276, 347);
+            this.grProperties.Size = new System.Drawing.Size(351, 347);
             this.grProperties.TabIndex = 6;
             this.grProperties.TabStop = false;
             this.grProperties.Text = "Параметры моделирования";
@@ -313,6 +306,21 @@ namespace lw_sm_1
             this.lbNumComp.TabIndex = 5;
             this.lbNumComp.Text = "N_компьютеров";
             // 
+            // tbSpeed
+            // 
+            this.tbSpeed.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbSpeed.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tbSpeed.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tbSpeed.Location = new System.Drawing.Point(0, 421);
+            this.tbSpeed.Maximum = 30;
+            this.tbSpeed.Name = "tbSpeed";
+            this.tbSpeed.Size = new System.Drawing.Size(1192, 45);
+            this.tbSpeed.SmallChange = 10;
+            this.tbSpeed.TabIndex = 17;
+            this.tbSpeed.TickFrequency = 10;
+            this.tbSpeed.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.tbSpeed.Value = 10;
+            // 
             // lbComp1
             // 
             this.lbComp1.AutoSize = true;
@@ -409,7 +417,7 @@ namespace lw_sm_1
             this.tbModel.Location = new System.Drawing.Point(13, 22);
             this.tbModel.Name = "tbModel";
             this.tbModel.SelectedIndex = 0;
-            this.tbModel.Size = new System.Drawing.Size(810, 377);
+            this.tbModel.Size = new System.Drawing.Size(810, 367);
             this.tbModel.TabIndex = 11;
             // 
             // tabModel
@@ -432,7 +440,7 @@ namespace lw_sm_1
             this.tabModel.Location = new System.Drawing.Point(4, 24);
             this.tabModel.Name = "tabModel";
             this.tabModel.Padding = new System.Windows.Forms.Padding(3);
-            this.tabModel.Size = new System.Drawing.Size(802, 349);
+            this.tabModel.Size = new System.Drawing.Size(802, 339);
             this.tabModel.TabIndex = 0;
             this.tabModel.Text = "Модель";
             this.tabModel.UseVisualStyleBackColor = true;
@@ -538,7 +546,7 @@ namespace lw_sm_1
             this.gbPC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbPC.Location = new System.Drawing.Point(453, 6);
             this.gbPC.Name = "gbPC";
-            this.gbPC.Size = new System.Drawing.Size(245, 330);
+            this.gbPC.Size = new System.Drawing.Size(245, 322);
             this.gbPC.TabIndex = 17;
             this.gbPC.TabStop = false;
             this.gbPC.Text = "Компьютеры для обработки сигналов";
@@ -593,7 +601,7 @@ namespace lw_sm_1
             this.tabData.Location = new System.Drawing.Point(4, 24);
             this.tabData.Name = "tabData";
             this.tabData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabData.Size = new System.Drawing.Size(802, 349);
+            this.tabData.Size = new System.Drawing.Size(802, 339);
             this.tabData.TabIndex = 1;
             this.tabData.Text = "Данные";
             this.tabData.UseVisualStyleBackColor = true;
@@ -619,7 +627,7 @@ namespace lw_sm_1
             this.tabStat.Location = new System.Drawing.Point(4, 24);
             this.tabStat.Name = "tabStat";
             this.tabStat.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStat.Size = new System.Drawing.Size(802, 349);
+            this.tabStat.Size = new System.Drawing.Size(802, 339);
             this.tabStat.TabIndex = 2;
             this.tabStat.Text = "Статистика";
             this.tabStat.UseVisualStyleBackColor = true;
@@ -780,23 +788,74 @@ namespace lw_sm_1
             this.label1.TabIndex = 0;
             this.label1.Text = "Принято сигналов";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(391, 392);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(0, 15);
+            this.label9.TabIndex = 18;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(391, 407);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(19, 15);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "10";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(781, 403);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(19, 15);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "50";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(1167, 403);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(25, 15);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "100";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(12, 392);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(118, 15);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Скорость анимации";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1120, 405);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(1192, 466);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.tbSpeed);
             this.Controls.Add(this.tbModel);
             this.Controls.Add(this.grProperties);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.signal)).EndInit();
             this.grProperties.ResumeLayout(false);
             this.grProperties.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logTable)).EndInit();
             this.tbModel.ResumeLayout(false);
             this.tabModel.ResumeLayout(false);
@@ -819,6 +878,7 @@ namespace lw_sm_1
             this.tabStat.ResumeLayout(false);
             this.tabStat.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -889,5 +949,10 @@ namespace lw_sm_1
         private System.Windows.Forms.PictureBox signalRoute1;
         private System.Windows.Forms.GroupBox gbPC;
         public System.Windows.Forms.TrackBar tbSpeed;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
     }
 }
