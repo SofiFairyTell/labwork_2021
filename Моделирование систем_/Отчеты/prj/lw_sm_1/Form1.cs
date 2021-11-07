@@ -44,7 +44,7 @@ namespace lw_sm_1
             tbEpsilon.Text = "3";
             tbNumComp.Text = "3";
             tbNumSignal.Text = "1000";
-            //tbSpeed.Scroll += tbSpeed_Scroll;
+            tbSpeed.Scroll += tbSpeed_Scroll;
 
         }
 
@@ -66,8 +66,7 @@ namespace lw_sm_1
                 }
                 else
                 {
-                   // if ((signal.Location.X >= 65)&&(signal.Location.Y> 149))
-                    if (signal.Location.X >= 65 && (signal.Location.Y >= 150))
+                    if (signal.Location.X >= 65 && (signal.Location.Y >= 150) && signal.Location.X < 366)
                     {
                         ChangeBox(Color.Gold);
                         switch (min)
@@ -77,32 +76,45 @@ namespace lw_sm_1
                                 {
                                     SlideUp();
                                 }
-                                while (signal.Location.X < 340)
-                                {
-                                    SlideLeft();
-                                }                           
-                                break;
-                                SlideStart();
-                            case 1:
-                                while (signal.Location.X < 340)
+                                while (signal.Location.X <= 366)
                                 {
                                     SlideLeft();
                                 }
-                                SlideStart();
+                            //if (signal.Location.X > 366)
+                            //{
+                            //    SlideStart();
+                            //}
+                            //SlideStart();
+                            break;
+                                
+                            case 1:
+                                while (signal.Location.X <= 366)
+                                {
+                                    SlideLeft();
+                                }
+                                //if (signal.Location.X > 340)
+                                //{
+                                //    SlideStart();
+                                //}
+                            //SlideStart();
                             break;
                             case 2:
                                 while (signal.Location.Y <260)
                                 {
                                     SlideDown();
                                 }
-                                while (signal.Location.X < 340)
+                                while (signal.Location.X <= 366)
                                 {
                                     SlideLeft();
                                 }
-                                SlideStart();
+                                //if (signal.Location.X > 366)
+                                //{
+                                //    SlideStart();
+                                //}
+                                //SlideStart();
                                 break;
                             default:
-                                SlideStart();
+                               // SlideStart();
                             break;
                         }
                         //SlideUp();
@@ -179,13 +191,13 @@ namespace lw_sm_1
             signal.Width = SignalWidth;
             signal.Height = SignalHeight;
             signal.BackColor = Color.Maroon;
-            //Task.Delay(Delay).Wait();
+            Task.Delay(Delay).Wait();
         }
         private void AK1()
         {
             arivTime = t0;
             signalCounter++;
-            Task.Delay(40).Wait();
+            Task.Delay(Delay).Wait();
         }
         private void AK2()
         {
@@ -201,8 +213,7 @@ namespace lw_sm_1
                     min = i;
                 }
             }             
-
-            Task.Delay(40).Wait();
+            Task.Delay(Delay).Wait();
         }
 
         private void AK3()
@@ -234,14 +245,13 @@ namespace lw_sm_1
                 }
             }
  
-            Task.Delay(40).Wait();
+            Task.Delay(Delay).Wait();
         }
 
         private void Count()
         {
                 for (; prepSignal <= Convert.ToDouble(tbNumSignal.Text.Trim()); t0 += detT)
-                {
-                   
+                {                 
                     if ((t0 - arivTime) > t1)
                     {
                         AK1();//выполнение первого действия
@@ -279,21 +289,44 @@ namespace lw_sm_1
                 {
                     if ((tbSpeed.Value >= 0) || (tbSpeed.Value <= 10))
                     {
-                            Delay = 10;
+                       Delay = 10;
                     }
                     
                 }
                 
+            }           
+        }
+        private void tbSpeed_Scroll2(object sender, EventArgs e)
+        {
+            if (tbSpeed.Value >= 20)
+            {
+                Delay = 100;
             }
-            
+            else
+            {
+                if ((tbSpeed.Value >= 10) || (tbSpeed.Value <= 20))
+                {
+                    Delay = 50;
+                }
+                else
+                {
+                    if ((tbSpeed.Value >= 0) || (tbSpeed.Value <= 10))
+                    {
+                        Delay = 10;
+                    }
+
+                }
+
+            }
         }
         async void tmr_Tick(object sender, EventArgs e)
         {
            
             route.Text = signalCounter.ToString();
+            lbPrepVisual.Text = prepSignal.ToString();
             signal.Visible = true;
             //signalRoute.Visible = false;
-            tbSpeed.Scroll += tbSpeed_Scroll;
+            //tbSpeed.Scroll += tbSpeed_Scroll;
             //SignalMovement();
 
             if ((t0 - arivTime) == t1)
@@ -328,7 +361,7 @@ namespace lw_sm_1
                 default:
                     break;
             }
-            if (prepSignal == Convert.ToDouble(tbNumSignal.Text.Trim()))
+            if (prepSignal >= Convert.ToDouble(tbNumSignal.Text.Trim()))
             {
                 tmr.Enabled = false; //старт/стоп
                 StatData();
@@ -341,9 +374,22 @@ namespace lw_sm_1
             lbPrepSignal.Text = prepSignal.ToString();
             lbOuterSignal.Text = OutSignalCounter.ToString();
             lbLostSignal.Text = lostSignal.ToString();
-            lbAllCapacity.Text = (signalCounter - prepSignal).ToString();
-            lbPSignal.Text = ((lostSignal / signalCounter) * 100).ToString("F" + tbEpsilon.Text.Trim()) + "%";
-            lbWait.Text = (((signalCounter - prepSignal) / signalCounter) * 100).ToString("F" + tbEpsilon.Text.Trim()) + "%";
+            var waitPosition = compList[0].capacity + compList[1].capacity + compList[2].capacity;
+            lbAllCapacity.Text = waitPosition.ToString();
+            var lost = (lostSignal / signalCounter) * 100;
+            if (lost > 100)
+            {
+                lost = 100;
+            }
+            lbPSignal.Text = lost.ToString("F" + tbEpsilon.Text.Trim()) + "%";
+            //Вероятность ожидания в очереди сигнала
+            // var wait = 100*((signalCounter - prepSignal) / signalCounter);
+            var wait = 100 * ((signalCounter- waitPosition) / signalCounter);
+            if (wait > 100)
+            {
+                wait = 100;
+            }
+            lbWait.Text = wait.ToString("F" + tbEpsilon.Text.Trim()) + "%";
             lbProd.Text = "Обработано " + ((prepSignal / signalCounter) / t0).ToString("F" + tbEpsilon.Text.Trim()) + " сигналов в секунду ";
         }
 //двойная буферизация

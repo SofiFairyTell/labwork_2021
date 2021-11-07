@@ -63,6 +63,9 @@ namespace lw_sm_1
             this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbModel = new System.Windows.Forms.TabControl();
             this.tabModel = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbPrepVisual = new System.Windows.Forms.Label();
+            this.gbRoute = new System.Windows.Forms.GroupBox();
             this.signalRoutePC3_3 = new System.Windows.Forms.PictureBox();
             this.signalRoutePC3_2 = new System.Windows.Forms.PictureBox();
             this.signalRoutePC3_1 = new System.Windows.Forms.PictureBox();
@@ -108,6 +111,8 @@ namespace lw_sm_1
             ((System.ComponentModel.ISupportInitialize)(this.logTable)).BeginInit();
             this.tbModel.SuspendLayout();
             this.tabModel.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.gbRoute.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_1)).BeginInit();
@@ -158,16 +163,21 @@ namespace lw_sm_1
             // route
             // 
             this.route.AutoSize = true;
-            this.route.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.route.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.route.Location = new System.Drawing.Point(59, 130);
+            this.route.BackColor = System.Drawing.Color.YellowGreen;
+            this.route.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.route.Location = new System.Drawing.Point(49, 35);
             this.route.Name = "route";
-            this.route.Size = new System.Drawing.Size(153, 65);
+            this.route.Size = new System.Drawing.Size(62, 25);
             this.route.TabIndex = 3;
             this.route.Text = "канал";
             // 
             // btnStart
             // 
+            this.btnStart.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnStart.FlatAppearance.BorderSize = 5;
+            this.btnStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Location = new System.Drawing.Point(28, 292);
             this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
@@ -203,6 +213,7 @@ namespace lw_sm_1
             this.grProperties.Controls.Add(this.tbNumComp);
             this.grProperties.Controls.Add(this.lbNumComp);
             this.grProperties.Controls.Add(this.btnStart);
+            this.grProperties.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.grProperties.Location = new System.Drawing.Point(829, 42);
             this.grProperties.Name = "grProperties";
             this.grProperties.Size = new System.Drawing.Size(351, 347);
@@ -238,9 +249,9 @@ namespace lw_sm_1
             this.lbSignal.AutoSize = true;
             this.lbSignal.Location = new System.Drawing.Point(7, 155);
             this.lbSignal.Name = "lbSignal";
-            this.lbSignal.Size = new System.Drawing.Size(88, 30);
+            this.lbSignal.Size = new System.Drawing.Size(88, 45);
             this.lbSignal.TabIndex = 13;
-            this.lbSignal.Text = "N_сигналов\r\nдля обработки";
+            this.lbSignal.Text = "N_сигналов\r\nдля обработки\r\nв ЭВМ";
             // 
             // tbT3
             // 
@@ -320,6 +331,7 @@ namespace lw_sm_1
             this.tbSpeed.TickFrequency = 10;
             this.tbSpeed.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.tbSpeed.Value = 10;
+            this.tbSpeed.Scroll += new System.EventHandler(this.tbSpeed_Scroll);
             // 
             // lbComp1
             // 
@@ -422,6 +434,8 @@ namespace lw_sm_1
             // 
             // tabModel
             // 
+            this.tabModel.Controls.Add(this.groupBox1);
+            this.tabModel.Controls.Add(this.gbRoute);
             this.tabModel.Controls.Add(this.signalRoutePC3_3);
             this.tabModel.Controls.Add(this.signalRoutePC3_2);
             this.tabModel.Controls.Add(this.signalRoutePC3_1);
@@ -436,7 +450,6 @@ namespace lw_sm_1
             this.tabModel.Controls.Add(this.signalPC1);
             this.tabModel.Controls.Add(this.signalRoute);
             this.tabModel.Controls.Add(this.signal);
-            this.tabModel.Controls.Add(this.route);
             this.tabModel.Location = new System.Drawing.Point(4, 24);
             this.tabModel.Name = "tabModel";
             this.tabModel.Padding = new System.Windows.Forms.Padding(3);
@@ -444,6 +457,39 @@ namespace lw_sm_1
             this.tabModel.TabIndex = 0;
             this.tabModel.Text = "Модель";
             this.tabModel.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.YellowGreen;
+            this.groupBox1.Controls.Add(this.lbPrepVisual);
+            this.groupBox1.Location = new System.Drawing.Point(704, 121);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(92, 101);
+            this.groupBox1.TabIndex = 27;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Обработано";
+            // 
+            // lbPrepVisual
+            // 
+            this.lbPrepVisual.AutoSize = true;
+            this.lbPrepVisual.BackColor = System.Drawing.Color.YellowGreen;
+            this.lbPrepVisual.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbPrepVisual.Location = new System.Drawing.Point(35, 29);
+            this.lbPrepVisual.Name = "lbPrepVisual";
+            this.lbPrepVisual.Size = new System.Drawing.Size(22, 25);
+            this.lbPrepVisual.TabIndex = 3;
+            this.lbPrepVisual.Text = "0";
+            // 
+            // gbRoute
+            // 
+            this.gbRoute.BackColor = System.Drawing.Color.YellowGreen;
+            this.gbRoute.Controls.Add(this.route);
+            this.gbRoute.Location = new System.Drawing.Point(59, 121);
+            this.gbRoute.Name = "gbRoute";
+            this.gbRoute.Size = new System.Drawing.Size(176, 101);
+            this.gbRoute.TabIndex = 26;
+            this.gbRoute.TabStop = false;
+            this.gbRoute.Text = "Сигналов в канале:";
             // 
             // signalRoutePC3_3
             // 
@@ -696,7 +742,7 @@ namespace lw_sm_1
             // 
             this.lbLostSignal.AutoSize = true;
             this.lbLostSignal.BackColor = System.Drawing.Color.Gold;
-            this.lbLostSignal.Location = new System.Drawing.Point(217, 138);
+            this.lbLostSignal.Location = new System.Drawing.Point(217, 170);
             this.lbLostSignal.Name = "lbLostSignal";
             this.lbLostSignal.Size = new System.Drawing.Size(13, 15);
             this.lbLostSignal.TabIndex = 9;
@@ -705,7 +751,7 @@ namespace lw_sm_1
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 138);
+            this.label6.Location = new System.Drawing.Point(16, 170);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(115, 15);
             this.label6.TabIndex = 8;
@@ -726,15 +772,15 @@ namespace lw_sm_1
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(16, 69);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(178, 15);
+            this.label5.Size = new System.Drawing.Size(125, 15);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Прошло через канал сигналов";
+            this.label5.Text = "Обработано в канале";
             // 
             // lbAllCapacity
             // 
             this.lbAllCapacity.AutoSize = true;
             this.lbAllCapacity.BackColor = System.Drawing.Color.Gold;
-            this.lbAllCapacity.Location = new System.Drawing.Point(217, 170);
+            this.lbAllCapacity.Location = new System.Drawing.Point(217, 138);
             this.lbAllCapacity.Name = "lbAllCapacity";
             this.lbAllCapacity.Size = new System.Drawing.Size(13, 15);
             this.lbAllCapacity.TabIndex = 5;
@@ -743,7 +789,7 @@ namespace lw_sm_1
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 170);
+            this.label3.Location = new System.Drawing.Point(16, 138);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(121, 15);
             this.label3.TabIndex = 4;
@@ -764,9 +810,9 @@ namespace lw_sm_1
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(16, 104);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 15);
+            this.label2.Size = new System.Drawing.Size(112, 15);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Обработано сигналов";
+            this.label2.Text = "Обработано в ЭВМ";
             // 
             // lbSignalCounter
             // 
@@ -859,7 +905,10 @@ namespace lw_sm_1
             ((System.ComponentModel.ISupportInitialize)(this.logTable)).EndInit();
             this.tbModel.ResumeLayout(false);
             this.tabModel.ResumeLayout(false);
-            this.tabModel.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.gbRoute.ResumeLayout(false);
+            this.gbRoute.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_1)).EndInit();
@@ -954,5 +1003,8 @@ namespace lw_sm_1
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.GroupBox gbRoute;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lbPrepVisual;
     }
 }
