@@ -206,14 +206,29 @@ namespace lw_sm_1
             OutSignalCounter++;//считаем количесво исходящих сигналов
 
             //Определим где наименьшая очередь
+            min = MinPC();
+            //for (int i = 0; i < compList.Count(); i++)
+            //{
+            //    if(compList[min].capacity >compList[i].capacity)
+            //    {
+            //        min = i;
+            //    }
+            //}             
+            Task.Delay(Delay).Wait();
+        }
+
+        private int MinPC()
+        {
+            int locMin = 0;
+            //Определим где наименьшая очередь
             for (int i = 0; i < compList.Count(); i++)
             {
-                if(compList[min].capacity >compList[i].capacity)
+                if (compList[min].capacity > compList[i].capacity)
                 {
-                    min = i;
+                    locMin = i;
                 }
-            }             
-            Task.Delay(Delay).Wait();
+            }
+            return locMin;
         }
 
         private void AK3()

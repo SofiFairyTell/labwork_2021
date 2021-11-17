@@ -53,14 +53,6 @@ namespace lw_sm_1
             this.lbComp2 = new System.Windows.Forms.Label();
             this.lbComp3 = new System.Windows.Forms.Label();
             this.logTable = new System.Windows.Forms.DataGridView();
-            this.TimeArrive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimeArriv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimePrep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimeComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrepSign = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbModel = new System.Windows.Forms.TabControl();
             this.tabModel = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -102,6 +94,14 @@ namespace lw_sm_1
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.TimeArrive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeArriv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimePrep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrepSign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -380,46 +380,6 @@ namespace lw_sm_1
             this.logTable.RowTemplate.Height = 25;
             this.logTable.Size = new System.Drawing.Size(794, 337);
             this.logTable.TabIndex = 10;
-            // 
-            // TimeArrive
-            // 
-            this.TimeArrive.HeaderText = "t0";
-            this.TimeArrive.Name = "TimeArrive";
-            // 
-            // TimeArriv
-            // 
-            this.TimeArriv.HeaderText = "Вр.приб";
-            this.TimeArriv.Name = "TimeArriv";
-            // 
-            // TimePrep
-            // 
-            this.TimePrep.HeaderText = "Вр.Канал";
-            this.TimePrep.Name = "TimePrep";
-            // 
-            // TimeComp
-            // 
-            this.TimeComp.HeaderText = "Вр.ЭВМ";
-            this.TimeComp.Name = "TimeComp";
-            // 
-            // NumComp
-            // 
-            this.NumComp.HeaderText = "№ЭВМ";
-            this.NumComp.Name = "NumComp";
-            // 
-            // CapComp
-            // 
-            this.CapComp.HeaderText = "Емк.ЭВМ";
-            this.CapComp.Name = "CapComp";
-            // 
-            // PrepSign
-            // 
-            this.PrepSign.HeaderText = "№Обр_Сигнал";
-            this.PrepSign.Name = "PrepSign";
-            // 
-            // ActionData
-            // 
-            this.ActionData.HeaderText = "Вып.действие";
-            this.ActionData.Name = "ActionData";
             // 
             // tbModel
             // 
@@ -878,6 +838,49 @@ namespace lw_sm_1
             this.label14.TabIndex = 22;
             this.label14.Text = "Скорость анимации";
             // 
+            // TimeArrive
+            // 
+            this.TimeArrive.HeaderText = "t0";
+            this.TimeArrive.Name = "TimeArrive";
+            // 
+            // TimeArriv
+            // 
+            this.TimeArriv.HeaderText = "Вр.приб";
+            this.TimeArriv.Name = "TimeArriv";
+            this.TimeArriv.Visible = false;
+            // 
+            // TimePrep
+            // 
+            this.TimePrep.HeaderText = "Вр.Канал";
+            this.TimePrep.Name = "TimePrep";
+            this.TimePrep.Visible = false;
+            // 
+            // TimeComp
+            // 
+            this.TimeComp.HeaderText = "Вр.ЭВМ";
+            this.TimeComp.Name = "TimeComp";
+            this.TimeComp.Visible = false;
+            // 
+            // NumComp
+            // 
+            this.NumComp.HeaderText = "№ЭВМ";
+            this.NumComp.Name = "NumComp";
+            // 
+            // CapComp
+            // 
+            this.CapComp.HeaderText = "Емк.ЭВМ";
+            this.CapComp.Name = "CapComp";
+            // 
+            // PrepSign
+            // 
+            this.PrepSign.HeaderText = "№Обр_Сигнал";
+            this.PrepSign.Name = "PrepSign";
+            // 
+            // ActionData
+            // 
+            this.ActionData.HeaderText = "Вып.действие";
+            this.ActionData.Name = "ActionData";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -894,7 +897,7 @@ namespace lw_sm_1
             this.Controls.Add(this.grProperties);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Моделирование обработки сигналов";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -955,14 +958,6 @@ namespace lw_sm_1
         private System.Windows.Forms.TabControl tbModel;
         private System.Windows.Forms.TabPage tabModel;
         private System.Windows.Forms.TabPage tabData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimeArrive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimeArriv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimePrep;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimeComp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumComp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapComp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrepSign;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ActionData;
         private System.Windows.Forms.TabPage tabStat;
         private System.Windows.Forms.Label lbSignalCounter;
         private System.Windows.Forms.Label label1;
@@ -1006,5 +1001,13 @@ namespace lw_sm_1
         private System.Windows.Forms.GroupBox gbRoute;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lbPrepVisual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeArrive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeArriv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimePrep;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeComp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumComp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapComp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrepSign;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ActionData;
     }
 }
