@@ -863,7 +863,7 @@ namespace lw_sm_1
             // 
             // NumComp
             // 
-            this.NumComp.HeaderText = "№ЭВМ";
+            this.NumComp.HeaderText = "№ЭВМ (занятого обработкой сигнала)";
             this.NumComp.Name = "NumComp";
             // 
             // CapComp

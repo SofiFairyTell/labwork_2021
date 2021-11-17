@@ -21,6 +21,7 @@ namespace lw_sm_1
         double t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 10;
         //Локальное время обработки
         double arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0, lostSignal=0;
+        string MESSAGE = "";
 
         //Для координат
         private int StartX = 0;
@@ -199,6 +200,7 @@ namespace lw_sm_1
         {
             arivTime = t0;
             signalCounter++;
+            MESSAGE = "Прием сигнала";
             Task.Delay(Delay).Wait();
         }
         private void AK2()
@@ -206,7 +208,7 @@ namespace lw_sm_1
             checkTime += t2;//для фиксации общего времени проверки в канале
             prepTime = t0;
             OutSignalCounter++;//считаем количесво исходящих сигналов
-
+            MESSAGE = "Обработка в канале";
             //Определим где наименьшая очередь
             min = MinPC();
             //for (int i = 0; i < compList.Count(); i++)
@@ -216,6 +218,7 @@ namespace lw_sm_1
             //        min = i;
             //    }
             //}             
+
             Task.Delay(Delay).Wait();
         }
 
@@ -235,7 +238,7 @@ namespace lw_sm_1
 
         private void AK3()
         {
-            
+            MESSAGE = "Обработка в ЭВМ";
             if ((compList[min].in_work == false)&&(compList[min].capacity>=0))
             {
                 prepTimeComp = t0;
@@ -255,13 +258,19 @@ namespace lw_sm_1
                 }
                 else
                 {
-                    if ((compList[min].in_work == true) && (compList[min].capacity == 4))
+                    if ((compList[min].in_work == true) || (compList[min].capacity == 4))
                     {
-                        lostSignal++;
+                        //if (lostSignal < signalCounter)
+                        //{
+                        //lostSignal++;
+                       lostSignal = OutSignalCounter - prepSignal;
+                       // }
+
+                        // OutSignalCounter
                     }
                 }
             }
- 
+
             Task.Delay(Delay).Wait();
         }
 
@@ -272,41 +281,53 @@ namespace lw_sm_1
                     if ((t0 - arivTime) > t1)
                     {
                         AK1();//выполнение первого действия
-                    }
+                    logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
+Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
+                }
                     if ((t0- prepTime)>t2)
                     {
                         AK2();//выполнение обработки в канале
-                    }
+                    logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
+Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
+                }
                     if ((t0 - prepTimeComp) > t3)
                     {
                        compList[min].in_work = false;
                        AK3();
-                    }
+                    logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
+Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
+                }
                     else
                     {
                         compList[min].in_work = true;
-                        AK3(); //обработка в ПК                       
-                    }
+                        AK3(); //обработка в ПК
+                                         logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
+                    Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
+        }
                 }
+
         }
 
         private void tbSpeed_Scroll(object sender, EventArgs e)
         {
             if (tbSpeed.Value >= 20)
             {
-                Delay = 100;
+               // Delay = 100;
+               detT = 30;
             }
             else
             {
                 if ((tbSpeed.Value >= 10)|| (tbSpeed.Value <= 20))
                 {
-                    Delay = 50;
+                    //Delay = 50;
+                    detT = 20;
                 }
                 else
                 {
                     if ((tbSpeed.Value >= 0) || (tbSpeed.Value <= 10))
                     {
-                       Delay = 10;
+                        detT = 10;
+                       // Delay = 10;
                     }
                     
                 }
@@ -334,7 +355,6 @@ namespace lw_sm_1
                         //Delay = 10;
                         detT = 10;
                     }
-
                 }
 
             }
@@ -343,29 +363,36 @@ namespace lw_sm_1
         {
            
             route.Text = signalCounter.ToString();
-            lbPrepVisual.Text = prepSignal.ToString();
+            // lbPrepVisual.Text = prepSignal.ToString();
+            lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
             signal.Visible = true;
-            //signalRoute.Visible = false;
-            //tbSpeed.Scroll += tbSpeed_Scroll;
-            //SignalMovement();
 
-            if ((t0 - arivTime) == t1)
-            {
-                logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
-                    " ", " ", " ", " ", " ", "Прием сигнала");
-                signal.Visible = true;
-            }
-            if ((t0 - prepTime) > t2)
-            {
-                logTable.Rows.Add(Convert.ToString(t0), " ",
-                Convert.ToString(prepTime), " ", " ", " ", " ", "Обработка в канале");
-                signal.Visible = false;
-            }
-            if ((t0 - prepTimeComp) > t3)
-            {
-                logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
-                Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), "Обработка в ЭВМ");
-            }
+
+            //if ((t0 - arivTime) > t1)
+            //{
+            //    logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
+            //        " ", " ", " ", " ", " ", MESSAGE);
+            //    signal.Visible = true;
+            //}
+            //else
+            //{
+            //    if ((t0 - prepTime) > t2)
+            //    {
+            //        logTable.Rows.Add(Convert.ToString(t0), " ",
+            //        Convert.ToString(prepTime), " ", " ", " ", " ", MESSAGE);
+            //        signal.Visible = false;
+            //    }
+            //    else
+            //    {
+            //        if ((t0 - prepTimeComp) > t3)
+            //        {
+            //            logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
+            //            Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
+            //        }
+            //    }
+            //}
+
+
             SignalMovement();
             switch (min)
             {
@@ -384,6 +411,7 @@ namespace lw_sm_1
             if (prepSignal >= Convert.ToDouble(tbNumSignal.Text.Trim()))
             {
                 tmr.Enabled = false; //старт/стоп
+                lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
                 StatData();
             }
         }
