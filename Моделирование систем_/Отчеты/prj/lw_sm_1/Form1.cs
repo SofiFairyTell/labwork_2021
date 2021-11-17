@@ -140,6 +140,8 @@ namespace lw_sm_1
                 t3 = Convert.ToDouble(tbT3.Text.Trim());
                 tmr.Enabled = true; //старт/стоп
                 compList.Clear();
+                logTable.Rows.Clear();
+
                 for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
                 {
                     compList.Add(new comp());
@@ -315,19 +317,22 @@ namespace lw_sm_1
         {
             if (tbSpeed.Value >= 20)
             {
-                Delay = 100;
+                //Delay = 100;
+                detT = 30;
             }
             else
             {
                 if ((tbSpeed.Value >= 10) || (tbSpeed.Value <= 20))
                 {
-                    Delay = 50;
+                    // Delay = 50;
+                    detT = 20;
                 }
                 else
                 {
                     if ((tbSpeed.Value >= 0) || (tbSpeed.Value <= 10))
                     {
-                        Delay = 10;
+                        //Delay = 10;
+                        detT = 10;
                     }
 
                 }

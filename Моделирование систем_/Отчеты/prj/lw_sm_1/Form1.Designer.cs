@@ -834,9 +834,9 @@ namespace lw_sm_1
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(12, 392);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(118, 15);
+            this.label14.Size = new System.Drawing.Size(143, 15);
             this.label14.TabIndex = 22;
-            this.label14.Text = "Скорость анимации";
+            this.label14.Text = "Шаг изменения времени";
             // 
             // TimeArrive
             // 
@@ -873,7 +873,7 @@ namespace lw_sm_1
             // 
             // PrepSign
             // 
-            this.PrepSign.HeaderText = "№Обр_Сигнал";
+            this.PrepSign.HeaderText = "Кол-во обработанных сигналов";
             this.PrepSign.Name = "PrepSign";
             // 
             // ActionData
