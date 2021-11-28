@@ -31,7 +31,14 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGeneratorTest\\RandomNumberGeneratorTest.csproj": {
+                "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGeneratorTest\\RandomNumberGeneratorTest.csproj"
+              },
+              "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj": {
+                "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -63,6 +70,35 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGeneratorTest\\RandomNumberGeneratorTest.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGeneratorTest\\RandomNumberGeneratorTest.csproj",
+        "projectName": "RandomNumberGeneratorTest",
+        "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGeneratorTest\\RandomNumberGeneratorTest.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj": {
+                "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj",
+        "projectName": "RandomNumberGenerator",
+        "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj"
+      },
+      "frameworks": {
+        "net472": {}
       }
     }
   }

@@ -7,6 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RandomNumberGeneratorTest;
+using RandomNumberGenerator;
+using System.Globalization;
+using System.IO;
+
 
 namespace lw_sm_1
 {
@@ -22,6 +27,8 @@ namespace lw_sm_1
         //Локальное время обработки
         double arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0, lostSignal=0;
         string MESSAGE = "";
+
+        List<LogTable> res = new List<LogTable>();
 
         //Для координат
         private int StartX = 0;
@@ -81,11 +88,6 @@ namespace lw_sm_1
                                 {
                                     SlideLeft();
                                 }
-                            //if (signal.Location.X > 366)
-                            //{
-                            //    SlideStart();
-                            //}
-                            //SlideStart();
                             break;
                                 
                             case 1:
@@ -93,11 +95,6 @@ namespace lw_sm_1
                                 {
                                     SlideLeft();
                                 }
-                                //if (signal.Location.X > 340)
-                                //{
-                                //    SlideStart();
-                                //}
-                            //SlideStart();
                             break;
                             case 2:
                                 while (signal.Location.Y <260)
@@ -108,17 +105,10 @@ namespace lw_sm_1
                                 {
                                     SlideLeft();
                                 }
-                                //if (signal.Location.X > 366)
-                                //{
-                                //    SlideStart();
-                                //}
-                                //SlideStart();
                                 break;
                             default:
-                               // SlideStart();
                             break;
                         }
-                        //SlideUp();
                     }
                     else
                         {
@@ -133,14 +123,32 @@ namespace lw_sm_1
             signalCounter = 0;
             t0 = 0;
             arivTime = 0; prepTime = 0; checkTime = 0; prepTimeComp = 0; prepSignal = 0; OutSignalCounter = 0;lostSignal = 0;
-
+            
             if (tmr.Enabled==false)
             {
-                t1 = Convert.ToDouble(tbT1.Text.Trim());
-                t2 = Convert.ToDouble(tbT2.Text.Trim());
-                t3 = Convert.ToDouble(tbT3.Text.Trim());
+                if (!cbRandom.Checked)
+                {
+                    //var generator = new Generator();
+                    //t1 = generator.ExponentialDistributionFunction(0.1);
+                    //t2 = generator.NormalDistributionFunction(1.5, 10);
+                    //t3 = generator.NormalDistributionFunction(3, 33);
+                    //tbT1.Text = Convert.ToString(t1);
+                    //tbT2.Text = Convert.ToString(t2);
+                    //tbT3.Text = Convert.ToString(t3);
+                    t1 = Convert.ToDouble(tbT1.Text.Trim());
+                    t2 = Convert.ToDouble(tbT2.Text.Trim());
+                    t3 = Convert.ToDouble(tbT3.Text.Trim());
+                }
+                //else
+                //{
+                //    t1 = Convert.ToDouble(tbT1.Text.Trim());
+                //    t2 = Convert.ToDouble(tbT2.Text.Trim());
+                //    t3 = Convert.ToDouble(tbT3.Text.Trim());
+                //}
+
                 tmr.Enabled = true; //старт/стоп
                 compList.Clear();
+                res.Clear();
                 logTable.Rows.Clear();
 
                 for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
@@ -154,13 +162,11 @@ namespace lw_sm_1
                 Task.Run(() =>
                     {
                         Count();
-                        //DrawSignal();
                     });
             }
             else
             {
                 tmr.Enabled = false; //старт/стоп
-                //StatData();
             }
            
         }
@@ -176,6 +182,32 @@ namespace lw_sm_1
             signal.BackColor = color;
             signal.Width = Convert.ToInt32( SignalWidth/1.5 );
             signal.Height = Convert.ToInt32(SignalHeight/1.5);
+        }
+
+        private void Generate()
+        {
+            var generator = new Generator();
+            t1 = generator.ExponentialDistributionFunction(0.1);
+            t2 = generator.NormalDistributionFunction(1.5, 10);
+            t3 = generator.NormalDistributionFunction(3, 33);
+        }
+        private void cbRandom_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbRandom.Checked)
+            {
+                //сформируем стартовые значения
+                Generate();
+                tbT1.Text = Convert.ToString(t1);
+                tbT2.Text = Convert.ToString(t2);
+                tbT3.Text = Convert.ToString(t3);
+            }
+            else
+            {
+                tbT1.Text = Convert.ToString(10);
+                tbT2.Text = Convert.ToString(10);
+                tbT3.Text = Convert.ToString(33);
+            }
+
         }
 
         private void SlideUp()
@@ -210,14 +242,7 @@ namespace lw_sm_1
             OutSignalCounter++;//считаем количесво исходящих сигналов
             MESSAGE = "Обработка в канале";
             //Определим где наименьшая очередь
-            min = MinPC();
-            //for (int i = 0; i < compList.Count(); i++)
-            //{
-            //    if(compList[min].capacity >compList[i].capacity)
-            //    {
-            //        min = i;
-            //    }
-            //}             
+            min = MinPC();       
 
             Task.Delay(Delay).Wait();
         }
@@ -277,37 +302,58 @@ namespace lw_sm_1
         private void Count()
         {
                 for (; prepSignal <= Convert.ToDouble(tbNumSignal.Text.Trim()); t0 += detT)
-                {                 
-                    if ((t0 - arivTime) > t1)
+                {
+                if (cbRandom.Checked)
+                {
+                    Generate();
+                }
+                
+                if ((t0 - arivTime) > t1)
                     {
                         AK1();//выполнение первого действия
-                    logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
-Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
+                        TableAdd();
+                    // LogAdd();
                 }
                     if ((t0- prepTime)>t2)
                     {
                         AK2();//выполнение обработки в канале
-                    logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
-Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
+                    TableAdd();
+                    //LogAdd();
                 }
                     if ((t0 - prepTimeComp) > t3)
                     {
                        compList[min].in_work = false;
                        AK3();
-                    logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
-Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
+                    TableAdd();
+                    // LogAdd();
                 }
                     else
                     {
                         compList[min].in_work = true;
                         AK3(); //обработка в ПК
-                                         logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
-                    Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
-        }
+                               //LogAdd();
+                    TableAdd();
+                    }
                 }
-
         }
 
+        private void LogAdd()
+        {
+            logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
+                   Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
+        }
+        private void TableAdd()
+        {
+            res.Add(new LogTable()
+            {
+                T0 = t0,
+                prepTimeComp = prepTimeComp,
+                minComp = min,
+                capacity = compList[min].capacity,
+                prepSignal = prepSignal,
+                message = MESSAGE
+            });
+        }
         private void tbSpeed_Scroll(object sender, EventArgs e)
         {
             if (tbSpeed.Value >= 20)
@@ -359,6 +405,7 @@ Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToStrin
 
             }
         }
+
         async void tmr_Tick(object sender, EventArgs e)
         {
            
@@ -366,32 +413,7 @@ Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToStrin
             // lbPrepVisual.Text = prepSignal.ToString();
             lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
             signal.Visible = true;
-
-
-            //if ((t0 - arivTime) > t1)
-            //{
-            //    logTable.Rows.Add(Convert.ToString(t0), Convert.ToString(arivTime),
-            //        " ", " ", " ", " ", " ", MESSAGE);
-            //    signal.Visible = true;
-            //}
-            //else
-            //{
-            //    if ((t0 - prepTime) > t2)
-            //    {
-            //        logTable.Rows.Add(Convert.ToString(t0), " ",
-            //        Convert.ToString(prepTime), " ", " ", " ", " ", MESSAGE);
-            //        signal.Visible = false;
-            //    }
-            //    else
-            //    {
-            //        if ((t0 - prepTimeComp) > t3)
-            //        {
-            //            logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
-            //            Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
-            //        }
-            //    }
-            //}
-
+            LogAdd();
 
             SignalMovement();
             switch (min)
@@ -411,6 +433,8 @@ Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToStrin
             if (prepSignal >= Convert.ToDouble(tbNumSignal.Text.Trim()))
             {
                 tmr.Enabled = false; //старт/стоп
+                var writer = new Writer();
+                writer.WriterLog(res);
                 lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
                 StatData();
             }

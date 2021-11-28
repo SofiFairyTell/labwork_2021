@@ -15,3 +15,13 @@ D:\Учеба\Технолог-Учеба\labwork_2021\Моделировани�
 D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\obj\Debug\netcoreapp3.1\lw_sm_1.pdb
 D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\obj\Debug\netcoreapp3.1\lw_sm_1.genruntimeconfig.cache
 D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\obj\Debug\netcoreapp3.1\lw_sm_1.csproj.AssemblyReference.cache
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\bin\Debug\netcoreapp3.1\RandomNumberGenerator.dll
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\bin\Debug\netcoreapp3.1\RandomNumberGenerator.pdb
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\obj\Debug\netcoreapp3.1\lw_sm_1.csproj.CopyComplete
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\bin\Debug\netcoreapp3.1\RandomNumberGeneratorTest.exe
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\bin\Debug\netcoreapp3.1\CsvHelper.dll
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\bin\Debug\netcoreapp3.1\RandomNumberGeneratorTest.pdb
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\bin\Debug\netcoreapp3.1\RandomNumberGeneratorTest.exe.config
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\bin\Debug\netcoreapp3.1\CsvHelper.xml
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\lw_sm_1\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.xml

@@ -53,6 +53,14 @@ namespace lw_sm_1
             this.lbComp2 = new System.Windows.Forms.Label();
             this.lbComp3 = new System.Windows.Forms.Label();
             this.logTable = new System.Windows.Forms.DataGridView();
+            this.TimeArrive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeArriv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimePrep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrepSign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbModel = new System.Windows.Forms.TabControl();
             this.tabModel = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -94,14 +102,7 @@ namespace lw_sm_1
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.TimeArrive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimeArriv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimePrep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimeComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapComp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrepSign = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbRandom = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -200,6 +201,7 @@ namespace lw_sm_1
             // 
             // grProperties
             // 
+            this.grProperties.Controls.Add(this.cbRandom);
             this.grProperties.Controls.Add(this.tbEpsilon);
             this.grProperties.Controls.Add(this.label4);
             this.grProperties.Controls.Add(this.tbNumSignal);
@@ -380,6 +382,49 @@ namespace lw_sm_1
             this.logTable.RowTemplate.Height = 25;
             this.logTable.Size = new System.Drawing.Size(794, 337);
             this.logTable.TabIndex = 10;
+            // 
+            // TimeArrive
+            // 
+            this.TimeArrive.HeaderText = "t0";
+            this.TimeArrive.Name = "TimeArrive";
+            // 
+            // TimeArriv
+            // 
+            this.TimeArriv.HeaderText = "Вр.приб";
+            this.TimeArriv.Name = "TimeArriv";
+            this.TimeArriv.Visible = false;
+            // 
+            // TimePrep
+            // 
+            this.TimePrep.HeaderText = "Вр.Канал";
+            this.TimePrep.Name = "TimePrep";
+            this.TimePrep.Visible = false;
+            // 
+            // TimeComp
+            // 
+            this.TimeComp.HeaderText = "Вр.ЭВМ";
+            this.TimeComp.Name = "TimeComp";
+            this.TimeComp.Visible = false;
+            // 
+            // NumComp
+            // 
+            this.NumComp.HeaderText = "№ЭВМ (занятого обработкой сигнала)";
+            this.NumComp.Name = "NumComp";
+            // 
+            // CapComp
+            // 
+            this.CapComp.HeaderText = "Емк.ЭВМ";
+            this.CapComp.Name = "CapComp";
+            // 
+            // PrepSign
+            // 
+            this.PrepSign.HeaderText = "Кол-во обработанных сигналов";
+            this.PrepSign.Name = "PrepSign";
+            // 
+            // ActionData
+            // 
+            this.ActionData.HeaderText = "Вып.действие";
+            this.ActionData.Name = "ActionData";
             // 
             // tbModel
             // 
@@ -838,48 +883,16 @@ namespace lw_sm_1
             this.label14.TabIndex = 22;
             this.label14.Text = "Шаг изменения времени";
             // 
-            // TimeArrive
+            // cbRandom
             // 
-            this.TimeArrive.HeaderText = "t0";
-            this.TimeArrive.Name = "TimeArrive";
-            // 
-            // TimeArriv
-            // 
-            this.TimeArriv.HeaderText = "Вр.приб";
-            this.TimeArriv.Name = "TimeArriv";
-            this.TimeArriv.Visible = false;
-            // 
-            // TimePrep
-            // 
-            this.TimePrep.HeaderText = "Вр.Канал";
-            this.TimePrep.Name = "TimePrep";
-            this.TimePrep.Visible = false;
-            // 
-            // TimeComp
-            // 
-            this.TimeComp.HeaderText = "Вр.ЭВМ";
-            this.TimeComp.Name = "TimeComp";
-            this.TimeComp.Visible = false;
-            // 
-            // NumComp
-            // 
-            this.NumComp.HeaderText = "№ЭВМ (занятого обработкой сигнала)";
-            this.NumComp.Name = "NumComp";
-            // 
-            // CapComp
-            // 
-            this.CapComp.HeaderText = "Емк.ЭВМ";
-            this.CapComp.Name = "CapComp";
-            // 
-            // PrepSign
-            // 
-            this.PrepSign.HeaderText = "Кол-во обработанных сигналов";
-            this.PrepSign.Name = "PrepSign";
-            // 
-            // ActionData
-            // 
-            this.ActionData.HeaderText = "Вып.действие";
-            this.ActionData.Name = "ActionData";
+            this.cbRandom.AutoSize = true;
+            this.cbRandom.Location = new System.Drawing.Point(28, 135);
+            this.cbRandom.Name = "cbRandom";
+            this.cbRandom.Size = new System.Drawing.Size(124, 19);
+            this.cbRandom.TabIndex = 17;
+            this.cbRandom.Text = "Генер. t случайно";
+            this.cbRandom.UseVisualStyleBackColor = true;
+            this.cbRandom.CheckedChanged += new System.EventHandler(this.cbRandom_CheckedChanged);
             // 
             // Form1
             // 
@@ -1009,5 +1022,6 @@ namespace lw_sm_1
         private System.Windows.Forms.DataGridViewTextBoxColumn CapComp;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrepSign;
         private System.Windows.Forms.DataGridViewTextBoxColumn ActionData;
+        private System.Windows.Forms.CheckBox cbRandom;
     }
 }
