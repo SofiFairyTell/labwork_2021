@@ -1,0 +1,12 @@
+F:\Картинки\Учёба\МС\MS1\RandomNumberGenerator\bin\Debug\RandomNumberGenerator.dll
+F:\Картинки\Учёба\МС\MS1\RandomNumberGenerator\bin\Debug\RandomNumberGenerator.pdb
+F:\Картинки\Учёба\МС\MS1\RandomNumberGenerator\obj\Debug\RandomNumberGenerator.csprojAssemblyReference.cache
+F:\Картинки\Учёба\МС\MS1\RandomNumberGenerator\obj\Debug\RandomNumberGenerator.csproj.CoreCompileInputs.cache
+F:\Картинки\Учёба\МС\MS1\RandomNumberGenerator\obj\Debug\RandomNumberGenerator.dll
+F:\Картинки\Учёба\МС\MS1\RandomNumberGenerator\obj\Debug\RandomNumberGenerator.pdb
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\RandomNumberGenerator\bin\Debug\RandomNumberGenerator.dll
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\RandomNumberGenerator\bin\Debug\RandomNumberGenerator.pdb
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\RandomNumberGenerator\obj\Debug\RandomNumberGenerator.csproj.AssemblyReference.cache
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\RandomNumberGenerator\obj\Debug\RandomNumberGenerator.csproj.CoreCompileInputs.cache
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\RandomNumberGenerator\obj\Debug\RandomNumberGenerator.dll
+D:\Учеба\Технолог-Учеба\labwork_2021\Моделирование систем_\Отчеты\prj\RandomNumberGenerator\obj\Debug\RandomNumberGenerator.pdb

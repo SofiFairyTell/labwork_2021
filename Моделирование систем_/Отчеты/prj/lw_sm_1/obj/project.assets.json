@@ -1,11 +1,47 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "RandomNumberGenerator/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/RandomNumberGenerator.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RandomNumberGenerator.dll": {}
+        }
+      },
+      "RandomNumberGeneratorTest/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "RandomNumberGenerator": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/RandomNumberGeneratorTest.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RandomNumberGeneratorTest.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "RandomNumberGenerator/1.0.0": {
+      "type": "project",
+      "path": "../RandomNumberGenerator/RandomNumberGenerator.csproj",
+      "msbuildProject": "../RandomNumberGenerator/RandomNumberGenerator.csproj"
+    },
+    "RandomNumberGeneratorTest/1.0.0": {
+      "type": "project",
+      "path": "../RandomNumberGeneratorTest/RandomNumberGeneratorTest.csproj",
+      "msbuildProject": "../RandomNumberGeneratorTest/RandomNumberGeneratorTest.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "RandomNumberGenerator >= 1.0.0",
+      "RandomNumberGeneratorTest >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\SKurbatova\\.nuget\\packages\\": {},
@@ -38,7 +74,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGeneratorTest\\RandomNumberGeneratorTest.csproj": {
+              "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGeneratorTest\\RandomNumberGeneratorTest.csproj"
+            },
+            "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj": {
+              "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -68,7 +111,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
