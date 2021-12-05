@@ -1,0 +1,9 @@
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcess\bin\Debug\RandomStationaryNormalProcess.dll
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcess\bin\Debug\RandomStationaryNormalProcess.pdb
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcess\bin\Debug\RandomNumberGenerator.dll
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcess\bin\Debug\RandomNumberGenerator.pdb
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcess\obj\Debug\RandomStationaryNormalProcess.csprojAssemblyReference.cache
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcess\obj\Debug\RandomStationaryNormalProcess.csproj.CoreCompileInputs.cache
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcess\obj\Debug\RandomStationaryNormalProcess.csproj.CopyComplete
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcess\obj\Debug\RandomStationaryNormalProcess.dll
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcess\obj\Debug\RandomStationaryNormalProcess.pdb

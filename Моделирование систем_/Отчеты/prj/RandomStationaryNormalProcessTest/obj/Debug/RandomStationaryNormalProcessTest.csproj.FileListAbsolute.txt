@@ -1,0 +1,12 @@
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\bin\Debug\RandomStationaryNormalProcessTest.exe.config
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\bin\Debug\RandomStationaryNormalProcessTest.exe
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\bin\Debug\RandomStationaryNormalProcessTest.pdb
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\bin\Debug\RandomStationaryNormalProcess.dll
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\bin\Debug\RandomNumberGenerator.dll
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\bin\Debug\RandomStationaryNormalProcess.pdb
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\bin\Debug\RandomNumberGenerator.pdb
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\obj\Debug\RandomStationaryNormalProcessTest.csprojAssemblyReference.cache
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\obj\Debug\RandomStationaryNormalProcessTest.csproj.CoreCompileInputs.cache
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\obj\Debug\RandomStationaryNormalProcessTest.csproj.CopyComplete
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\obj\Debug\RandomStationaryNormalProcessTest.exe
+F:\Картинки\Учёба\МС\MS1\RandomStationaryNormalProcessTest\obj\Debug\RandomStationaryNormalProcessTest.pdb
