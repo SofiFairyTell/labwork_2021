@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RandomNumberGeneratorTest;
 using RandomNumberGenerator;
+using RandomStationaryNormalProcessTest;
+
 using System.Globalization;
 using System.IO;
 
@@ -23,7 +25,7 @@ namespace lw_sm_1
         int min = 0, signalCounter = 0, OutSignalCounter = 0;
         bool Visible = false;
         //для детерминированной СМО
-        double t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Е = 4, detT = 10;
+        public static double t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Ecapcity = 4, detT = 10;
         //Локальное время обработки
         double arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0, lostSignal=0;
         string MESSAGE = "";
@@ -52,18 +54,8 @@ namespace lw_sm_1
             tbEpsilon.Text = "3";
             tbNumComp.Text = "3";
             tbNumSignal.Text = "1000";
+            tbEcapcity.Text = "4";
             tbSpeed.Scroll += tbSpeed_Scroll;
-
-        }
-
-        private async void DrawSignal()
-        {
-            Bitmap mybit = new Bitmap(signal.Width, signal.Height);
-            Graphics g = Graphics.FromImage(mybit);
-            SolidBrush grBrush = new SolidBrush(Color.Green);
-            g.FillRectangle(grBrush, 0, 0, signal.Width, signal.Height);
-            g.DrawImage(mybit, StartX, StartY);
-            SignalMovement();
         }
 
         private void SignalMovement()
@@ -117,7 +109,6 @@ namespace lw_sm_1
                 }
         }
 
-
         private void btnStart_Click(object sender, EventArgs e)
         {
             signalCounter = 0;
@@ -128,23 +119,14 @@ namespace lw_sm_1
             {
                 if (!cbRandom.Checked)
                 {
-                    //var generator = new Generator();
-                    //t1 = generator.ExponentialDistributionFunction(0.1);
-                    //t2 = generator.NormalDistributionFunction(1.5, 10);
-                    //t3 = generator.NormalDistributionFunction(3, 33);
-                    //tbT1.Text = Convert.ToString(t1);
-                    //tbT2.Text = Convert.ToString(t2);
-                    //tbT3.Text = Convert.ToString(t3);
                     t1 = Convert.ToDouble(tbT1.Text.Trim());
                     t2 = Convert.ToDouble(tbT2.Text.Trim());
                     t3 = Convert.ToDouble(tbT3.Text.Trim());
                 }
-                //else
-                //{
-                //    t1 = Convert.ToDouble(tbT1.Text.Trim());
-                //    t2 = Convert.ToDouble(tbT2.Text.Trim());
-                //    t3 = Convert.ToDouble(tbT3.Text.Trim());
-                //}
+                if (!cbRandomEcapacity.Checked)
+                {
+                    Ecapcity = Convert.ToDouble(tbEcapcity.Text.Trim());
+                }
 
                 tmr.Enabled = true; //старт/стоп
                 compList.Clear();
@@ -191,23 +173,44 @@ namespace lw_sm_1
             t2 = generator.NormalDistributionFunction(1.5, 10);
             t3 = generator.NormalDistributionFunction(3, 33);
         }
+        private void GenerateStationary()
+        {
+            var generator = new RandomStationaryNormalProcess.NormalProcessValueGenerator(
+                new double[] { 0.036, 0.084, 0.228, 0.619 },
+                2, 6);
+            Ecapcity = Math.Round(generator.GetNextValue(), MidpointRounding.ToEven);
+        }
         private void cbRandom_CheckedChanged(object sender, EventArgs e)
         {
             if(cbRandom.Checked)
             {
                 //сформируем стартовые значения
                 Generate();
-                tbT1.Text = Convert.ToString(t1);
-                tbT2.Text = Convert.ToString(t2);
-                tbT3.Text = Convert.ToString(t3);
+                tbT1.Text = t1.ToString("F" + tbEpsilon.Text.Trim());
+                tbT2.Text = t2.ToString("F" + tbEpsilon.Text.Trim());
+                tbT3.Text = t3.ToString("F" + tbEpsilon.Text.Trim());
             }
             else
-            {
+            {               
                 tbT1.Text = Convert.ToString(10);
                 tbT2.Text = Convert.ToString(10);
                 tbT3.Text = Convert.ToString(33);
             }
 
+        }
+        private void cbRandomEcapcity_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbRandomEcapacity.Checked)
+            {
+                GenerateStationary();
+
+                tbEcapcity.Text = Ecapcity.ToString("F" + 0);
+            }
+            else
+            {
+                //Ecapcity = 4;
+                tbEcapcity.Text = Convert.ToString(4);
+            }
         }
 
         private void SlideUp()
@@ -220,6 +223,8 @@ namespace lw_sm_1
             signal.Location = new Point(signal.Location.X, signal.Location.Y + 50);
             Task.Delay(Delay).Wait();
         }
+
+
         private void SlideStart()
         {
             signal.Location = new Point(StartX, StartY);
@@ -243,7 +248,6 @@ namespace lw_sm_1
             MESSAGE = "Обработка в канале";
             //Определим где наименьшая очередь
             min = MinPC();       
-
             Task.Delay(Delay).Wait();
         }
 
@@ -276,26 +280,20 @@ namespace lw_sm_1
             }
             else
             {
-                if((compList[min].in_work == true)&&(compList[min].capacity<4))
+                if((compList[min].in_work == true)&&(compList[min].capacity < Ecapcity))
                 {
                     compList[min].capacity++;
                     Visible = true;
                 }
                 else
                 {
-                    if ((compList[min].in_work == true) || (compList[min].capacity == 4))
+                    if ((compList[min].in_work == true) || (compList[min].capacity >= Ecapcity))
                     {
-                        //if (lostSignal < signalCounter)
-                        //{
-                        //lostSignal++;
-                       lostSignal = OutSignalCounter - prepSignal;
-                       // }
-
-                        // OutSignalCounter
+                        //lostSignal = OutSignalCounter - prepSignal;
+                        lostSignal++;
                     }
                 }
             }
-
             Task.Delay(Delay).Wait();
         }
 
@@ -307,24 +305,27 @@ namespace lw_sm_1
                 {
                     Generate();
                 }
+                if(cbRandomEcapacity.Checked)
+                {
+                    GenerateStationary();
+                }
                 
                 if ((t0 - arivTime) > t1)
                     {
                         AK1();//выполнение первого действия
                         TableAdd();
-                    // LogAdd();
                 }
                     if ((t0- prepTime)>t2)
                     {
                         AK2();//выполнение обработки в канале
-                    TableAdd();
+                        TableAdd();
                     //LogAdd();
                 }
                     if ((t0 - prepTimeComp) > t3)
                     {
                        compList[min].in_work = false;
                        AK3();
-                    TableAdd();
+                       TableAdd();
                     // LogAdd();
                 }
                     else
@@ -332,7 +333,7 @@ namespace lw_sm_1
                         compList[min].in_work = true;
                         AK3(); //обработка в ПК
                                //LogAdd();
-                    TableAdd();
+                        TableAdd();
                     }
                 }
         }
@@ -455,7 +456,6 @@ namespace lw_sm_1
             }
             lbPSignal.Text = lost.ToString("F" + tbEpsilon.Text.Trim()) + "%";
             //Вероятность ожидания в очереди сигнала
-            // var wait = 100*((signalCounter - prepSignal) / signalCounter);
             var wait = 100 * ((signalCounter- waitPosition) / signalCounter);
             if (wait > 100)
             {
@@ -464,6 +464,7 @@ namespace lw_sm_1
             lbWait.Text = wait.ToString("F" + tbEpsilon.Text.Trim()) + "%";
             lbProd.Text = "Обработано " + ((prepSignal / signalCounter) / t0).ToString("F" + tbEpsilon.Text.Trim()) + " сигналов в секунду ";
         }
+
 //двойная буферизация
         protected override CreateParams CreateParams
         {

@@ -17,7 +17,7 @@ namespace RandomNumberGeneratorTest
             var b = values.Max();
             var step = (b - a) / m;
             var res = 0d;
-            for (var t = a; t < b; t+=step)
+            for (var t = a; t < b; t += step)
             {
                 var integralValue = DefiniteIntegral.CentralRectangle(f, t, t + step, 100);
                 var statistiсValue = (double)values.Count(x => t < x && x < (t + step)) / valuesCount;
@@ -51,18 +51,18 @@ namespace RandomNumberGeneratorTest
             }
 
             var exponentialPirson = GetPirson(res.Select(x => x.ExponentialValue), x => 0.1 * Math.Exp(-0.1 * x), 10);
-            var normal1Pirson = GetPirson(res.Select(x => x.Normal1Value), x => (1 / (1.5 * Math.Sqrt(2 * Math.PI))) * Math.Exp(-Math.Pow(x - 10, 2) /( Math.Pow((2*1.5),2))), 10);
-            var normal2Pirson = GetPirson(res.Select(x => x.Normal2Value), x => (1 / (3 * Math.Sqrt(2 * Math.PI))) * Math.Exp(-Math.Pow(x - 33, 2) /( Math.Pow((2*3),2))), 33);
+            var normal1Pirson = GetPirson(res.Select(x => x.Normal1Value), x => (1 / (1.5 * Math.Sqrt(2 * Math.PI))) * Math.Exp(-Math.Pow(x - 10, 2) / (Math.Pow((2 * 1.5), 2))), 10);
+            var normal2Pirson = GetPirson(res.Select(x => x.Normal2Value), x => (1 / (3 * Math.Sqrt(2 * Math.PI))) * Math.Exp(-Math.Pow(x - 33, 2) / (Math.Pow((2 * 3), 2))), 33);
             Console.WriteLine($"Значения критериев согласия \n Показательная величина - {exponentialPirson} \n Нормальная величина 1 - {normal1Pirson}"
                 + $"\n Нормальная величина 2 - {normal2Pirson} \n");
             _ = Console.ReadKey();
-        } 
-        
+        }
 
 
-    }   
+
+    }
     public class Writer
-        {
+    {
         public void WriterLog(List<LogTable> res)
         {
             using (var streamReader = new StreamWriter("LogTest.csv"))
@@ -74,5 +74,17 @@ namespace RandomNumberGeneratorTest
                 }
             }
         }
+            public void WriterRandom(List<ValuesList> res)
+            {
+                using (var streamReader = new StreamWriter("RandomStation.csv"))
+                {
+                    using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
+                    {
+                        csvReader.Configuration.Delimiter = ";";
+                        csvReader.WriteRecords(res);
+                    }
+                }
+            }
         }
-}
+    }
+

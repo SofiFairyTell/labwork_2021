@@ -11,6 +11,8 @@
   <ItemGroup>
     <ProjectReference Include="..\RandomNumberGeneratorTest\RandomNumberGeneratorTest.csproj" />
     <ProjectReference Include="..\RandomNumberGenerator\RandomNumberGenerator.csproj" />
+    <ProjectReference Include="..\RandomStationaryNormalProcessTest\RandomStationaryNormalProcessTest.csproj" />
+    <ProjectReference Include="..\RandomStationaryNormalProcess\RandomStationaryNormalProcess.csproj" />
   </ItemGroup>
 
   <ItemGroup>

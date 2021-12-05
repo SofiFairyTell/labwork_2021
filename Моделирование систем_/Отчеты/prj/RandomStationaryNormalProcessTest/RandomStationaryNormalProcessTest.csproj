@@ -50,6 +50,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RandomNumberGeneratorTest\RandomNumberGeneratorTest.csproj">
+      <Project>{f7afc917-5b64-44be-8806-39428b3ae98f}</Project>
+      <Name>RandomNumberGeneratorTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RandomNumberGenerator\RandomNumberGenerator.csproj">
+      <Project>{8bc3c500-1c74-4e96-92fd-87f1c8e6e2e0}</Project>
+      <Name>RandomNumberGenerator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RandomStationaryNormalProcess\RandomStationaryNormalProcess.csproj">
       <Project>{7331cc68-ec57-4dd4-aed2-b0c574f2ecf9}</Project>
       <Name>RandomStationaryNormalProcess</Name>

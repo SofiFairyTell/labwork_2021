@@ -30,7 +30,13 @@ namespace RandomNumberGeneratorTest
         public double prepSignal { get; set; }
         [Name ("Message")]
         public string message { get; set; }    
-
     }
 
+    public class ValuesList
+    {
+        [Name("a-chet")]
+        public double achet{ get; set; }
+        [Name("b-nechet")]
+        public double bnechet{ get; set; }       
+    }
 }

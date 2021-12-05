@@ -9,7 +9,9 @@
       "lw_sm_1/1.0.0": {
         "dependencies": {
           "RandomNumberGenerator": "1.0.0",
-          "RandomNumberGeneratorTest": "1.0.0"
+          "RandomNumberGeneratorTest": "1.0.0",
+          "RandomStationaryNormalProcess": "1.0.0",
+          "RandomStationaryNormalProcessTest": "1.0.0"
         },
         "runtime": {
           "lw_sm_1.dll": {}
@@ -26,6 +28,24 @@
         },
         "runtime": {
           "RandomNumberGeneratorTest.exe": {}
+        }
+      },
+      "RandomStationaryNormalProcess/1.0.0": {
+        "dependencies": {
+          "RandomNumberGenerator": "1.0.0"
+        },
+        "runtime": {
+          "RandomStationaryNormalProcess.dll": {}
+        }
+      },
+      "RandomStationaryNormalProcessTest/1.0.0": {
+        "dependencies": {
+          "RandomNumberGenerator": "1.0.0",
+          "RandomNumberGeneratorTest": "1.0.0",
+          "RandomStationaryNormalProcess": "1.0.0"
+        },
+        "runtime": {
+          "RandomStationaryNormalProcessTest.exe": {}
         }
       },
       "CsvHelper/15.0.0.0": {
@@ -58,6 +78,16 @@
       "sha512": ""
     },
     "RandomNumberGeneratorTest/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RandomStationaryNormalProcess/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RandomStationaryNormalProcessTest/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

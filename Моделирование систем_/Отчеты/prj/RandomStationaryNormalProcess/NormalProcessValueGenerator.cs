@@ -14,7 +14,7 @@ namespace RandomStationaryNormalProcess
         public NormalProcessValueGenerator(double[] C, double min, double max)
         {
             this.C = C;
-            M = (max + min) / 2;
+            M = (max + min) / 2; //математическое ожидание стационарного случайного процесса
             q = new List<double>();
             for (var i = 0; i < C.Length; i++)
             {
@@ -30,9 +30,9 @@ namespace RandomStationaryNormalProcess
 
         public double GetNextValue() 
         {
+            //получение нового значения yi(detT)
             var value = Enumerable.Range(0, C.Length).Select(i => C[i] * q[i]).Sum() + M;
             ShiftQ();
-
             return value;
         }
     }
