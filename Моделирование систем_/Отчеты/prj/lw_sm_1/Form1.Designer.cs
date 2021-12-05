@@ -108,6 +108,7 @@ namespace lw_sm_1
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.btnExperiment = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -186,12 +187,12 @@ namespace lw_sm_1
             this.btnStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.btnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Location = new System.Drawing.Point(263, 318);
+            this.btnStart.Location = new System.Drawing.Point(222, 318);
             this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(76, 33);
+            this.btnStart.Size = new System.Drawing.Size(117, 33);
             this.btnStart.TabIndex = 4;
-            this.btnStart.Text = "Start";
+            this.btnStart.Text = "Моделирование";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
@@ -208,6 +209,7 @@ namespace lw_sm_1
             // 
             // grProperties
             // 
+            this.grProperties.Controls.Add(this.btnExperiment);
             this.grProperties.Controls.Add(this.tbEcapcity);
             this.grProperties.Controls.Add(this.label15);
             this.grProperties.Controls.Add(this.groupBox3);
@@ -215,9 +217,9 @@ namespace lw_sm_1
             this.grProperties.Controls.Add(this.label4);
             this.grProperties.Controls.Add(this.tbNumSignal);
             this.grProperties.Controls.Add(this.lbSignal);
+            this.grProperties.Controls.Add(this.btnStart);
             this.grProperties.Controls.Add(this.tbNumComp);
             this.grProperties.Controls.Add(this.lbNumComp);
-            this.grProperties.Controls.Add(this.btnStart);
             this.grProperties.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.grProperties.Location = new System.Drawing.Point(829, 42);
             this.grProperties.Name = "grProperties";
@@ -951,6 +953,22 @@ namespace lw_sm_1
             this.label14.TabIndex = 22;
             this.label14.Text = "Шаг изменения времени";
             // 
+            // btnExperiment
+            // 
+            this.btnExperiment.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnExperiment.FlatAppearance.BorderSize = 5;
+            this.btnExperiment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btnExperiment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btnExperiment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExperiment.Location = new System.Drawing.Point(58, 318);
+            this.btnExperiment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExperiment.Name = "btnExperiment";
+            this.btnExperiment.Size = new System.Drawing.Size(117, 33);
+            this.btnExperiment.TabIndex = 23;
+            this.btnExperiment.Text = "Эксперимент";
+            this.btnExperiment.UseVisualStyleBackColor = true;
+            this.btnExperiment.Click += new System.EventHandler(this.btnExperiment_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1089,5 +1107,6 @@ namespace lw_sm_1
         private System.Windows.Forms.CheckBox cbRandomEcapacity;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tbEcapcity;
+        private System.Windows.Forms.Button btnExperiment;
     }
 }

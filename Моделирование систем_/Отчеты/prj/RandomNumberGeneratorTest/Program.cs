@@ -74,17 +74,29 @@ namespace RandomNumberGeneratorTest
                 }
             }
         }
-            public void WriterRandom(List<ValuesList> res)
+        public void WriterRandom(List<ValuesList> res)
+        {
+            using (var streamReader = new StreamWriter("RandomStation.csv"))
             {
-                using (var streamReader = new StreamWriter("RandomStation.csv"))
+                using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
                 {
-                    using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
-                    {
-                        csvReader.Configuration.Delimiter = ";";
-                        csvReader.WriteRecords(res);
-                    }
+                    csvReader.Configuration.Delimiter = ";";
+                    csvReader.WriteRecords(res);
                 }
             }
+        }
+
+        public void WriterResultLine(List<ResultLine> res)
+        {
+            using (var streamReader = new StreamWriter("Output.csv"))
+            {
+                using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
+                {
+                    csvReader.Configuration.Delimiter = ";";
+                    csvReader.WriteRecords(res);
+                }
+            }
+        }
         }
     }
 

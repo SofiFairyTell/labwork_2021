@@ -18,26 +18,33 @@ using System.IO;
 namespace lw_sm_1
 {
     public partial class Form1 : Form
-    {
-        public static List<comp> compList = new List<comp>();
+    {       
         readonly Timer tmr = new Timer();
+        #region Значения детерминированной СМО
         //счетчик канала
         int min = 0, signalCounter = 0, OutSignalCounter = 0;
         bool Visible = false;
         //для детерминированной СМО
         public static double t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Ecapcity = 4, detT = 10;
         //Локальное время обработки
-        double arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0, lostSignal=0;
+        public static double arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0, lostSignal=0;
         string MESSAGE = "";
-
-        List<LogTable> res = new List<LogTable>();
-
+        #endregion
+      
+        #region Графика
         //Для координат
         private int StartX = 0;
         private readonly int StartY = 0;
         private int SignalWidth = 0;
         private int SignalHeight = 0;
         private int Delay = 40;
+        #endregion
+
+        #region Списки для записей и выводов
+        public static List<comp> compList = new List<comp>();
+        List<LogTable> res = new List<LogTable>();
+        List<ResultLine> resultLine = new List<ResultLine>();
+        #endregion
         public Form1()
         {
             InitializeComponent();
@@ -204,6 +211,7 @@ namespace lw_sm_1
                 2, 6);
             Ecapcity = Math.Round(generator.GetNextValue(), MidpointRounding.ToEven);
         }
+
         #endregion
 
         #region Галочки для случайностей
@@ -258,6 +266,11 @@ namespace lw_sm_1
                 prepSignal = prepSignal,
                 message = MESSAGE
             });
+        }
+
+        private void ResultLineAdd()
+        {
+
         }
         private async void StatData()
         {
@@ -347,7 +360,7 @@ namespace lw_sm_1
             Task.Delay(Delay).Wait();
         }
 
-        private void Count()
+        private static void Count()
         {
             for (; prepSignal <= Convert.ToDouble(tbNumSignal.Text.Trim()); t0 += detT)
             {
@@ -388,22 +401,53 @@ namespace lw_sm_1
             }
         }
 
+        static ResultLine Work()
+        {
+            Count();
+            return new ResultLine(t1, t2, t3, Ecapcity, prepSignal);
+        }
         #endregion
 
-
-        private void btnStart_Click(object sender, EventArgs e)
+        #region Общее
+        private void NullEverything()
         {
             signalCounter = 0;
             t0 = 0;
-            arivTime = 0; prepTime = 0; checkTime = 0; prepTimeComp = 0; prepSignal = 0; OutSignalCounter = 0; lostSignal = 0;
+            arivTime = 0;
+            prepTime = 0;
+            checkTime = 0;
+            prepTimeComp = 0;
+            prepSignal = 0;
+            OutSignalCounter = 0;
+            lostSignal = 0;
+            compList.Clear();
+            res.Clear();
+            logTable.Rows.Clear();
+        }
 
+        private void ConvertTo(double t1, double t2, double t3)
+        {
+            t1 = Convert.ToDouble(tbT1.Text.Trim());
+            t2 = Convert.ToDouble(tbT2.Text.Trim());
+            t3 = Convert.ToDouble(tbT3.Text.Trim());
+        }
+        private void ConvertTo(int t1, int t2, int t3)
+        {
+            lbComp1.Text = Convert.ToString(t1);
+            lbComp2.Text = Convert.ToString(t2);
+            lbComp3.Text = Convert.ToString(t2);
+        }
+        #endregion
+        #region Кнопочки для запуска
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            NullEverything();
             if (tmr.Enabled == false)
             {
                 if (!cbRandom.Checked)
                 {
-                    t1 = Convert.ToDouble(tbT1.Text.Trim());
-                    t2 = Convert.ToDouble(tbT2.Text.Trim());
-                    t3 = Convert.ToDouble(tbT3.Text.Trim());
+                    ConvertTo(t1, t2, t3);
                 }
                 if (!cbRandomEcapacity.Checked)
                 {
@@ -411,17 +455,12 @@ namespace lw_sm_1
                 }
 
                 tmr.Enabled = true; //старт/стоп
-                compList.Clear();
-                res.Clear();
-                logTable.Rows.Clear();
 
                 for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
                 {
                     compList.Add(new comp());
                 }
-                lbComp1.Text = Convert.ToString(compList[0].capacity);
-                lbComp2.Text = Convert.ToString(compList[1].capacity);
-                lbComp3.Text = Convert.ToString(compList[2].capacity);
+                ConvertTo(compList[0].capacity,compList[1].capacity,compList[2].capacity);
 
                 Task.Run(() =>
                 {
@@ -434,11 +473,40 @@ namespace lw_sm_1
             }
 
         }
-        async void tmr_Tick(object sender, EventArgs e)
+
+        private void btnExperiment_Click(object sender, EventArgs e)
         {
-           
+            
+            if (tmr.Enabled == false)
+            {
+                tmr.Enabled = true; //старт/стоп
+                NullEverything();
+                for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
+                {
+                    compList.Add(new comp());
+                }
+                ConvertTo(compList[0].capacity, compList[1].capacity, compList[2].capacity);
+
+                Task.Run(() =>
+                {
+                    //Count();
+                    var res = Work();
+                    resultLine.Add(res);
+                });
+            }
+            else
+            {
+                tmr.Enabled = false; //старт/стоп
+            }
+
+        }
+
+        #endregion
+
+
+        async void tmr_Tick(object sender, EventArgs e)
+        {        
             route.Text = signalCounter.ToString();
-            // lbPrepVisual.Text = prepSignal.ToString();
             lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
             signal.Visible = true;
             LogAdd();
