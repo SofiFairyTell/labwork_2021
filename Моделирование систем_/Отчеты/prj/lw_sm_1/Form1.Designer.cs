@@ -36,6 +36,7 @@ namespace lw_sm_1
             this.btnStart = new System.Windows.Forms.Button();
             this.signal = new System.Windows.Forms.PictureBox();
             this.grProperties = new System.Windows.Forms.GroupBox();
+            this.btnExperiment = new System.Windows.Forms.Button();
             this.tbEcapcity = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -108,7 +109,6 @@ namespace lw_sm_1
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.btnExperiment = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -227,6 +227,22 @@ namespace lw_sm_1
             this.grProperties.TabIndex = 6;
             this.grProperties.TabStop = false;
             this.grProperties.Text = "Параметры моделирования";
+            // 
+            // btnExperiment
+            // 
+            this.btnExperiment.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnExperiment.FlatAppearance.BorderSize = 5;
+            this.btnExperiment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btnExperiment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btnExperiment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExperiment.Location = new System.Drawing.Point(58, 318);
+            this.btnExperiment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExperiment.Name = "btnExperiment";
+            this.btnExperiment.Size = new System.Drawing.Size(117, 33);
+            this.btnExperiment.TabIndex = 23;
+            this.btnExperiment.Text = "Эксперимент";
+            this.btnExperiment.UseVisualStyleBackColor = true;
+            this.btnExperiment.Click += new System.EventHandler(this.btnExperiment_Click);
             // 
             // tbEcapcity
             // 
@@ -953,22 +969,6 @@ namespace lw_sm_1
             this.label14.TabIndex = 22;
             this.label14.Text = "Шаг изменения времени";
             // 
-            // btnExperiment
-            // 
-            this.btnExperiment.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnExperiment.FlatAppearance.BorderSize = 5;
-            this.btnExperiment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
-            this.btnExperiment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
-            this.btnExperiment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExperiment.Location = new System.Drawing.Point(58, 318);
-            this.btnExperiment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnExperiment.Name = "btnExperiment";
-            this.btnExperiment.Size = new System.Drawing.Size(117, 33);
-            this.btnExperiment.TabIndex = 23;
-            this.btnExperiment.Text = "Эксперимент";
-            this.btnExperiment.UseVisualStyleBackColor = true;
-            this.btnExperiment.Click += new System.EventHandler(this.btnExperiment_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1032,14 +1032,12 @@ namespace lw_sm_1
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label route;
-        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.PictureBox signal;
         private System.Windows.Forms.GroupBox grProperties;
         private System.Windows.Forms.Label lbComp1;
         private System.Windows.Forms.Label lbComp2;
         private System.Windows.Forms.Label lbComp3;
         private System.Windows.Forms.DataGridView logTable;
-        private System.Windows.Forms.TextBox tbNumComp;
         private System.Windows.Forms.Label lbNumComp;
         private System.Windows.Forms.TabControl tbModel;
         private System.Windows.Forms.TabPage tabModel;
@@ -1053,7 +1051,6 @@ namespace lw_sm_1
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbOuterSignal;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tbNumSignal;
         private System.Windows.Forms.Label lbSignal;
         private System.Windows.Forms.Label lbLostSignal;
         private System.Windows.Forms.Label label6;
@@ -1061,7 +1058,6 @@ namespace lw_sm_1
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lbPSignal;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox tbEpsilon;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbWait;
         private System.Windows.Forms.Label label10;
@@ -1095,18 +1091,22 @@ namespace lw_sm_1
         private System.Windows.Forms.DataGridViewTextBoxColumn CapComp;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrepSign;
         private System.Windows.Forms.DataGridViewTextBoxColumn ActionData;
-        private System.Windows.Forms.CheckBox cbRandom;
-        private System.Windows.Forms.TextBox tbT3;
         private System.Windows.Forms.Label lbT3;
-        private System.Windows.Forms.TextBox tbT2;
         private System.Windows.Forms.Label lbT2;
-        private System.Windows.Forms.TextBox tbT1;
         private System.Windows.Forms.Label lbT1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox cbRandomEcapacity;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox tbEcapcity;
-        private System.Windows.Forms.Button btnExperiment;
+        public System.Windows.Forms.Button btnStart;
+        public System.Windows.Forms.TextBox tbNumComp;
+        public System.Windows.Forms.TextBox tbNumSignal;
+        public System.Windows.Forms.TextBox tbEpsilon;
+        public System.Windows.Forms.CheckBox cbRandom;
+        public System.Windows.Forms.TextBox tbT3;
+        public System.Windows.Forms.TextBox tbT2;
+        public System.Windows.Forms.TextBox tbT1;
+        public System.Windows.Forms.CheckBox cbRandomEcapacity;
+        public System.Windows.Forms.TextBox tbEcapcity;
+        public System.Windows.Forms.Button btnExperiment;
     }
 }

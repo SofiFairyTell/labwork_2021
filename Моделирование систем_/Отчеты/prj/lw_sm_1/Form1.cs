@@ -22,13 +22,14 @@ namespace lw_sm_1
         readonly Timer tmr = new Timer();
         #region Значения детерминированной СМО
         //счетчик канала
-        int min = 0, signalCounter = 0, OutSignalCounter = 0;
-        bool Visible = false;
+        public static int min = 0, signalCounter = 0, OutSignalCounter = 0;
+        public static bool Visible = false;
         //для детерминированной СМО
         public static double t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Ecapcity = 4, detT = 10;
         //Локальное время обработки
         public static double arivTime = 0, prepTime = 0, checkTime = 0, prepTimeComp = 0, prepSignal = 0, lostSignal=0;
-        string MESSAGE = "";
+        public static string MESSAGE = "";
+        public static bool ExperimentMode=false;
         #endregion
       
         #region Графика
@@ -37,13 +38,13 @@ namespace lw_sm_1
         private readonly int StartY = 0;
         private int SignalWidth = 0;
         private int SignalHeight = 0;
-        private int Delay = 40;
+        private static int Delay = 40;
         #endregion
 
         #region Списки для записей и выводов
         public static List<comp> compList = new List<comp>();
-        List<LogTable> res = new List<LogTable>();
-        List<ResultLine> resultLine = new List<ResultLine>();
+        public static List<LogTable> res = new List<LogTable>();
+        public static List<ResultLine> resultLine = new List<ResultLine>();
         #endregion
         public Form1()
         {
@@ -197,14 +198,14 @@ namespace lw_sm_1
         #endregion
 
         #region Случайности
-        private void Generate()
+        private static void Generate()
         {
             var generator = new Generator();
             t1 = generator.ExponentialDistributionFunction(0.1);
             t2 = generator.NormalDistributionFunction(1.5, 10);
             t3 = generator.NormalDistributionFunction(3, 33);
         }
-        private void GenerateStationary()
+        private static void GenerateStationary()
         {
             var generator = new RandomStationaryNormalProcess.NormalProcessValueGenerator(
                 new double[] { 0.036, 0.084, 0.228, 0.619 },
@@ -249,13 +250,13 @@ namespace lw_sm_1
         }
         #endregion
 
-        #region Выводы в таблицы и файлы и на экран
+//Выводы в таблицы и файлы и на экран
         private void LogAdd()
         {
             logTable.Rows.Add(Convert.ToString(t0), "", "", Convert.ToString(prepTimeComp),
                    Convert.ToString(min), Convert.ToString(compList[min].capacity), Convert.ToString(prepSignal), MESSAGE);
         }
-        private void TableAdd()
+        private static void TableAdd()
         {
             res.Add(new LogTable()
             {
@@ -268,10 +269,6 @@ namespace lw_sm_1
             });
         }
 
-        private void ResultLineAdd()
-        {
-
-        }
         private async void StatData()
         {
             lbSignalCounter.Text = signalCounter.ToString();
@@ -295,17 +292,17 @@ namespace lw_sm_1
             lbWait.Text = wait.ToString("F" + tbEpsilon.Text.Trim()) + "%";
             lbProd.Text = "Обработано " + ((prepSignal / signalCounter) / t0).ToString("F" + tbEpsilon.Text.Trim()) + " сигналов в секунду ";
         }
-        #endregion
+
 
         #region Активности и вычисления
-        private void AK1()
+        private static void AK1()
         {
             arivTime = t0;
             signalCounter++;
             MESSAGE = "Прием сигнала";
             Task.Delay(Delay).Wait();
         }
-        private void AK2()
+        private static void AK2()
         {
             checkTime += t2;//для фиксации общего времени проверки в канале
             prepTime = t0;
@@ -315,7 +312,7 @@ namespace lw_sm_1
             min = MinPC();
             Task.Delay(Delay).Wait();
         }
-        private int MinPC()
+        private static int MinPC()
         {
             int locMin = 0;
             //Определим где наименьшая очередь
@@ -328,7 +325,7 @@ namespace lw_sm_1
             }
             return locMin;
         }
-        private void AK3()
+        private static void AK3()
         {
             MESSAGE = "Обработка в ЭВМ";
             if ((compList[min].in_work == false) && (compList[min].capacity >= 0))
@@ -359,8 +356,9 @@ namespace lw_sm_1
             }
             Task.Delay(Delay).Wait();
         }
+        #endregion
 
-        private static void Count()
+        public void Count()
         {
             for (; prepSignal <= Convert.ToDouble(tbNumSignal.Text.Trim()); t0 += detT)
             {
@@ -401,12 +399,52 @@ namespace lw_sm_1
             }
         }
 
-        static ResultLine Work()
+        public static void CountExperiment(double NumPrepSignal,bool RandomTCheck, bool RandomEcapCheck)
         {
-            Count();
+            for (; prepSignal <= NumPrepSignal; t0 += detT)
+            {
+                if (RandomTCheck == true)
+                {
+                    Generate();
+                }
+                if (RandomEcapCheck == true)
+                {
+                    GenerateStationary();
+                }
+
+                if ((t0 - arivTime) > t1)
+                {
+                    AK1();//выполнение первого действия
+                    TableAdd();
+                }
+                if ((t0 - prepTime) > t2)
+                {
+                    AK2();//выполнение обработки в канале
+                    TableAdd();
+                    //LogAdd();
+                }
+                if ((t0 - prepTimeComp) > t3)
+                {
+                    compList[min].in_work = false;
+                    AK3();
+                    TableAdd();
+                    // LogAdd();
+                }
+                else
+                {
+                    compList[min].in_work = true;
+                    AK3(); //обработка в ПК
+                           //LogAdd();
+                    TableAdd();
+                }
+            }
+        }
+        static ResultLine Work(double NumPrepSignal)
+        {
+            CountExperiment(NumPrepSignal,false,false);
             return new ResultLine(t1, t2, t3, Ecapcity, prepSignal);
         }
-        #endregion
+
 
         #region Общее
         private void NullEverything()
@@ -476,7 +514,7 @@ namespace lw_sm_1
 
         private void btnExperiment_Click(object sender, EventArgs e)
         {
-            
+            ExperimentMode = true;
             if (tmr.Enabled == false)
             {
                 tmr.Enabled = true; //старт/стоп
@@ -486,13 +524,23 @@ namespace lw_sm_1
                     compList.Add(new comp());
                 }
                 ConvertTo(compList[0].capacity, compList[1].capacity, compList[2].capacity);
-
+                var rnd = new Random();
+                var experiments = 0;
                 Task.Run(() =>
                 {
-                    //Count();
-                    var res = Work();
-                    resultLine.Add(res);
+                    foreach (var T1 in Enumerable.Range(5, 15).OrderBy(x => rnd.Next()).Take(5))
+                    {
+                        var numSignal = Convert.ToDouble(tbNumSignal.Text.Trim());
+                        t1 = T1;
+                        //Count();
+                        var res = Work(numSignal);
+                        resultLine.Add(res);
+                        experiments++;
+                    }
                 });
+                var writer = new Writer();
+                writer.WriterResultLine(resultLine);
+
             }
             else
             {
@@ -529,8 +577,12 @@ namespace lw_sm_1
             if (prepSignal >= Convert.ToDouble(tbNumSignal.Text.Trim()))
             {
                 tmr.Enabled = false; //старт/стоп
-                var writer = new Writer();
-                writer.WriterLog(res);
+                if(!ExperimentMode)
+                {
+                    var writer = new Writer();
+                    writer.WriterLog(res);
+                }
+
                 lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
                 StatData();
             }
