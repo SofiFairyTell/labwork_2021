@@ -45,7 +45,10 @@ namespace RandomStationaryNormalProcessTest
             }
             writer.WriterRandom(res);
             var student = new CounterStudent();
+            var fisher = new CounterFisher();
             var studentCriterion = student.StudentCriterion(a, b,N);
+            var fisherCriterion = fisher.FisherCriterion(a, b, N);
+            _ = Console.ReadKey();
         }
     }
     public class CounterStudent
@@ -81,8 +84,49 @@ namespace RandomStationaryNormalProcessTest
             Console.WriteLine($"D - {D}");
             Console.WriteLine($"Степеней свободы - {beta}");
             Console.WriteLine($"Критерий Стьюдента - {studentCriterion}");
-            _ = Console.ReadKey();
+            //_ = Console.ReadKey();
         }
     }
 
+    public class CounterFisher
+    {
+        public double FisherCriterion(List<double> a, List<double> b, int N)
+        {
+            var aM = a.Sum() / N;
+            var bM = b.Sum() / N;
+            var aD = 0d;
+            var bD = 0d;
+            for (var i = 0; i < N; i++)
+            {
+                aD += Math.Pow(a[i] - aM, 2) / (N - 1);
+                bD += Math.Pow(b[i] - bM, 2) / (N - 1);
+            }
+            //Вычислим отношение дисперсий
+            double fisherCriterion = 0;
+            if(bD<aD)
+            {
+                fisherCriterion = aD/bD;
+            }
+            else
+            {
+                fisherCriterion = bD/aD ;
+            }
+            var beta1 = N - 1;
+            var aZNACH = 0.05;
+            ConsoleLog(aM, bM, aD, bD, fisherCriterion, aZNACH, beta1);
+            return fisherCriterion;
+        }
+        public void ConsoleLog(double aM, double bM, double aD, double bD, double fisherCriterion,double aZnach ,double beta)
+        {
+            Console.WriteLine($"Параметры для расчета Критерия согласия Фишера");
+            Console.WriteLine($"m'x - {aM}");
+            Console.WriteLine($"m''y - {bM}");
+            Console.WriteLine($"Dx - {aD}");
+            Console.WriteLine($"Dy - {bD}");
+            Console.WriteLine($"Критерий значимости - {aZnach}");
+            Console.WriteLine($"Степеней свободы - {beta}");
+            Console.WriteLine($"Критерий Фишера - {fisherCriterion}");
+            //_ = Console.ReadKey();
+        }
+    }
 }
