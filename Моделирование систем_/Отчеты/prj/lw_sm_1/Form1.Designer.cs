@@ -88,6 +88,8 @@ namespace lw_sm_1
             this.signalRoute = new System.Windows.Forms.PictureBox();
             this.tabData = new System.Windows.Forms.TabPage();
             this.tabStat = new System.Windows.Forms.TabPage();
+            this.lbExperiment = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.lbWait = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.lbPSignal = new System.Windows.Forms.Label();
@@ -109,6 +111,8 @@ namespace lw_sm_1
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lbExper = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -137,6 +141,7 @@ namespace lw_sm_1
             ((System.ComponentModel.ISupportInitialize)(this.signalRoute)).BeginInit();
             this.tabData.SuspendLayout();
             this.tabStat.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -525,6 +530,7 @@ namespace lw_sm_1
             // 
             // tabModel
             // 
+            this.tabModel.Controls.Add(this.groupBox4);
             this.tabModel.Controls.Add(this.groupBox1);
             this.tabModel.Controls.Add(this.gbRoute);
             this.tabModel.Controls.Add(this.signalRoutePC3_3);
@@ -553,9 +559,9 @@ namespace lw_sm_1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.YellowGreen;
             this.groupBox1.Controls.Add(this.lbPrepVisual);
-            this.groupBox1.Location = new System.Drawing.Point(704, 121);
+            this.groupBox1.Location = new System.Drawing.Point(693, 121);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(92, 101);
+            this.groupBox1.Size = new System.Drawing.Size(103, 101);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Обработано";
@@ -565,7 +571,7 @@ namespace lw_sm_1
             this.lbPrepVisual.AutoSize = true;
             this.lbPrepVisual.BackColor = System.Drawing.Color.YellowGreen;
             this.lbPrepVisual.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbPrepVisual.Location = new System.Drawing.Point(35, 29);
+            this.lbPrepVisual.Location = new System.Drawing.Point(16, 30);
             this.lbPrepVisual.Name = "lbPrepVisual";
             this.lbPrepVisual.Size = new System.Drawing.Size(22, 25);
             this.lbPrepVisual.TabIndex = 3;
@@ -683,7 +689,7 @@ namespace lw_sm_1
             this.gbPC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbPC.Location = new System.Drawing.Point(453, 6);
             this.gbPC.Name = "gbPC";
-            this.gbPC.Size = new System.Drawing.Size(245, 322);
+            this.gbPC.Size = new System.Drawing.Size(234, 322);
             this.gbPC.TabIndex = 17;
             this.gbPC.TabStop = false;
             this.gbPC.Text = "Компьютеры для обработки сигналов";
@@ -745,6 +751,8 @@ namespace lw_sm_1
             // 
             // tabStat
             // 
+            this.tabStat.Controls.Add(this.lbExperiment);
+            this.tabStat.Controls.Add(this.label16);
             this.tabStat.Controls.Add(this.lbWait);
             this.tabStat.Controls.Add(this.label10);
             this.tabStat.Controls.Add(this.lbPSignal);
@@ -768,6 +776,26 @@ namespace lw_sm_1
             this.tabStat.TabIndex = 2;
             this.tabStat.Text = "Статистика";
             this.tabStat.UseVisualStyleBackColor = true;
+            // 
+            // lbExperiment
+            // 
+            this.lbExperiment.AutoSize = true;
+            this.lbExperiment.BackColor = System.Drawing.Color.Gold;
+            this.lbExperiment.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbExperiment.Location = new System.Drawing.Point(483, 151);
+            this.lbExperiment.Name = "lbExperiment";
+            this.lbExperiment.Size = new System.Drawing.Size(13, 15);
+            this.lbExperiment.TabIndex = 17;
+            this.lbExperiment.Text = "0";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(282, 151);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 15);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "Эксперименты";
             // 
             // lbWait
             // 
@@ -969,6 +997,28 @@ namespace lw_sm_1
             this.label14.TabIndex = 22;
             this.label14.Text = "Шаг изменения времени";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.BackColor = System.Drawing.Color.YellowGreen;
+            this.groupBox4.Controls.Add(this.lbExper);
+            this.groupBox4.Location = new System.Drawing.Point(693, 250);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(103, 58);
+            this.groupBox4.TabIndex = 28;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Эксперимент";
+            // 
+            // lbExper
+            // 
+            this.lbExper.AutoSize = true;
+            this.lbExper.BackColor = System.Drawing.Color.YellowGreen;
+            this.lbExper.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbExper.Location = new System.Drawing.Point(16, 24);
+            this.lbExper.Name = "lbExper";
+            this.lbExper.Size = new System.Drawing.Size(17, 19);
+            this.lbExper.TabIndex = 3;
+            this.lbExper.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1021,6 +1071,8 @@ namespace lw_sm_1
             this.tabData.ResumeLayout(false);
             this.tabStat.ResumeLayout(false);
             this.tabStat.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1108,5 +1160,9 @@ namespace lw_sm_1
         public System.Windows.Forms.CheckBox cbRandomEcapacity;
         public System.Windows.Forms.TextBox tbEcapcity;
         public System.Windows.Forms.Button btnExperiment;
+        private System.Windows.Forms.Label lbExperiment;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label lbExper;
     }
 }

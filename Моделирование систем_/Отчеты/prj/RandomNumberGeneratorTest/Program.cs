@@ -97,6 +97,17 @@ namespace RandomNumberGeneratorTest
                 }
             }
         }
+        public void WriterResultLine(List<SLAULine> res)
+        {
+            using (var streamReader = new StreamWriter("Slau.csv"))
+            {
+                using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
+                {
+                    csvReader.Configuration.Delimiter = ";";
+                    csvReader.WriteRecords(res);
+                }
+            }
         }
+    }
     }
 

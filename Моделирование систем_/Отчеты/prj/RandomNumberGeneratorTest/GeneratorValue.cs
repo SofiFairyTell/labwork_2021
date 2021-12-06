@@ -72,7 +72,7 @@ namespace RandomNumberGeneratorTest
             X4 = (int)x4;
         }
     }
-    class SLAULine
+    public class SLAULine
     {
         [Name("a0")]
         public int a0 { get; set; }
