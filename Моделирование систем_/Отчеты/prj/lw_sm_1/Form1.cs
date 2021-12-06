@@ -24,6 +24,7 @@ namespace lw_sm_1
         //счетчик канала
         public static int min = 0, signalCounter = 0, OutSignalCounter = 0;
         public static bool Visible = false;
+        public int experiments = 0;
         //для детерминированной СМО
         public static double t0 = 0, N = 3, t1 = 10, t2 = 10, t3 = 33, Ecapcity = 4, detT = 10;
         //Локальное время обработки
@@ -523,7 +524,7 @@ namespace lw_sm_1
                 compList.Clear();
                 res.Clear();
                 logTable.Rows.Clear();
-                resultLine.Clear();
+                //resultLine.Clear();
                 NullEverything();
                 for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
                 {
@@ -531,7 +532,7 @@ namespace lw_sm_1
                 }
                 //ConvertTo(compList[0].capacity, compList[1].capacity, compList[2].capacity);
                 var rnd = new Random();
-                int experiments = 0;
+                
                 Task.Run(() =>
                 {
                     foreach (var T1 in Enumerable.Range(5, 15).OrderBy(x => rnd.Next()).Take(5))
