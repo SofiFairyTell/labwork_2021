@@ -22,6 +22,32 @@
         "runtime": {
           "bin/placeholder/RandomNumberGeneratorTest.dll": {}
         }
+      },
+      "RandomStationaryNormalProcess/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "RandomNumberGenerator": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/RandomStationaryNormalProcess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RandomStationaryNormalProcess.dll": {}
+        }
+      },
+      "RandomStationaryNormalProcessTest/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "RandomNumberGenerator": "1.0.0",
+          "RandomNumberGeneratorTest": "1.0.0",
+          "RandomStationaryNormalProcess": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/RandomStationaryNormalProcessTest.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RandomStationaryNormalProcessTest.dll": {}
+        }
       }
     }
   },
@@ -35,12 +61,24 @@
       "type": "project",
       "path": "../RandomNumberGeneratorTest/RandomNumberGeneratorTest.csproj",
       "msbuildProject": "../RandomNumberGeneratorTest/RandomNumberGeneratorTest.csproj"
+    },
+    "RandomStationaryNormalProcess/1.0.0": {
+      "type": "project",
+      "path": "../RandomStationaryNormalProcess/RandomStationaryNormalProcess.csproj",
+      "msbuildProject": "../RandomStationaryNormalProcess/RandomStationaryNormalProcess.csproj"
+    },
+    "RandomStationaryNormalProcessTest/1.0.0": {
+      "type": "project",
+      "path": "../RandomStationaryNormalProcessTest/RandomStationaryNormalProcessTest.csproj",
+      "msbuildProject": "../RandomStationaryNormalProcessTest/RandomStationaryNormalProcessTest.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "RandomNumberGenerator >= 1.0.0",
-      "RandomNumberGeneratorTest >= 1.0.0"
+      "RandomNumberGeneratorTest >= 1.0.0",
+      "RandomStationaryNormalProcess >= 1.0.0",
+      "RandomStationaryNormalProcessTest >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -80,6 +118,12 @@
             },
             "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj": {
               "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj"
+            },
+            "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcessTest\\RandomStationaryNormalProcessTest.csproj": {
+              "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcessTest\\RandomStationaryNormalProcessTest.csproj"
+            },
+            "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcess\\RandomStationaryNormalProcess.csproj": {
+              "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcess\\RandomStationaryNormalProcess.csproj"
             }
           }
         }

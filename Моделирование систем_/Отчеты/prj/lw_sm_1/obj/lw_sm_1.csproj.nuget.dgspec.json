@@ -37,6 +37,12 @@
               },
               "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj": {
                 "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj"
+              },
+              "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcessTest\\RandomStationaryNormalProcessTest.csproj": {
+                "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcessTest\\RandomStationaryNormalProcessTest.csproj"
+              },
+              "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcess\\RandomStationaryNormalProcess.csproj": {
+                "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcess\\RandomStationaryNormalProcess.csproj"
               }
             }
           }
@@ -96,6 +102,50 @@
         "projectUniqueName": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj",
         "projectName": "RandomNumberGenerator",
         "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcessTest\\RandomStationaryNormalProcessTest.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcessTest\\RandomStationaryNormalProcessTest.csproj",
+        "projectName": "RandomStationaryNormalProcessTest",
+        "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcessTest\\RandomStationaryNormalProcessTest.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGeneratorTest\\RandomNumberGeneratorTest.csproj": {
+                "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGeneratorTest\\RandomNumberGeneratorTest.csproj"
+              },
+              "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj": {
+                "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj"
+              },
+              "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcess\\RandomStationaryNormalProcess.csproj": {
+                "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcess\\RandomStationaryNormalProcess.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcess\\RandomStationaryNormalProcess.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcess\\RandomStationaryNormalProcess.csproj",
+        "projectName": "RandomStationaryNormalProcess",
+        "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomStationaryNormalProcess\\RandomStationaryNormalProcess.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj": {
+                "projectPath": "D:\\Учеба\\Технолог-Учеба\\labwork_2021\\Моделирование систем_\\Отчеты\\prj\\RandomNumberGenerator\\RandomNumberGenerator.csproj"
+              }
+            }
+          }
+        }
       },
       "frameworks": {
         "net472": {}

@@ -36,16 +36,23 @@ namespace lw_sm_1
             this.btnStart = new System.Windows.Forms.Button();
             this.signal = new System.Windows.Forms.PictureBox();
             this.grProperties = new System.Windows.Forms.GroupBox();
+            this.btnExperiment = new System.Windows.Forms.Button();
+            this.tbEcapcity = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbRandomEcapacity = new System.Windows.Forms.CheckBox();
+            this.cbRandom = new System.Windows.Forms.CheckBox();
+            this.lbT1 = new System.Windows.Forms.Label();
+            this.tbT1 = new System.Windows.Forms.TextBox();
+            this.lbT2 = new System.Windows.Forms.Label();
+            this.tbT2 = new System.Windows.Forms.TextBox();
+            this.tbT3 = new System.Windows.Forms.TextBox();
+            this.lbT3 = new System.Windows.Forms.Label();
             this.tbEpsilon = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tbNumSignal = new System.Windows.Forms.TextBox();
             this.lbSignal = new System.Windows.Forms.Label();
-            this.tbT3 = new System.Windows.Forms.TextBox();
-            this.lbT3 = new System.Windows.Forms.Label();
-            this.tbT2 = new System.Windows.Forms.TextBox();
-            this.lbT2 = new System.Windows.Forms.Label();
-            this.tbT1 = new System.Windows.Forms.TextBox();
-            this.lbT1 = new System.Windows.Forms.Label();
             this.tbNumComp = new System.Windows.Forms.TextBox();
             this.lbNumComp = new System.Windows.Forms.Label();
             this.tbSpeed = new System.Windows.Forms.TrackBar();
@@ -81,6 +88,8 @@ namespace lw_sm_1
             this.signalRoute = new System.Windows.Forms.PictureBox();
             this.tabData = new System.Windows.Forms.TabPage();
             this.tabStat = new System.Windows.Forms.TabPage();
+            this.lbExperiment = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.lbWait = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.lbPSignal = new System.Windows.Forms.Label();
@@ -102,12 +111,15 @@ namespace lw_sm_1
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.cbRandom = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lbExper = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signal)).BeginInit();
             this.grProperties.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logTable)).BeginInit();
             this.tbModel.SuspendLayout();
@@ -129,6 +141,7 @@ namespace lw_sm_1
             ((System.ComponentModel.ISupportInitialize)(this.signalRoute)).BeginInit();
             this.tabData.SuspendLayout();
             this.tabStat.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -179,12 +192,12 @@ namespace lw_sm_1
             this.btnStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.btnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Location = new System.Drawing.Point(28, 292);
+            this.btnStart.Location = new System.Drawing.Point(222, 318);
             this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(153, 40);
+            this.btnStart.Size = new System.Drawing.Size(117, 33);
             this.btnStart.TabIndex = 4;
-            this.btnStart.Text = "Start";
+            this.btnStart.Text = "Моделирование";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
@@ -201,63 +214,141 @@ namespace lw_sm_1
             // 
             // grProperties
             // 
-            this.grProperties.Controls.Add(this.cbRandom);
+            this.grProperties.Controls.Add(this.btnExperiment);
+            this.grProperties.Controls.Add(this.tbEcapcity);
+            this.grProperties.Controls.Add(this.label15);
+            this.grProperties.Controls.Add(this.groupBox3);
             this.grProperties.Controls.Add(this.tbEpsilon);
             this.grProperties.Controls.Add(this.label4);
             this.grProperties.Controls.Add(this.tbNumSignal);
             this.grProperties.Controls.Add(this.lbSignal);
-            this.grProperties.Controls.Add(this.tbT3);
-            this.grProperties.Controls.Add(this.lbT3);
-            this.grProperties.Controls.Add(this.tbT2);
-            this.grProperties.Controls.Add(this.lbT2);
-            this.grProperties.Controls.Add(this.tbT1);
-            this.grProperties.Controls.Add(this.lbT1);
+            this.grProperties.Controls.Add(this.btnStart);
             this.grProperties.Controls.Add(this.tbNumComp);
             this.grProperties.Controls.Add(this.lbNumComp);
-            this.grProperties.Controls.Add(this.btnStart);
             this.grProperties.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.grProperties.Location = new System.Drawing.Point(829, 42);
             this.grProperties.Name = "grProperties";
-            this.grProperties.Size = new System.Drawing.Size(351, 347);
+            this.grProperties.Size = new System.Drawing.Size(351, 358);
             this.grProperties.TabIndex = 6;
             this.grProperties.TabStop = false;
             this.grProperties.Text = "Параметры моделирования";
             // 
-            // tbEpsilon
+            // btnExperiment
             // 
-            this.tbEpsilon.Location = new System.Drawing.Point(111, 215);
-            this.tbEpsilon.Name = "tbEpsilon";
-            this.tbEpsilon.Size = new System.Drawing.Size(117, 23);
-            this.tbEpsilon.TabIndex = 16;
+            this.btnExperiment.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnExperiment.FlatAppearance.BorderSize = 5;
+            this.btnExperiment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btnExperiment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btnExperiment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExperiment.Location = new System.Drawing.Point(58, 318);
+            this.btnExperiment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExperiment.Name = "btnExperiment";
+            this.btnExperiment.Size = new System.Drawing.Size(117, 33);
+            this.btnExperiment.TabIndex = 23;
+            this.btnExperiment.Text = "Эксперимент";
+            this.btnExperiment.UseVisualStyleBackColor = true;
+            this.btnExperiment.Click += new System.EventHandler(this.btnExperiment_Click);
             // 
-            // label4
+            // tbEcapcity
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 219);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 15);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Точность";
+            this.tbEcapcity.Location = new System.Drawing.Point(138, 136);
+            this.tbEcapcity.Name = "tbEcapcity";
+            this.tbEcapcity.Size = new System.Drawing.Size(117, 23);
+            this.tbEcapcity.TabIndex = 22;
             // 
-            // tbNumSignal
+            // label15
             // 
-            this.tbNumSignal.Location = new System.Drawing.Point(111, 166);
-            this.tbNumSignal.Name = "tbNumSignal";
-            this.tbNumSignal.Size = new System.Drawing.Size(117, 23);
-            this.tbNumSignal.TabIndex = 14;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 136);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(118, 15);
+            this.label15.TabIndex = 21;
+            this.label15.Text = "Ёмкость очереди (E)";
             // 
-            // lbSignal
+            // groupBox3
             // 
-            this.lbSignal.AutoSize = true;
-            this.lbSignal.Location = new System.Drawing.Point(7, 155);
-            this.lbSignal.Name = "lbSignal";
-            this.lbSignal.Size = new System.Drawing.Size(88, 45);
-            this.lbSignal.TabIndex = 13;
-            this.lbSignal.Text = "N_сигналов\r\nдля обработки\r\nв ЭВМ";
+            this.groupBox3.Controls.Add(this.groupBox2);
+            this.groupBox3.Controls.Add(this.lbT1);
+            this.groupBox3.Controls.Add(this.tbT1);
+            this.groupBox3.Controls.Add(this.lbT2);
+            this.groupBox3.Controls.Add(this.tbT2);
+            this.groupBox3.Controls.Add(this.tbT3);
+            this.groupBox3.Controls.Add(this.lbT3);
+            this.groupBox3.Location = new System.Drawing.Point(7, 169);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(338, 144);
+            this.groupBox3.TabIndex = 20;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Время обработки на каждом этапе";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.cbRandomEcapacity);
+            this.groupBox2.Controls.Add(this.cbRandom);
+            this.groupBox2.Location = new System.Drawing.Point(6, 24);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(326, 62);
+            this.groupBox2.TabIndex = 19;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Генерация ";
+            // 
+            // cbRandomEcapacity
+            // 
+            this.cbRandomEcapacity.AutoSize = true;
+            this.cbRandomEcapacity.Location = new System.Drawing.Point(118, 25);
+            this.cbRandomEcapacity.Name = "cbRandomEcapacity";
+            this.cbRandomEcapacity.Size = new System.Drawing.Size(149, 19);
+            this.cbRandomEcapacity.TabIndex = 18;
+            this.cbRandomEcapacity.Text = "случайная ёмкость (Е)";
+            this.cbRandomEcapacity.UseVisualStyleBackColor = true;
+            this.cbRandomEcapacity.CheckedChanged += new System.EventHandler(this.cbRandomEcapcity_CheckedChanged);
+            // 
+            // cbRandom
+            // 
+            this.cbRandom.AutoSize = true;
+            this.cbRandom.Location = new System.Drawing.Point(26, 25);
+            this.cbRandom.Name = "cbRandom";
+            this.cbRandom.Size = new System.Drawing.Size(86, 19);
+            this.cbRandom.TabIndex = 17;
+            this.cbRandom.Text = "t случайно";
+            this.cbRandom.UseVisualStyleBackColor = true;
+            this.cbRandom.CheckedChanged += new System.EventHandler(this.cbRandom_CheckedChanged);
+            // 
+            // lbT1
+            // 
+            this.lbT1.AutoSize = true;
+            this.lbT1.Location = new System.Drawing.Point(15, 106);
+            this.lbT1.Name = "lbT1";
+            this.lbT1.Size = new System.Drawing.Size(17, 15);
+            this.lbT1.TabIndex = 7;
+            this.lbT1.Text = "t1";
+            // 
+            // tbT1
+            // 
+            this.tbT1.Location = new System.Drawing.Point(47, 106);
+            this.tbT1.Name = "tbT1";
+            this.tbT1.Size = new System.Drawing.Size(41, 23);
+            this.tbT1.TabIndex = 8;
+            // 
+            // lbT2
+            // 
+            this.lbT2.AutoSize = true;
+            this.lbT2.Location = new System.Drawing.Point(104, 109);
+            this.lbT2.Name = "lbT2";
+            this.lbT2.Size = new System.Drawing.Size(17, 15);
+            this.lbT2.TabIndex = 9;
+            this.lbT2.Text = "t2";
+            // 
+            // tbT2
+            // 
+            this.tbT2.Location = new System.Drawing.Point(127, 106);
+            this.tbT2.Name = "tbT2";
+            this.tbT2.Size = new System.Drawing.Size(41, 23);
+            this.tbT2.TabIndex = 10;
             // 
             // tbT3
             // 
-            this.tbT3.Location = new System.Drawing.Point(187, 106);
+            this.tbT3.Location = new System.Drawing.Point(207, 106);
             this.tbT3.Name = "tbT3";
             this.tbT3.Size = new System.Drawing.Size(41, 23);
             this.tbT3.TabIndex = 12;
@@ -265,47 +356,47 @@ namespace lw_sm_1
             // lbT3
             // 
             this.lbT3.AutoSize = true;
-            this.lbT3.Location = new System.Drawing.Point(164, 106);
+            this.lbT3.Location = new System.Drawing.Point(184, 109);
             this.lbT3.Name = "lbT3";
             this.lbT3.Size = new System.Drawing.Size(17, 15);
             this.lbT3.TabIndex = 11;
             this.lbT3.Text = "t3";
             // 
-            // tbT2
+            // tbEpsilon
             // 
-            this.tbT2.Location = new System.Drawing.Point(111, 106);
-            this.tbT2.Name = "tbT2";
-            this.tbT2.Size = new System.Drawing.Size(41, 23);
-            this.tbT2.TabIndex = 10;
+            this.tbEpsilon.Location = new System.Drawing.Point(138, 98);
+            this.tbEpsilon.Name = "tbEpsilon";
+            this.tbEpsilon.Size = new System.Drawing.Size(117, 23);
+            this.tbEpsilon.TabIndex = 16;
             // 
-            // lbT2
+            // label4
             // 
-            this.lbT2.AutoSize = true;
-            this.lbT2.Location = new System.Drawing.Point(87, 106);
-            this.lbT2.Name = "lbT2";
-            this.lbT2.Size = new System.Drawing.Size(17, 15);
-            this.lbT2.TabIndex = 9;
-            this.lbT2.Text = "t2";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 106);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 15);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Точность";
             // 
-            // tbT1
+            // tbNumSignal
             // 
-            this.tbT1.Location = new System.Drawing.Point(30, 103);
-            this.tbT1.Name = "tbT1";
-            this.tbT1.Size = new System.Drawing.Size(41, 23);
-            this.tbT1.TabIndex = 8;
+            this.tbNumSignal.Location = new System.Drawing.Point(138, 61);
+            this.tbNumSignal.Name = "tbNumSignal";
+            this.tbNumSignal.Size = new System.Drawing.Size(117, 23);
+            this.tbNumSignal.TabIndex = 14;
             // 
-            // lbT1
+            // lbSignal
             // 
-            this.lbT1.AutoSize = true;
-            this.lbT1.Location = new System.Drawing.Point(7, 103);
-            this.lbT1.Name = "lbT1";
-            this.lbT1.Size = new System.Drawing.Size(17, 15);
-            this.lbT1.TabIndex = 7;
-            this.lbT1.Text = "t1";
+            this.lbSignal.AutoSize = true;
+            this.lbSignal.Location = new System.Drawing.Point(7, 56);
+            this.lbSignal.Name = "lbSignal";
+            this.lbSignal.Size = new System.Drawing.Size(88, 45);
+            this.lbSignal.TabIndex = 13;
+            this.lbSignal.Text = "N_сигналов\r\nдля обработки\r\nв ЭВМ";
             // 
             // tbNumComp
             // 
-            this.tbNumComp.Location = new System.Drawing.Point(111, 56);
+            this.tbNumComp.Location = new System.Drawing.Point(138, 27);
             this.tbNumComp.Name = "tbNumComp";
             this.tbNumComp.Size = new System.Drawing.Size(117, 23);
             this.tbNumComp.TabIndex = 6;
@@ -313,7 +404,7 @@ namespace lw_sm_1
             // lbNumComp
             // 
             this.lbNumComp.AutoSize = true;
-            this.lbNumComp.Location = new System.Drawing.Point(7, 56);
+            this.lbNumComp.Location = new System.Drawing.Point(7, 30);
             this.lbNumComp.Name = "lbNumComp";
             this.lbNumComp.Size = new System.Drawing.Size(97, 15);
             this.lbNumComp.TabIndex = 5;
@@ -439,6 +530,7 @@ namespace lw_sm_1
             // 
             // tabModel
             // 
+            this.tabModel.Controls.Add(this.groupBox4);
             this.tabModel.Controls.Add(this.groupBox1);
             this.tabModel.Controls.Add(this.gbRoute);
             this.tabModel.Controls.Add(this.signalRoutePC3_3);
@@ -467,9 +559,9 @@ namespace lw_sm_1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.YellowGreen;
             this.groupBox1.Controls.Add(this.lbPrepVisual);
-            this.groupBox1.Location = new System.Drawing.Point(704, 121);
+            this.groupBox1.Location = new System.Drawing.Point(693, 121);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(92, 101);
+            this.groupBox1.Size = new System.Drawing.Size(103, 101);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Обработано";
@@ -479,7 +571,7 @@ namespace lw_sm_1
             this.lbPrepVisual.AutoSize = true;
             this.lbPrepVisual.BackColor = System.Drawing.Color.YellowGreen;
             this.lbPrepVisual.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbPrepVisual.Location = new System.Drawing.Point(35, 29);
+            this.lbPrepVisual.Location = new System.Drawing.Point(16, 30);
             this.lbPrepVisual.Name = "lbPrepVisual";
             this.lbPrepVisual.Size = new System.Drawing.Size(22, 25);
             this.lbPrepVisual.TabIndex = 3;
@@ -597,7 +689,7 @@ namespace lw_sm_1
             this.gbPC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbPC.Location = new System.Drawing.Point(453, 6);
             this.gbPC.Name = "gbPC";
-            this.gbPC.Size = new System.Drawing.Size(245, 322);
+            this.gbPC.Size = new System.Drawing.Size(234, 322);
             this.gbPC.TabIndex = 17;
             this.gbPC.TabStop = false;
             this.gbPC.Text = "Компьютеры для обработки сигналов";
@@ -659,6 +751,8 @@ namespace lw_sm_1
             // 
             // tabStat
             // 
+            this.tabStat.Controls.Add(this.lbExperiment);
+            this.tabStat.Controls.Add(this.label16);
             this.tabStat.Controls.Add(this.lbWait);
             this.tabStat.Controls.Add(this.label10);
             this.tabStat.Controls.Add(this.lbPSignal);
@@ -682,6 +776,26 @@ namespace lw_sm_1
             this.tabStat.TabIndex = 2;
             this.tabStat.Text = "Статистика";
             this.tabStat.UseVisualStyleBackColor = true;
+            // 
+            // lbExperiment
+            // 
+            this.lbExperiment.AutoSize = true;
+            this.lbExperiment.BackColor = System.Drawing.Color.Gold;
+            this.lbExperiment.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbExperiment.Location = new System.Drawing.Point(483, 151);
+            this.lbExperiment.Name = "lbExperiment";
+            this.lbExperiment.Size = new System.Drawing.Size(13, 15);
+            this.lbExperiment.TabIndex = 17;
+            this.lbExperiment.Text = "0";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(282, 151);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 15);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "Эксперименты";
             // 
             // lbWait
             // 
@@ -883,16 +997,27 @@ namespace lw_sm_1
             this.label14.TabIndex = 22;
             this.label14.Text = "Шаг изменения времени";
             // 
-            // cbRandom
+            // groupBox4
             // 
-            this.cbRandom.AutoSize = true;
-            this.cbRandom.Location = new System.Drawing.Point(28, 135);
-            this.cbRandom.Name = "cbRandom";
-            this.cbRandom.Size = new System.Drawing.Size(124, 19);
-            this.cbRandom.TabIndex = 17;
-            this.cbRandom.Text = "Генер. t случайно";
-            this.cbRandom.UseVisualStyleBackColor = true;
-            this.cbRandom.CheckedChanged += new System.EventHandler(this.cbRandom_CheckedChanged);
+            this.groupBox4.BackColor = System.Drawing.Color.YellowGreen;
+            this.groupBox4.Controls.Add(this.lbExper);
+            this.groupBox4.Location = new System.Drawing.Point(693, 250);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(103, 58);
+            this.groupBox4.TabIndex = 28;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Эксперимент";
+            // 
+            // lbExper
+            // 
+            this.lbExper.AutoSize = true;
+            this.lbExper.BackColor = System.Drawing.Color.YellowGreen;
+            this.lbExper.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbExper.Location = new System.Drawing.Point(16, 24);
+            this.lbExper.Name = "lbExper";
+            this.lbExper.Size = new System.Drawing.Size(17, 19);
+            this.lbExper.TabIndex = 3;
+            this.lbExper.Text = "0";
             // 
             // Form1
             // 
@@ -917,6 +1042,10 @@ namespace lw_sm_1
             ((System.ComponentModel.ISupportInitialize)(this.signal)).EndInit();
             this.grProperties.ResumeLayout(false);
             this.grProperties.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logTable)).EndInit();
             this.tbModel.ResumeLayout(false);
@@ -942,6 +1071,8 @@ namespace lw_sm_1
             this.tabData.ResumeLayout(false);
             this.tabStat.ResumeLayout(false);
             this.tabStat.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -953,20 +1084,12 @@ namespace lw_sm_1
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label route;
-        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.PictureBox signal;
         private System.Windows.Forms.GroupBox grProperties;
         private System.Windows.Forms.Label lbComp1;
         private System.Windows.Forms.Label lbComp2;
         private System.Windows.Forms.Label lbComp3;
         private System.Windows.Forms.DataGridView logTable;
-        private System.Windows.Forms.TextBox tbT3;
-        private System.Windows.Forms.Label lbT3;
-        private System.Windows.Forms.TextBox tbT2;
-        private System.Windows.Forms.Label lbT2;
-        private System.Windows.Forms.TextBox tbT1;
-        private System.Windows.Forms.Label lbT1;
-        private System.Windows.Forms.TextBox tbNumComp;
         private System.Windows.Forms.Label lbNumComp;
         private System.Windows.Forms.TabControl tbModel;
         private System.Windows.Forms.TabPage tabModel;
@@ -980,7 +1103,6 @@ namespace lw_sm_1
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbOuterSignal;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tbNumSignal;
         private System.Windows.Forms.Label lbSignal;
         private System.Windows.Forms.Label lbLostSignal;
         private System.Windows.Forms.Label label6;
@@ -988,7 +1110,6 @@ namespace lw_sm_1
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lbPSignal;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox tbEpsilon;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbWait;
         private System.Windows.Forms.Label label10;
@@ -1022,6 +1143,26 @@ namespace lw_sm_1
         private System.Windows.Forms.DataGridViewTextBoxColumn CapComp;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrepSign;
         private System.Windows.Forms.DataGridViewTextBoxColumn ActionData;
-        private System.Windows.Forms.CheckBox cbRandom;
+        private System.Windows.Forms.Label lbT3;
+        private System.Windows.Forms.Label lbT2;
+        private System.Windows.Forms.Label lbT1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label15;
+        public System.Windows.Forms.Button btnStart;
+        public System.Windows.Forms.TextBox tbNumComp;
+        public System.Windows.Forms.TextBox tbNumSignal;
+        public System.Windows.Forms.TextBox tbEpsilon;
+        public System.Windows.Forms.CheckBox cbRandom;
+        public System.Windows.Forms.TextBox tbT3;
+        public System.Windows.Forms.TextBox tbT2;
+        public System.Windows.Forms.TextBox tbT1;
+        public System.Windows.Forms.CheckBox cbRandomEcapacity;
+        public System.Windows.Forms.TextBox tbEcapcity;
+        public System.Windows.Forms.Button btnExperiment;
+        private System.Windows.Forms.Label lbExperiment;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label lbExper;
     }
 }
