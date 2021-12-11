@@ -445,7 +445,7 @@ namespace lw_sm_1
         static ResultLine Work(double NumPrepSignal)
         {
             CountExperiment(NumPrepSignal,false,false);
-            return new ResultLine(t1, t2, t3, Ecapcity, prepSignal);
+            return new ResultLine(t1, t2, t3, Ecapcity, lostSignal);
         }
 
 
@@ -535,11 +535,11 @@ namespace lw_sm_1
                 
                 Task.Run(() =>
                 {
-                    foreach (var T1 in Enumerable.Range(5, 15).OrderBy(x => rnd.Next()).Take(5))
+                    foreach (var T1 in Enumerable.Range(2, 5).OrderBy(x => rnd.Next()).Take(5))
                     {
-                        foreach (var T2 in Enumerable.Range(5, 15).OrderBy(x => rnd.Next()).Take(5))
+                        foreach (var T2 in Enumerable.Range(2, 4).OrderBy(x => rnd.Next()).Take(5))
                         {
-                            foreach (var T3 in Enumerable.Range(5, 15).OrderBy(x => rnd.Next()).Take(5))
+                            foreach (var T3 in Enumerable.Range(5, 10).OrderBy(x => rnd.Next()).Take(5))
                             {
                                 foreach(var E in Enumerable.Range(2, 6).OrderBy(x => rnd.Next()).Take(5))
                                 {
@@ -559,65 +559,7 @@ namespace lw_sm_1
                             }
                         }
                     }
-                //var writer = new Writer();
-                //writer.WriterResultLine(resultLine);
-                ////Experiment = experiments;
-                //// lbExperiment.Text = Experiment.ToString();
-                //var Slau = new SLAULine
-                //{
-                //    a0 = Experiment,
-                //    a1 = resultLine.Select(x => x.X1).Sum(),
-                //    a2 = resultLine.Select(x => x.X2).Sum(),
-                //    a3 = resultLine.Select(x => x.X3).Sum(),
-                //    a4 = resultLine.Select(x => x.X4).Sum(),
-                //    b = resultLine.Select(x => x.Y).Sum()
-                //};
-                //var Slau1 = new SLAULine
-                //{
-                //    a0 = resultLine.Select(x => x.X1).Sum(),
-                //    a1 = resultLine.Select(x => x.X1 * x.X1).Sum(),
-                //    a2 = resultLine.Select(x => x.X2 * x.X1).Sum(),
-                //    a3 = resultLine.Select(x => x.X3 * x.X1).Sum(),
-                //    a4 = resultLine.Select(x => x.X4 * x.X1).Sum(),
-                //    b = resultLine.Select(x => x.Y * x.X1).Sum(),
-                //};
-
-                //var Slau2 = new SLAULine
-                //{
-                //    a0 = resultLine.Select(x => x.X2).Sum(),
-                //    a1 = resultLine.Select(x => x.X1 * x.X2).Sum(),
-                //    a2 = resultLine.Select(x => x.X2 * x.X2).Sum(),
-                //    a3 = resultLine.Select(x => x.X3 * x.X2).Sum(),
-                //    a4 = resultLine.Select(x => x.X4 * x.X2).Sum(),
-                //    b = resultLine.Select(x => x.Y * x.X2).Sum(),
-                //};
-
-                //var Slau3 = new SLAULine
-                //{
-                //    a0 = resultLine.Select(x => x.X3).Sum(),
-                //    a1 = resultLine.Select(x => x.X1 * x.X3).Sum(),
-                //    a2 = resultLine.Select(x => x.X2 * x.X3).Sum(),
-                //    a3 = resultLine.Select(x => x.X3 * x.X3).Sum(),
-                //    a4 = resultLine.Select(x => x.X4 * x.X3).Sum(),
-                //    b = resultLine.Select(x => x.Y * x.X3).Sum(),
-                //};
-
-                //var Slau4 = new SLAULine
-                //{
-                //    a0 = resultLine.Select(x => x.X4).Sum(),
-                //    a1 = resultLine.Select(x => x.X1 * x.X4).Sum(),
-                //    a2 = resultLine.Select(x => x.X2 * x.X4).Sum(),
-                //    a3 = resultLine.Select(x => x.X3 * x.X4).Sum(),
-                //    a4 = resultLine.Select(x => x.X4 * x.X4).Sum(),
-                //    b = resultLine.Select(x => x.Y * x.X4).Sum(),
-                //};
-                //var SLAU = new List<SLAULine>
-                //{
-                //    Slau, Slau1, Slau2, Slau3,Slau4
-                //};
-                //var slau = new Writer();
-                //slau.WriterResultLine(SLAU);
-                
+               
                 });
             }
             else
