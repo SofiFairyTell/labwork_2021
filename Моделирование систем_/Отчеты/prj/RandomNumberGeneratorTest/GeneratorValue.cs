@@ -42,20 +42,20 @@ namespace RandomNumberGeneratorTest
 
     public class ResultLine
     {
-        [Name("X1")]
+        [Name("X1 (lambda)")]
         public int X1 { get; set; }
 
-        [Name("X2")]
+        [Name("X2 (m1)")]
         public int X2 { get; set; }
 
-        [Name("X3")]
+        [Name("X3 (m2)")]
         public int X3 { get; set; }
 
-        [Name("X4")]
+        [Name("X4 (E)")]
         public int X4 { get; set; }
 
 
-        [Name("Y")]
+        [Name("Y (lost signal)")]
         public int Y { get; set; }
 
         public ResultLine(
