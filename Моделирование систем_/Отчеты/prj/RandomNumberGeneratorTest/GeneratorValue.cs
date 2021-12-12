@@ -52,7 +52,7 @@ namespace RandomNumberGeneratorTest
         public double X3 { get; set; }
 
         [Name("X4 (E)")]
-        public double X4 { get; set; }
+        public int X4 { get; set; }
 
 
         [Name("Y (lost signal)")]
@@ -80,7 +80,7 @@ namespace RandomNumberGeneratorTest
             X1 = x1;
             X2 = x2;
             X3 = x3;
-            X4 = x4;
+            X4 = (int)x4;
             T1 = t1;
             T2 = t2;
             T3 = t3;

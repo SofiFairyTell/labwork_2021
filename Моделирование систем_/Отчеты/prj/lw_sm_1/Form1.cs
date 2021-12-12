@@ -353,6 +353,8 @@ namespace lw_sm_1
             }
             return locMin;
         }
+
+
         private static void AK3()
         {
             MESSAGE = "Обработка в ЭВМ";
@@ -468,7 +470,7 @@ namespace lw_sm_1
         static ResultLine Work(double NumPrepSignal, double la,double mat1, double mat2, double E)//double lamb,, double sig1, double sig2)
         {
             CountExperiment(NumPrepSignal, true, true, mat1, mat2, E,la);//lamb, , sig1, sig2);
-            return new ResultLine(la, mat1, mat2, E, lostSignal,t1,t2,t3);
+            return new ResultLine(la, mat1, mat2, E, lostSignal/signalCounter,t1,t2,t3);
         }
 
 
@@ -535,6 +537,127 @@ namespace lw_sm_1
 
         }
 
+        private void btOp_Click(object sender, EventArgs e)
+        {
+            for (var exp = 0; exp < 2; exp++)
+            {
+                //Task.Run(() =>
+                //{
+                //    //  btnExperiment_Click(null, null);
+                //    if (tmr.Enabled == false)
+                //    {
+                //        tmr.Enabled = true; //старт/стоп
+                //        ExperimentParams();
+                //    }
+                //    else
+                //    {
+                //        tmr.Enabled = false; //старт/стоп
+                //    }
+                //});
+                btnExperiment.Click += new EventHandler(btnExperiment_Click);
+                ExperimentParams();
+            }
+        }
+        public void ExperimentParams()
+        {
+            compList.Clear();
+            logTable.Rows.Clear();
+            if (!cbRandom.Checked)
+            {
+                ConvertTo(t1, t2, t3);
+            }
+            if (!cbRandomEcapacity.Checked)
+            {
+                Ecapcity = Convert.ToDouble(tbEcapcity.Text.Trim());
+            }
+            for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
+            {
+                compList.Add(new comp());
+            }
+            var rnd = new Random();
+            var numSignal = Convert.ToDouble(tbNumSignal.Text.Trim());
+            NullEverything();
+            Task.Run(() =>
+            {
+                for (var E = 2; E < 3; E++)
+                {
+
+                    for (var la1 = 1.05; la1 <= 1.15; la1 += 0.10)
+                    {
+                        for (var mat1 = 5.0; mat1 < 10.0; mat1 += 5.0)
+                        {
+                            for (var mat2 = 7.5; mat2 <= 8.5; mat2 += 1.0)
+                            {
+
+
+                                Exp(la1, mat1, mat2, E, numSignal);
+                            }
+                        }
+                    }
+                }
+                var writer = new Writer();
+                writer.WriterResultLine(resultLine);
+
+                var Slau = new SLAULine
+                {
+                    a0 = Experiment,
+                    a1 = resultLine.Select(x => x.X1).Sum(),
+                    a2 = resultLine.Select(x => x.X2).Sum(),
+                    a3 = resultLine.Select(x => x.X3).Sum(),
+                    a4 = resultLine.Select(x => x.X4).Sum(),
+                    b = resultLine.Select(x => x.Y).Sum()
+                };
+                var Slau1 = new SLAULine
+                {
+                    a0 = resultLine.Select(x => x.X1).Sum(),
+                    a1 = resultLine.Select(x => x.X1 * x.X1).Sum(),
+                    a2 = resultLine.Select(x => x.X2 * x.X1).Sum(),
+                    a3 = resultLine.Select(x => x.X3 * x.X1).Sum(),
+                    a4 = resultLine.Select(x => x.X4 * x.X1).Sum(),
+                    b = resultLine.Select(x => x.Y * x.X1).Sum(),
+                };
+
+                var Slau2 = new SLAULine
+                {
+                    a0 = resultLine.Select(x => x.X2).Sum(),
+                    a1 = resultLine.Select(x => x.X1 * x.X2).Sum(),
+                    a2 = resultLine.Select(x => x.X2 * x.X2).Sum(),
+                    a3 = resultLine.Select(x => x.X3 * x.X2).Sum(),
+                    a4 = resultLine.Select(x => x.X4 * x.X2).Sum(),
+                    b = resultLine.Select(x => x.Y * x.X2).Sum(),
+                };
+
+                var Slau3 = new SLAULine
+                {
+                    a0 = resultLine.Select(x => x.X3).Sum(),
+                    a1 = resultLine.Select(x => x.X1 * x.X3).Sum(),
+                    a2 = resultLine.Select(x => x.X2 * x.X3).Sum(),
+                    a3 = resultLine.Select(x => x.X3 * x.X3).Sum(),
+                    a4 = resultLine.Select(x => x.X4 * x.X3).Sum(),
+                    b = resultLine.Select(x => x.Y * x.X3).Sum(),
+                };
+
+                var Slau4 = new SLAULine
+                {
+                    a0 = resultLine.Select(x => x.X4).Sum(),
+                    a1 = resultLine.Select(x => x.X1 * x.X4).Sum(),
+                    a2 = resultLine.Select(x => x.X2 * x.X4).Sum(),
+                    a3 = resultLine.Select(x => x.X3 * x.X4).Sum(),
+                    a4 = resultLine.Select(x => x.X4 * x.X4).Sum(),
+                    b = resultLine.Select(x => x.Y * x.X4).Sum(),
+                };
+                var SLAU = new List<SLAULine>
+                      {
+                        Slau, Slau1, Slau2, Slau3,Slau4
+                      };
+                var slau = new Writer();
+                slau.WriterResultLine(SLAU);
+
+
+            });
+
+        }
+
         private void btnExperiment_Click(object sender, EventArgs e)
         {
             ExperimentMode = true;
@@ -542,104 +665,7 @@ namespace lw_sm_1
             if (tmr.Enabled == false)
             {
                 tmr.Enabled = true; //старт/стоп
-
-                compList.Clear();
-
-                logTable.Rows.Clear();
-             
-                if (!cbRandom.Checked)
-                {
-                    ConvertTo(t1, t2, t3);
-                }
-                if (!cbRandomEcapacity.Checked)
-                {
-                    Ecapcity = Convert.ToDouble(tbEcapcity.Text.Trim());
-                }
-                for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
-                {
-                    compList.Add(new comp());
-                }
-                var rnd = new Random();
-                var numSignal = Convert.ToDouble(tbNumSignal.Text.Trim());
-                NullEverything();
-                Task.Run(() =>
-                  {
-                    for (var E = 2; E < 3; E++)
-                        {                              
-           
-                                 for (var la1 = 1.05; la1 <= 1.15; la1 += 0.10)
-                                    {     
-                           for (var mat1 = 5.0; mat1 < 10.0; mat1 += 5.0)
-                          {                                                                                 
-                              for (var mat2 = 7.5; mat2 <= 8.5; mat2 +=1.0)
-                              {                                       
-                                      
-                                      
-                                      Exp(la1,mat1, mat2, E, numSignal);
-                                    }
-                            }
-                        }
-                    }
-                      var writer = new Writer();
-                      writer.WriterResultLine(resultLine);
-
-                      var Slau = new SLAULine
-                      {
-                          a0 = Experiment,
-                          a1 = resultLine.Select(x => x.X1).Sum(),
-                          a2 = resultLine.Select(x => x.X2).Sum(),
-                          a3 = resultLine.Select(x => x.X3).Sum(),
-                          a4 = resultLine.Select(x => x.X4).Sum(),
-                          b = resultLine.Select(x => x.Y).Sum()
-                      };
-                      var Slau1 = new SLAULine
-                      {
-                          a0 = resultLine.Select(x => x.X1).Sum(),
-                          a1 = resultLine.Select(x => x.X1 * x.X1).Sum(),
-                          a2 = resultLine.Select(x => x.X2 * x.X1).Sum(),
-                          a3 = resultLine.Select(x => x.X3 * x.X1).Sum(),
-                          a4 = resultLine.Select(x => x.X4 * x.X1).Sum(),
-                          b = resultLine.Select(x => x.Y * x.X1).Sum(),
-                      };
-
-                      var Slau2 = new SLAULine
-                      {
-                          a0 = resultLine.Select(x => x.X2).Sum(),
-                          a1 = resultLine.Select(x => x.X1 * x.X2).Sum(),
-                          a2 = resultLine.Select(x => x.X2 * x.X2).Sum(),
-                          a3 = resultLine.Select(x => x.X3 * x.X2).Sum(),
-                          a4 = resultLine.Select(x => x.X4 * x.X2).Sum(),
-                          b = resultLine.Select(x => x.Y * x.X2).Sum(),
-                      };
-
-                      var Slau3 = new SLAULine
-                      {
-                          a0 = resultLine.Select(x => x.X3).Sum(),
-                          a1 = resultLine.Select(x => x.X1 * x.X3).Sum(),
-                          a2 = resultLine.Select(x => x.X2 * x.X3).Sum(),
-                          a3 = resultLine.Select(x => x.X3 * x.X3).Sum(),
-                          a4 = resultLine.Select(x => x.X4 * x.X3).Sum(),
-                          b = resultLine.Select(x => x.Y * x.X3).Sum(),
-                      };
-
-                      var Slau4 = new SLAULine
-                      {
-                          a0 = resultLine.Select(x => x.X4).Sum(),
-                          a1 = resultLine.Select(x => x.X1 * x.X4).Sum(),
-                          a2 = resultLine.Select(x => x.X2 * x.X4).Sum(),
-                          a3 = resultLine.Select(x => x.X3 * x.X4).Sum(),
-                          a4 = resultLine.Select(x => x.X4 * x.X4).Sum(),
-                          b = resultLine.Select(x => x.Y * x.X4).Sum(),
-                      };
-                      var SLAU = new List<SLAULine>
-                      { 
-                        Slau, Slau1, Slau2, Slau3,Slau4
-                      };
-                      var slau = new Writer();
-                      slau.WriterResultLine(SLAU);
-
-
-                  });
+                ExperimentParams();
             }
             else
             {
@@ -652,8 +678,7 @@ namespace lw_sm_1
         public void Exp( double la,double mat2, double mat3, double E, double numSignal)//double la1,, double sig1, double sig2)
         {
 
-            (lambda, m1, m2, Ecapcity) = (la,mat2, mat3, E);//la1, lambda,
-            
+            (lambda, m1, m2, Ecapcity) = (la,mat2, mat3, E);//la1, lambda,           
             var res = Work(numSignal,la,mat2,mat3,E);//,  la1, sig1, sig2);
             resultLine.Add(res);
             Experiment = ++experiments;
@@ -684,8 +709,7 @@ namespace lw_sm_1
             }
 
             if (prepSignal >= Convert.ToDouble(tbNumSignal.Text.Trim()))
-            {               
-                        
+            {                                      
                 tmr.Enabled = false; //старт/стоп
                 if(!ExperimentMode)
                 {
@@ -693,15 +717,12 @@ namespace lw_sm_1
                     var writer = new Writer();
                     writer.WriterLog(result); 
                 } 
-
                 lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
                 lbExperiment.Text = Experiment.ToString();
-                StatData();                   
+                StatData(); 
             }
-
+            
         }
-
-
 
 //двойная буферизация
         protected override CreateParams CreateParams
