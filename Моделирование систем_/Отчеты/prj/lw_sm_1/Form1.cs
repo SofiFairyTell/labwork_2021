@@ -429,14 +429,13 @@ namespace lw_sm_1
         {
             for (; prepSignal <= NumPrepSignal; t0 += detT)
             {
-                if (RandomTCheck == true)
+                if (RandomTCheck == true || RandomEcapCheck == true)
                 {
                     Generate(lamb, mat1, mat2,sig1,sig2);
-                }
-                if (RandomEcapCheck == true)
-                {
                     GenerateStationary(mat1,mat2);
                 }
+                   
+
 
                 if ((t0 - arivTime) > t1)
                 {
@@ -542,7 +541,7 @@ namespace lw_sm_1
             if (tmr.Enabled == false)
             {
                 tmr.Enabled = true; //старт/стоп
-                resultLine.Clear();
+               // resultLine.Clear();
                 compList.Clear();
                // res.Clear();
                 logTable.Rows.Clear();
@@ -563,39 +562,94 @@ namespace lw_sm_1
                 //ConvertTo(compList[0].capacity, compList[1].capacity, compList[2].capacity);
                 var rnd = new Random();
                 var numSignal = Convert.ToDouble(tbNumSignal.Text.Trim());
-                Task.Run(() =>
-                {
+                _ = Task.Run(() =>
+                  {
                     //ResultLine res = new ResultLine(lambda=0, m1=0, m2=0, Ecapcity=0, lostSignal=0);
                     // foreach (var la1 in Enumerable.Range(1, 3).OrderBy(x => rnd.Next()).Take(3))
-                    for (var la1 = 0.1; la1 <= 0.5; la1+=0.1)
-                    {
+                    for (var la1 = 0.1; la1 <= 0.5; la1 += 0.1)
+                      {
                         //foreach (var mat2 in Enumerable.Range(1, 4).OrderBy(x => rnd.Next()).Take(3))
-                        for (var mat2 = 1.0; mat2 <= 2.0; mat2+=0.5)
-                        {
-                           // foreach (var mat3 in Enumerable.Range(1, 5).OrderBy(x => rnd.Next()).Take(3))
-                            for (var mat3 = 1.0; mat3<=3.0; mat3+=1.0) 
-                            {
+                        for (var mat2 = 1.0; mat2 <= 2.0; mat2 += 0.5)
+                          {
+                            // foreach (var mat3 in Enumerable.Range(1, 5).OrderBy(x => rnd.Next()).Take(3))
+                            for (var mat3 = 1.0; mat3 <= 3.0; mat3 += 1.0)
+                              {
                                 //foreach(var E in Enumerable.Range(1, 4).OrderBy(x => rnd.Next()).Take(3))
                                 for (var E = 2; E <= 3; E++)
-                                {
-                                for (var sig1=10.0; sig1<=12.0;sig1+=1.0)
-                                {
-                                    for (var sig2 = 30.0; sig1 <= 33.0; sig1+=1.0)
-                                    {
-                                        Exp(la1, mat2, mat3, E, numSignal,sig1,sig2);
-                                    }
-                                }
-                                    
-                                }
-                                //Exp(la1, mat2, mat3, Ecapcity, numSignal);
+                                  {
+                                      for (var sig1 = 10.0; sig1 <= 12.0; sig1 += 2.0)
+                                      {
+                                          for (var sig2 = 30.0; sig1 <= 33.0; sig1 += 2.0)
+                                          {
+                                              Exp(la1, mat2, mat3, E, numSignal, sig1, sig2);
+                                          }
+                                      }
+
+                                  }
                             }
-                          //  Exp(la1, mat2, m2, Ecapcity, numSignal);
                         }
-                       // Exp(la1, m1, m2, Ecapcity, numSignal);
                     }
-                              
-                                   
-                });
+                      var writer = new Writer();
+                      writer.WriterResultLine(resultLine);
+                      //Experiment = experiments;
+                      // lbExperiment.Text = Experiment.ToString();
+                      var Slau = new SLAULine
+                      {
+                          a0 = Experiment,
+                          a1 = resultLine.Select(x => x.X1).Sum(),
+                          a2 = resultLine.Select(x => x.X2).Sum(),
+                          a3 = resultLine.Select(x => x.X3).Sum(),
+                          a4 = resultLine.Select(x => x.X4).Sum(),
+                          b = resultLine.Select(x => x.Y).Sum()
+                      };
+                      var Slau1 = new SLAULine
+                      {
+                          a0 = resultLine.Select(x => x.X1).Sum(),
+                          a1 = resultLine.Select(x => x.X1 * x.X1).Sum(),
+                          a2 = resultLine.Select(x => x.X2 * x.X1).Sum(),
+                          a3 = resultLine.Select(x => x.X3 * x.X1).Sum(),
+                          a4 = resultLine.Select(x => x.X4 * x.X1).Sum(),
+                          b = resultLine.Select(x => x.Y * x.X1).Sum(),
+                      };
+
+                      var Slau2 = new SLAULine
+                      {
+                          a0 = resultLine.Select(x => x.X2).Sum(),
+                          a1 = resultLine.Select(x => x.X1 * x.X2).Sum(),
+                          a2 = resultLine.Select(x => x.X2 * x.X2).Sum(),
+                          a3 = resultLine.Select(x => x.X3 * x.X2).Sum(),
+                          a4 = resultLine.Select(x => x.X4 * x.X2).Sum(),
+                          b = resultLine.Select(x => x.Y * x.X2).Sum(),
+                      };
+
+                      var Slau3 = new SLAULine
+                      {
+                          a0 = resultLine.Select(x => x.X3).Sum(),
+                          a1 = resultLine.Select(x => x.X1 * x.X3).Sum(),
+                          a2 = resultLine.Select(x => x.X2 * x.X3).Sum(),
+                          a3 = resultLine.Select(x => x.X3 * x.X3).Sum(),
+                          a4 = resultLine.Select(x => x.X4 * x.X3).Sum(),
+                          b = resultLine.Select(x => x.Y * x.X3).Sum(),
+                      };
+
+                      var Slau4 = new SLAULine
+                      {
+                          a0 = resultLine.Select(x => x.X4).Sum(),
+                          a1 = resultLine.Select(x => x.X1 * x.X4).Sum(),
+                          a2 = resultLine.Select(x => x.X2 * x.X4).Sum(),
+                          a3 = resultLine.Select(x => x.X3 * x.X4).Sum(),
+                          a4 = resultLine.Select(x => x.X4 * x.X4).Sum(),
+                          b = resultLine.Select(x => x.Y * x.X4).Sum(),
+                      };
+                      var SLAU = new List<SLAULine>
+                {
+                    Slau, Slau1, Slau2, Slau3,Slau4
+                };
+                      var slau = new Writer();
+                      slau.WriterResultLine(SLAU);
+
+
+                  });
             }
             else
             {
@@ -649,82 +703,73 @@ namespace lw_sm_1
                     var writer = new Writer();
                     writer.WriterLog(result); 
                 } 
-                else
-                {
-                    var result = resultLine;
-                    var writer = new Writer();
-                    writer.WriterResultLine(result);
-                    //Experiment = experiments;
-                    // lbExperiment.Text = Experiment.ToString();
-                    var Slau = new SLAULine
-                    {
-                        a0 = Experiment,
-                        a1 = resultLine.Select(x => x.X1).Sum(),
-                        a2 = resultLine.Select(x => x.X2).Sum(),
-                        a3 = resultLine.Select(x => x.X3).Sum(),
-                        a4 = resultLine.Select(x => x.X4).Sum(),
-                        b = resultLine.Select(x => x.Y).Sum()
-                    };
-                    var Slau1 = new SLAULine
-                    {
-                        a0 = resultLine.Select(x => x.X1).Sum(),
-                        a1 = resultLine.Select(x => x.X1 * x.X1).Sum(),
-                        a2 = resultLine.Select(x => x.X2 * x.X1).Sum(),
-                        a3 = resultLine.Select(x => x.X3 * x.X1).Sum(),
-                        a4 = resultLine.Select(x => x.X4 * x.X1).Sum(),
-                        b = resultLine.Select(x => x.Y * x.X1).Sum(),
-                    };
+               // else
+                //{
+                //    var result = resultLine;
+                //    var writer = new Writer();
+                //    writer.WriterResultLine(result);
+                //    //Experiment = experiments;
+                //    // lbExperiment.Text = Experiment.ToString();
+                //    var Slau = new SLAULine
+                //    {
+                //        a0 = Experiment,
+                //        a1 = resultLine.Select(x => x.X1).Sum(),
+                //        a2 = resultLine.Select(x => x.X2).Sum(),
+                //        a3 = resultLine.Select(x => x.X3).Sum(),
+                //        a4 = resultLine.Select(x => x.X4).Sum(),
+                //        b = resultLine.Select(x => x.Y).Sum()
+                //    };
+                //    var Slau1 = new SLAULine
+                //    {
+                //        a0 = resultLine.Select(x => x.X1).Sum(),
+                //        a1 = resultLine.Select(x => x.X1 * x.X1).Sum(),
+                //        a2 = resultLine.Select(x => x.X2 * x.X1).Sum(),
+                //        a3 = resultLine.Select(x => x.X3 * x.X1).Sum(),
+                //        a4 = resultLine.Select(x => x.X4 * x.X1).Sum(),
+                //        b = resultLine.Select(x => x.Y * x.X1).Sum(),
+                //    };
 
-                    var Slau2 = new SLAULine
-                    {
-                        a0 = resultLine.Select(x => x.X2).Sum(),
-                        a1 = resultLine.Select(x => x.X1 * x.X2).Sum(),
-                        a2 = resultLine.Select(x => x.X2 * x.X2).Sum(),
-                        a3 = resultLine.Select(x => x.X3 * x.X2).Sum(),
-                        a4 = resultLine.Select(x => x.X4 * x.X2).Sum(),
-                        b = resultLine.Select(x => x.Y * x.X2).Sum(),
-                    };
+                //    var Slau2 = new SLAULine
+                //    {
+                //        a0 = resultLine.Select(x => x.X2).Sum(),
+                //        a1 = resultLine.Select(x => x.X1 * x.X2).Sum(),
+                //        a2 = resultLine.Select(x => x.X2 * x.X2).Sum(),
+                //        a3 = resultLine.Select(x => x.X3 * x.X2).Sum(),
+                //        a4 = resultLine.Select(x => x.X4 * x.X2).Sum(),
+                //        b = resultLine.Select(x => x.Y * x.X2).Sum(),
+                //    };
 
-                    var Slau3 = new SLAULine
-                    {
-                        a0 = resultLine.Select(x => x.X3).Sum(),
-                        a1 = resultLine.Select(x => x.X1 * x.X3).Sum(),
-                        a2 = resultLine.Select(x => x.X2 * x.X3).Sum(),
-                        a3 = resultLine.Select(x => x.X3 * x.X3).Sum(),
-                        a4 = resultLine.Select(x => x.X4 * x.X3).Sum(),
-                        b = resultLine.Select(x => x.Y * x.X3).Sum(),
-                    };
+                //    var Slau3 = new SLAULine
+                //    {
+                //        a0 = resultLine.Select(x => x.X3).Sum(),
+                //        a1 = resultLine.Select(x => x.X1 * x.X3).Sum(),
+                //        a2 = resultLine.Select(x => x.X2 * x.X3).Sum(),
+                //        a3 = resultLine.Select(x => x.X3 * x.X3).Sum(),
+                //        a4 = resultLine.Select(x => x.X4 * x.X3).Sum(),
+                //        b = resultLine.Select(x => x.Y * x.X3).Sum(),
+                //    };
 
-                    var Slau4 = new SLAULine
-                    {
-                        a0 = resultLine.Select(x => x.X4).Sum(),
-                        a1 = resultLine.Select(x => x.X1 * x.X4).Sum(),
-                        a2 = resultLine.Select(x => x.X2 * x.X4).Sum(),
-                        a3 = resultLine.Select(x => x.X3 * x.X4).Sum(),
-                        a4 = resultLine.Select(x => x.X4 * x.X4).Sum(),
-                        b = resultLine.Select(x => x.Y * x.X4).Sum(),
-                    };
-                    var SLAU = new List<SLAULine>
-                {
-                    Slau, Slau1, Slau2, Slau3,Slau4
-                };
-                    var slau = new Writer();
-                    slau.WriterResultLine(SLAU);
-                }
+                //    var Slau4 = new SLAULine
+                //    {
+                //        a0 = resultLine.Select(x => x.X4).Sum(),
+                //        a1 = resultLine.Select(x => x.X1 * x.X4).Sum(),
+                //        a2 = resultLine.Select(x => x.X2 * x.X4).Sum(),
+                //        a3 = resultLine.Select(x => x.X3 * x.X4).Sum(),
+                //        a4 = resultLine.Select(x => x.X4 * x.X4).Sum(),
+                //        b = resultLine.Select(x => x.Y * x.X4).Sum(),
+                //    };
+                //    var SLAU = new List<SLAULine>
+                //{
+                //    Slau, Slau1, Slau2, Slau3,Slau4
+                //};
+                //    var slau = new Writer();
+                //    slau.WriterResultLine(SLAU);
+                //}
                 lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
                 lbExperiment.Text = Experiment.ToString();
                 StatData();                   
             }
-            //else
-            //{
-            //    if (stop)
-            //    {
-            //        tmr.Enabled = false; //старт/стоп
-            //        lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
-            //        lbExperiment.Text = Experiment.ToString();
-            //        StatData();
-            //    }
-            //}
+
         }
 
 
