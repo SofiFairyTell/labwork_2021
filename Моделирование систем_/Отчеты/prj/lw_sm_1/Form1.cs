@@ -216,12 +216,14 @@ namespace lw_sm_1
             t2 = generator.NormalDistributionFunction(m1, sigma1);
             t3 = generator.NormalDistributionFunction(m2, sigma2);
         }
-        private static void Generate(double lambda, double mat1,double mat2, double sig1,double sig2)
+        private static void Generate(double la,double mat1,double mat2)//,double lambda, double sig1,double sig2)
         {
             var generator = new Generator();
-            t1 = generator.ExponentialDistributionFunction(lambda);
-            t2 = generator.NormalDistributionFunction(mat1, sig1);
-            t3 = generator.NormalDistributionFunction(mat2, sig2);
+            t1 = generator.ExponentialDistributionFunction(la);
+            
+            t2 = generator.NormalDistributionFunction(mat1, sigma1);
+            t3 = generator.NormalDistributionFunction(mat2, sigma2);
+
         }
         private static void GenerateStationary()
         {
@@ -235,8 +237,9 @@ namespace lw_sm_1
         {
             var generator = new RandomStationaryNormalProcess.NormalProcessValueGenerator(
                 new double[] { 0.036, 0.084, 0.228, 0.619 },
-                e1, e2);
-            Ecapcity = Math.Round(generator.GetNextValue(), MidpointRounding.ToEven);
+                e2-1.0, e2);
+           // Ecapcity = Math.Round(generator.GetNextValue(), MidpointRounding.ToEven);
+            Ecapcity = Math.Round(generator.GetNextValue());
         }
         #endregion
 
@@ -425,17 +428,15 @@ namespace lw_sm_1
         }
 
         public static void CountExperiment(double NumPrepSignal,bool RandomTCheck, bool RandomEcapCheck,
-            double lamb, double mat1, double mat2, double sig1, double sig2)
+            double mat1, double mat2, double E, double la)//double lamb, , double sig1, double sig2)
         {
             for (; prepSignal <= NumPrepSignal; t0 += detT)
             {
                 if (RandomTCheck == true || RandomEcapCheck == true)
                 {
-                    Generate(lamb, mat1, mat2,sig1,sig2);
-                    GenerateStationary(mat1,mat2);
-                }
-                   
-
+                    Generate( la, mat1, mat2);//lamb,,sig1,sig2);
+                    GenerateStationary(E,E);
+                }               
 
                 if ((t0 - arivTime) > t1)
                 {
@@ -464,10 +465,10 @@ namespace lw_sm_1
                 }
             }
         }
-        static ResultLine Work(double NumPrepSignal,double lamb, double mat1, double mat2, double sig1, double sig2)
+        static ResultLine Work(double NumPrepSignal, double la,double mat1, double mat2, double E)//double lamb,, double sig1, double sig2)
         {
-            CountExperiment(NumPrepSignal,true,true, lamb, mat1, mat2, sig1, sig2);
-            return new ResultLine(lamb, mat1, mat2, Ecapcity, lostSignal);
+            CountExperiment(NumPrepSignal, true, true, mat1, mat2, E,la);//lamb, , sig1, sig2);
+            return new ResultLine(la, mat1, mat2, E, lostSignal,t1,t2,t3);
         }
 
 
@@ -541,12 +542,11 @@ namespace lw_sm_1
             if (tmr.Enabled == false)
             {
                 tmr.Enabled = true; //старт/стоп
-               // resultLine.Clear();
+
                 compList.Clear();
-               // res.Clear();
+
                 logTable.Rows.Clear();
-                //resultLine.Clear();
-                NullEverything();
+             
                 if (!cbRandom.Checked)
                 {
                     ConvertTo(t1, t2, t3);
@@ -559,40 +559,30 @@ namespace lw_sm_1
                 {
                     compList.Add(new comp());
                 }
-                //ConvertTo(compList[0].capacity, compList[1].capacity, compList[2].capacity);
                 var rnd = new Random();
                 var numSignal = Convert.ToDouble(tbNumSignal.Text.Trim());
-                _ = Task.Run(() =>
+                NullEverything();
+                Task.Run(() =>
                   {
-                    //ResultLine res = new ResultLine(lambda=0, m1=0, m2=0, Ecapcity=0, lostSignal=0);
-                    // foreach (var la1 in Enumerable.Range(1, 3).OrderBy(x => rnd.Next()).Take(3))
-                    for (var la1 = 0.1; la1 <= 0.5; la1 += 0.1)
-                      {
-                        //foreach (var mat2 in Enumerable.Range(1, 4).OrderBy(x => rnd.Next()).Take(3))
-                        for (var mat2 = 1.0; mat2 <= 2.0; mat2 += 0.5)
-                          {
-                            // foreach (var mat3 in Enumerable.Range(1, 5).OrderBy(x => rnd.Next()).Take(3))
-                            for (var mat3 = 1.0; mat3 <= 3.0; mat3 += 1.0)
-                              {
-                                //foreach(var E in Enumerable.Range(1, 4).OrderBy(x => rnd.Next()).Take(3))
-                                for (var E = 2; E <= 3; E++)
-                                  {
-                                      for (var sig1 = 10.0; sig1 <= 12.0; sig1 += 2.0)
-                                      {
-                                          for (var sig2 = 30.0; sig1 <= 33.0; sig1 += 2.0)
-                                          {
-                                              Exp(la1, mat2, mat3, E, numSignal, sig1, sig2);
-                                          }
-                                      }
-
-                                  }
+                    for (var E = 2; E < 3; E++)
+                        {                              
+           
+                                 for (var la1 = 1.05; la1 <= 1.15; la1 += 0.10)
+                                    {     
+                           for (var mat1 = 5.0; mat1 < 10.0; mat1 += 5.0)
+                          {                                                                                 
+                              for (var mat2 = 7.5; mat2 <= 8.5; mat2 +=1.0)
+                              {                                       
+                                      
+                                      
+                                      Exp(la1,mat1, mat2, E, numSignal);
+                                    }
                             }
                         }
                     }
                       var writer = new Writer();
                       writer.WriterResultLine(resultLine);
-                      //Experiment = experiments;
-                      // lbExperiment.Text = Experiment.ToString();
+
                       var Slau = new SLAULine
                       {
                           a0 = Experiment,
@@ -642,9 +632,9 @@ namespace lw_sm_1
                           b = resultLine.Select(x => x.Y * x.X4).Sum(),
                       };
                       var SLAU = new List<SLAULine>
-                {
-                    Slau, Slau1, Slau2, Slau3,Slau4
-                };
+                      { 
+                        Slau, Slau1, Slau2, Slau3,Slau4
+                      };
                       var slau = new Writer();
                       slau.WriterResultLine(SLAU);
 
@@ -659,12 +649,12 @@ namespace lw_sm_1
         }
 
         #endregion
-        public void Exp(double la1, double mat2, double mat3, double E, double numSignal, double sig1, double sig2)
+        public void Exp( double la,double mat2, double mat3, double E, double numSignal)//double la1,, double sig1, double sig2)
         {
 
-            (lambda, m1, m2, Ecapcity) = (la1, mat2, mat3, E);
-            //Count();
-            var res = Work(numSignal, la1, mat2, mat3, sig1, sig2);
+            (lambda, m1, m2, Ecapcity) = (la,mat2, mat3, E);//la1, lambda,
+            
+            var res = Work(numSignal,la,mat2,mat3,E);//,  la1, sig1, sig2);
             resultLine.Add(res);
             Experiment = ++experiments;
         }
@@ -703,68 +693,7 @@ namespace lw_sm_1
                     var writer = new Writer();
                     writer.WriterLog(result); 
                 } 
-               // else
-                //{
-                //    var result = resultLine;
-                //    var writer = new Writer();
-                //    writer.WriterResultLine(result);
-                //    //Experiment = experiments;
-                //    // lbExperiment.Text = Experiment.ToString();
-                //    var Slau = new SLAULine
-                //    {
-                //        a0 = Experiment,
-                //        a1 = resultLine.Select(x => x.X1).Sum(),
-                //        a2 = resultLine.Select(x => x.X2).Sum(),
-                //        a3 = resultLine.Select(x => x.X3).Sum(),
-                //        a4 = resultLine.Select(x => x.X4).Sum(),
-                //        b = resultLine.Select(x => x.Y).Sum()
-                //    };
-                //    var Slau1 = new SLAULine
-                //    {
-                //        a0 = resultLine.Select(x => x.X1).Sum(),
-                //        a1 = resultLine.Select(x => x.X1 * x.X1).Sum(),
-                //        a2 = resultLine.Select(x => x.X2 * x.X1).Sum(),
-                //        a3 = resultLine.Select(x => x.X3 * x.X1).Sum(),
-                //        a4 = resultLine.Select(x => x.X4 * x.X1).Sum(),
-                //        b = resultLine.Select(x => x.Y * x.X1).Sum(),
-                //    };
 
-                //    var Slau2 = new SLAULine
-                //    {
-                //        a0 = resultLine.Select(x => x.X2).Sum(),
-                //        a1 = resultLine.Select(x => x.X1 * x.X2).Sum(),
-                //        a2 = resultLine.Select(x => x.X2 * x.X2).Sum(),
-                //        a3 = resultLine.Select(x => x.X3 * x.X2).Sum(),
-                //        a4 = resultLine.Select(x => x.X4 * x.X2).Sum(),
-                //        b = resultLine.Select(x => x.Y * x.X2).Sum(),
-                //    };
-
-                //    var Slau3 = new SLAULine
-                //    {
-                //        a0 = resultLine.Select(x => x.X3).Sum(),
-                //        a1 = resultLine.Select(x => x.X1 * x.X3).Sum(),
-                //        a2 = resultLine.Select(x => x.X2 * x.X3).Sum(),
-                //        a3 = resultLine.Select(x => x.X3 * x.X3).Sum(),
-                //        a4 = resultLine.Select(x => x.X4 * x.X3).Sum(),
-                //        b = resultLine.Select(x => x.Y * x.X3).Sum(),
-                //    };
-
-                //    var Slau4 = new SLAULine
-                //    {
-                //        a0 = resultLine.Select(x => x.X4).Sum(),
-                //        a1 = resultLine.Select(x => x.X1 * x.X4).Sum(),
-                //        a2 = resultLine.Select(x => x.X2 * x.X4).Sum(),
-                //        a3 = resultLine.Select(x => x.X3 * x.X4).Sum(),
-                //        a4 = resultLine.Select(x => x.X4 * x.X4).Sum(),
-                //        b = resultLine.Select(x => x.Y * x.X4).Sum(),
-                //    };
-                //    var SLAU = new List<SLAULine>
-                //{
-                //    Slau, Slau1, Slau2, Slau3,Slau4
-                //};
-                //    var slau = new Writer();
-                //    slau.WriterResultLine(SLAU);
-                //}
                 lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
                 lbExperiment.Text = Experiment.ToString();
                 StatData();                   

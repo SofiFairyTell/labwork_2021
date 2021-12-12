@@ -43,53 +43,67 @@ namespace RandomNumberGeneratorTest
     public class ResultLine
     {
         [Name("X1 (lambda)")]
-        public int X1 { get; set; }
+        public double X1 { get; set; }
 
         [Name("X2 (m1)")]
-        public int X2 { get; set; }
+        public double X2 { get; set; }
 
         [Name("X3 (m2)")]
-        public int X3 { get; set; }
+        public double X3 { get; set; }
 
         [Name("X4 (E)")]
-        public int X4 { get; set; }
+        public double X4 { get; set; }
 
 
         [Name("Y (lost signal)")]
-        public int Y { get; set; }
+        public double Y { get; set; }
+
+        [Name("t1")]
+        public double T1 { get; set; }
+
+        [Name("t2")]
+        public double T2 { get; set; }
+        [Name("t3")]
+        public double T3 { get; set; }
 
         public ResultLine(
             double x1,
             double x2,
             double x3,
             double x4,
-            double y)
+            double y,
+            double t1,
+            double t2,
+            double t3)
         {
-            Y = (int)y;
-            X1 = (int)x1;
-            X2 = (int)x2;
-            X3 = (int)x3;
-            X4 = (int)x4;
+            Y = y;
+            X1 = x1;
+            X2 = x2;
+            X3 = x3;
+            X4 = x4;
+            T1 = t1;
+            T2 = t2;
+            T3 = t3;
         }
     }
     public class SLAULine
     {
         [Name("a0")]
-        public int a0 { get; set; }
+        public double a0 { get; set; }
 
         [Name("a1")]
-        public int a1 { get; set; }
+        public double a1 { get; set; }
 
         [Name("a2")]
-        public int a2 { get; set; }
+        public double a2 { get; set; }
 
         [Name("a3")]
-        public int a3 { get; set; }
+        public double a3 { get; set; }
 
         [Name("a4")]
-        public int a4 { get; set; }
+        public double a4 { get; set; }
 
         [Name("b")]
-        public int b { get; set; }
+        public double b { get; set; }
     }
 }
