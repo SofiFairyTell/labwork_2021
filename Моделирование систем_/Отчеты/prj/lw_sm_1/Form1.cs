@@ -579,17 +579,15 @@ namespace lw_sm_1
             NullEverything();
             Task.Run(() =>
             {
-                for (var E = 2; E < 3; E++)
+                for (var E = 2; E <= 3; E++)
                 {
 
-                    for (var la1 = 1.05; la1 <= 1.15; la1 += 0.10)
+                    for (var la1 = 0.1; la1 < 0.5; la1 += 0.4)
                     {
-                        for (var mat1 = 5.0; mat1 < 10.0; mat1 += 5.0)
+                        for (var mat1 = 0.9; mat1 < 1.6; mat1 += 0.7)
                         {
-                            for (var mat2 = 7.5; mat2 <= 8.5; mat2 += 1.0)
+                            for (var mat2 = 2.5; mat2 <= 3; mat2 += 0.5)
                             {
-
-
                                 Exp(la1, mat1, mat2, E, numSignal);
                             }
                         }
