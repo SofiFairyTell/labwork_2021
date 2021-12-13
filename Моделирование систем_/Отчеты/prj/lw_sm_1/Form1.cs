@@ -13,7 +13,7 @@ using RandomStationaryNormalProcessTest;
 
 using System.Globalization;
 using System.IO;
-
+using System.Runtime.InteropServices;
 
 namespace lw_sm_1
 {
@@ -541,13 +541,17 @@ namespace lw_sm_1
         {
             //количество опытов которые будут сгенерированны с учетом того,
             //что внутри ExperimentParamsCycle уже будет два значения возвращено
-            for (var exp = 0; exp < 5; exp++)
+            for (var exp = 0; exp < 160; exp++)
             {
+                //tmr.Enabled = true; //старт/стоп
                 ExperimentParamsCycle();
+
+                //tmr.Enabled = false; //старт/стоп
             }
             SLAUwriter();
         }
-        public void ExperimentParamsCycle()
+
+    public void ExperimentParamsCycle()
         {
             compList.Clear();
 
@@ -596,18 +600,32 @@ namespace lw_sm_1
             NullEverything();
             Task.Run(() =>
             {
-                for (var la1 = 0.1; la1 < 0.5; la1 += 0.4)
+                //for (var la1 = 0.1; la1 < 0.5; la1 += 0.4)
+                //{
+                //    for (var E = 2; E <= 3; E++)
+                //    {
+                //            for (var mat1 = 0.9; mat1 < 1.6; mat1 += 0.7)
+                //            {
+                //                for (var mat2 = 2.5; mat2 <= 3; mat2 += 0.5)
+                //                {
+                //                    Exp(la1, mat1, mat2, E, numSignal);
+                //                }
+                //            }
+                //        }
+                //}
+                var rnd = new Random();
+                foreach (var la1 in Enumerable.Range(1, 2).OrderBy(x => rnd.Next()).Take(1))
                 {
-                    for (var E = 2; E <= 3; E++)
+                    foreach (var mat1 in Enumerable.Range(1, 2).OrderBy(x => rnd.Next()).Take(1))
                     {
-                            for (var mat1 = 0.9; mat1 < 1.6; mat1 += 0.7)
+                        foreach (var mat2 in Enumerable.Range(2, 3).OrderBy(x => rnd.Next()).Take(1))
+                        {
+                            foreach (var E in Enumerable.Range(1, 2).OrderBy(x => rnd.Next()).Take(1))
                             {
-                                for (var mat2 = 2.5; mat2 <= 3; mat2 += 0.5)
-                                {
-                                    Exp(la1, mat1, mat2, E, numSignal);
-                                }
+                                Exp(la1, mat1, mat2, E, numSignal);
                             }
                         }
+                    }
                 }
                 var writer = new Writer();
                 writer.WriterResultLine(resultLine);
