@@ -101,7 +101,7 @@ namespace RandomNumberGeneratorTest
             }
             catch (IOException e)
             {
-                using (var streamReader = new StreamWriter("Output2.csv"))
+                using (var streamReader = new StreamWriter("OutputERROR.csv"))
                 {
                     using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
                     {
@@ -115,14 +115,29 @@ namespace RandomNumberGeneratorTest
         }
         public void WriterResultLine(List<SLAULine> res)
         {
-            using (var streamReader = new StreamWriter("Slau.csv"))
+            try
             {
-                using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
+                using (var streamReader = new StreamWriter("Slau.csv"))
                 {
-                    csvReader.Configuration.Delimiter = ";";
-                    csvReader.WriteRecords(res);
+                    using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
+                    {
+                        csvReader.Configuration.Delimiter = ";";
+                        csvReader.WriteRecords(res);
+                    }
                 }
             }
+            catch(IOException e)
+            {
+                using (var streamReader = new StreamWriter("SlauERROR.csv"))
+                {
+                    using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
+                    {
+                        csvReader.Configuration.Delimiter = ";";
+                        csvReader.WriteRecords(res);
+                    }
+                }
+            }
+
         }
     }
     }
