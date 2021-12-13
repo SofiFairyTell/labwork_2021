@@ -70,6 +70,8 @@ namespace lw_sm_1
             this.ActionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbModel = new System.Windows.Forms.TabControl();
             this.tabModel = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lbExper = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbPrepVisual = new System.Windows.Forms.Label();
             this.gbRoute = new System.Windows.Forms.GroupBox();
@@ -111,8 +113,7 @@ namespace lw_sm_1
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.lbExper = new System.Windows.Forms.Label();
+            this.btOp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -124,6 +125,7 @@ namespace lw_sm_1
             ((System.ComponentModel.ISupportInitialize)(this.logTable)).BeginInit();
             this.tbModel.SuspendLayout();
             this.tabModel.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbRoute.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalRoutePC3_3)).BeginInit();
@@ -141,7 +143,6 @@ namespace lw_sm_1
             ((System.ComponentModel.ISupportInitialize)(this.signalRoute)).BeginInit();
             this.tabData.SuspendLayout();
             this.tabStat.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -240,7 +241,7 @@ namespace lw_sm_1
             this.btnExperiment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.btnExperiment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
             this.btnExperiment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExperiment.Location = new System.Drawing.Point(58, 318);
+            this.btnExperiment.Location = new System.Drawing.Point(54, 318);
             this.btnExperiment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExperiment.Name = "btnExperiment";
             this.btnExperiment.Size = new System.Drawing.Size(117, 33);
@@ -554,6 +555,28 @@ namespace lw_sm_1
             this.tabModel.TabIndex = 0;
             this.tabModel.Text = "Модель";
             this.tabModel.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.BackColor = System.Drawing.Color.YellowGreen;
+            this.groupBox4.Controls.Add(this.lbExper);
+            this.groupBox4.Location = new System.Drawing.Point(693, 250);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(103, 58);
+            this.groupBox4.TabIndex = 28;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Эксперимент";
+            // 
+            // lbExper
+            // 
+            this.lbExper.AutoSize = true;
+            this.lbExper.BackColor = System.Drawing.Color.YellowGreen;
+            this.lbExper.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbExper.Location = new System.Drawing.Point(16, 24);
+            this.lbExper.Name = "lbExper";
+            this.lbExper.Size = new System.Drawing.Size(17, 19);
+            this.lbExper.TabIndex = 3;
+            this.lbExper.Text = "0";
             // 
             // groupBox1
             // 
@@ -997,27 +1020,21 @@ namespace lw_sm_1
             this.label14.TabIndex = 22;
             this.label14.Text = "Шаг изменения времени";
             // 
-            // groupBox4
+            // btOp
             // 
-            this.groupBox4.BackColor = System.Drawing.Color.YellowGreen;
-            this.groupBox4.Controls.Add(this.lbExper);
-            this.groupBox4.Location = new System.Drawing.Point(693, 250);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(103, 58);
-            this.groupBox4.TabIndex = 28;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Эксперимент";
-            // 
-            // lbExper
-            // 
-            this.lbExper.AutoSize = true;
-            this.lbExper.BackColor = System.Drawing.Color.YellowGreen;
-            this.lbExper.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbExper.Location = new System.Drawing.Point(16, 24);
-            this.lbExper.Name = "lbExper";
-            this.lbExper.Size = new System.Drawing.Size(17, 19);
-            this.lbExper.TabIndex = 3;
-            this.lbExper.Text = "0";
+            this.btOp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btOp.FlatAppearance.BorderSize = 5;
+            this.btOp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btOp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btOp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btOp.Location = new System.Drawing.Point(963, 403);
+            this.btOp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btOp.Name = "btOp";
+            this.btOp.Size = new System.Drawing.Size(117, 33);
+            this.btOp.TabIndex = 24;
+            this.btOp.Text = "ОпытЦикл";
+            this.btOp.UseVisualStyleBackColor = true;
+            this.btOp.Click += new System.EventHandler(this.btOp_Click);
             // 
             // Form1
             // 
@@ -1025,6 +1042,7 @@ namespace lw_sm_1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1192, 466);
+            this.Controls.Add(this.btOp);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -1050,6 +1068,8 @@ namespace lw_sm_1
             ((System.ComponentModel.ISupportInitialize)(this.logTable)).EndInit();
             this.tbModel.ResumeLayout(false);
             this.tabModel.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gbRoute.ResumeLayout(false);
@@ -1071,8 +1091,6 @@ namespace lw_sm_1
             this.tabData.ResumeLayout(false);
             this.tabStat.ResumeLayout(false);
             this.tabStat.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1164,5 +1182,6 @@ namespace lw_sm_1
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lbExper;
+        public System.Windows.Forms.Button btOp;
     }
 }
