@@ -505,7 +505,7 @@ namespace lw_sm_1
 
         static ResultLine Work(double NumPrepSignal, double la,double mat1, double mat2, double E)//double lamb,, double sig1, double sig2)
         {
-            CountExperiment(NumPrepSignal, true, true, mat1, mat2, E,la);//lamb, , sig1, sig2);
+            CountExperiment(NumPrepSignal, true, true, mat1, mat2, E,la);//lamb, , sig1, sig2);          
             return new ResultLine(la, mat1, mat2, E, lostSignal,t1,t2,t3);
         }
 
@@ -632,7 +632,15 @@ namespace lw_sm_1
                        {    
                             foreach (var E in Enumerable.Range(1, 2).OrderBy(x => rnd.Next()).Take(1))
                             {
-                                Exp(la1, mat1, mat2, E, numSignal);
+                                if (extend)
+                                {
+
+                                }
+                                else
+                                {
+                                    Exp(la1, mat1, mat2, E, numSignal);
+                                }
+                                
                             }
                        }
                     }
@@ -645,7 +653,9 @@ namespace lw_sm_1
             else
             {
                 var writer = new Writer();
-                writer.WriterResultLine(resultExtend);
+                writer.WriterResultLine(resultExtend, "OutputEXT.csv");
+                GetPareto(resultExtend);
+                writer.WriterResultLine(resultExtend, "OutputParreto.csv");
             }
         }
 
@@ -773,7 +783,25 @@ namespace lw_sm_1
         Experiment = ++experiments;
     }
 
-    async void tmr_Tick(object sender, EventArgs e)
+    static void GetPareto(List<ResultLineExtend> results)
+    {
+        var jIds = new List<int>();
+        var j = results.FirstOrDefault();
+        do
+        {
+            jIds.Add(j.ParamID);
+            var k = results.FirstOrDefault(x => j.ParamID != x.ParamID && j.CompareTo(x) == -1);
+            if (k != null)
+            {
+                results.Remove(j);
+            }
+
+            j = results.FirstOrDefault(x => !jIds.Contains(x.ParamID));
+        }
+        while (j != null);
+    }
+
+        async void tmr_Tick(object sender, EventArgs e)
     {        
         route.Text = signalCounter.ToString();
         lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();

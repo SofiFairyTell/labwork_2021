@@ -1,4 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using System.Linq;
 
 namespace RandomNumberGeneratorTest
 {
@@ -89,6 +90,8 @@ namespace RandomNumberGeneratorTest
 
     public class ResultLineExtend
     {
+        [Ignore]
+        public int ParamID { get; set; }
         [Name("X1 (lambda)")]
         public double X1 { get; set; }
 
@@ -109,6 +112,7 @@ namespace RandomNumberGeneratorTest
         [Name("t3")]
         public double T3 { get; set; }
 
+        //Показатели работы моделируемой системы
         [Name("L (LostSignalChance)")]
         public double L { get; set; }
         [Name("W (WaitSignalChance)")]
@@ -139,6 +143,26 @@ namespace RandomNumberGeneratorTest
             T2 = t2;
             T3 = t3;
         }
+        public int CompareTo(ResultLineExtend resultLineExtend)
+        {
+            var R = new int[3];
+            R[0] = L == resultLineExtend.L
+                ? 0
+                : L > resultLineExtend.L ? 1 : -1;
+            R[1] = W == resultLineExtend.W
+                ? 0
+                : W > resultLineExtend.L ? 1 : -1;
+            R[2] = S == resultLineExtend.S
+                ? 0
+                : S < resultLineExtend.S ? 1 : -1;
+
+            return R.All(x => x == 0)
+                ? 0
+                : R.All(x => x == 1 || x == 0)
+                    ? 1
+                    : R.All(x => x == -1 || x == 0) ? -1 : 0;
+        }
+
     }
 
     public class SLAULine
