@@ -86,6 +86,61 @@ namespace RandomNumberGeneratorTest
             T3 = t3;
         }
     }
+
+    public class ResultLineExtend
+    {
+        [Name("X1 (lambda)")]
+        public double X1 { get; set; }
+
+        [Name("X2 (m1)")]
+        public double X2 { get; set; }
+
+        [Name("X3 (m2)")]
+        public double X3 { get; set; }
+
+        [Name("X4 (E)")]
+        public int X4 { get; set; }
+
+        [Name("t1")]
+        public double T1 { get; set; }
+
+        [Name("t2")]
+        public double T2 { get; set; }
+        [Name("t3")]
+        public double T3 { get; set; }
+
+        [Name("L (LostSignalChance)")]
+        public double L { get; set; }
+        [Name("W (WaitSignalChance)")]
+        public double W { get; set; }
+        [Name("S (SpeedSignalProcessing)")]
+        public double S { get; set; }
+        public ResultLineExtend(
+            double x1,
+            double x2,
+            double x3,
+            double x4,
+            double t1,
+            double t2,
+            double t3,
+            double l,
+            double w,
+            double s
+            )
+        {
+            L = l;
+            W = w;
+            S = s;
+            X1 = x1;
+            X2 = x2;
+            X3 = x3;
+            X4 = (int)x4;
+            T1 = t1;
+            T2 = t2;
+            T3 = t3;
+        }
+    }
+
     public class SLAULine
     {
         [Name("a0")]

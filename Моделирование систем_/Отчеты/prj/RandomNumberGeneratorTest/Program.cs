@@ -111,7 +111,32 @@ namespace RandomNumberGeneratorTest
                 }
                 //throw;
             }
-
+        }
+        public void WriterResultLine(List<ResultLineExtend> res)
+        {
+            try
+            {
+                using (var streamReader = new StreamWriter("OutputEXT.csv"))
+                {
+                    using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
+                    {
+                        csvReader.Configuration.Delimiter = ";";
+                        csvReader.WriteRecords(res);
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                using (var streamReader = new StreamWriter("OutputERROR.csv"))
+                {
+                    using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
+                    {
+                        csvReader.Configuration.Delimiter = ";";
+                        csvReader.WriteRecords(res);
+                    }
+                }
+                //throw;
+            }
         }
         public void WriterResultLine(List<SLAULine> res)
         {

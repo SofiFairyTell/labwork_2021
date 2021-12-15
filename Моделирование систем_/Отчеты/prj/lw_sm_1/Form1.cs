@@ -56,6 +56,7 @@ namespace lw_sm_1
         public static List<comp> compList = new List<comp>();
         public static List<LogTable> res = new List<LogTable>();
         public static List<ResultLine> resultLine = new List<ResultLine>();
+        public static List<ResultLineExtend> resultExtend= new List<ResultLineExtend>();
         #endregion
         public Form1()
         {
@@ -594,7 +595,7 @@ namespace lw_sm_1
             for (var exp = 0; exp < 160; exp++)
             {
                 //tmr.Enabled = true; //старт/стоп
-                ExperimentParamsCycle();
+                ExperimentParamsCycle(false);
 
                 //tmr.Enabled = false; //старт/стоп
             }
@@ -602,14 +603,20 @@ namespace lw_sm_1
         }
         private void btnParettoOPT_Click(object sender, EventArgs e)
         {
+            for (var exp = 0; exp < 160; exp++)
+            {
 
+                //tmr.Enabled = true; //старт/стоп
+                ExperimentParamsCycle(true);
+
+                //tmr.Enabled = false; //старт/стоп
+            }
         }
 
     #endregion
-    public void ExperimentParamsCycle()
+    public void ExperimentParamsCycle(bool extend)
         {
             compList.Clear();
-
             for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
             {
                 compList.Add(new comp());
@@ -630,8 +637,16 @@ namespace lw_sm_1
                        }
                     }
                 }
-            var writer = new Writer();
-            writer.WriterResultLine(resultLine);
+            if (extend == false)
+            {
+                var writer = new Writer();
+                writer.WriterResultLine(resultLine);
+            }
+            else
+            {
+                var writer = new Writer();
+                writer.WriterResultLine(resultExtend);
+            }
         }
 
     public void ExperimentParams()
