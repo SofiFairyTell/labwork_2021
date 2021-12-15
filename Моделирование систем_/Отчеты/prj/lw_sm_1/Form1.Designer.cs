@@ -114,6 +114,7 @@ namespace lw_sm_1
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.btOp = new System.Windows.Forms.Button();
+            this.btnParettoOPT = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -193,7 +194,7 @@ namespace lw_sm_1
             this.btnStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.btnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Location = new System.Drawing.Point(222, 318);
+            this.btnStart.Location = new System.Drawing.Point(131, 318);
             this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(117, 33);
@@ -215,6 +216,8 @@ namespace lw_sm_1
             // 
             // grProperties
             // 
+            this.grProperties.Controls.Add(this.btnParettoOPT);
+            this.grProperties.Controls.Add(this.btOp);
             this.grProperties.Controls.Add(this.btnExperiment);
             this.grProperties.Controls.Add(this.tbEcapcity);
             this.grProperties.Controls.Add(this.label15);
@@ -227,9 +230,9 @@ namespace lw_sm_1
             this.grProperties.Controls.Add(this.tbNumComp);
             this.grProperties.Controls.Add(this.lbNumComp);
             this.grProperties.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.grProperties.Location = new System.Drawing.Point(829, 42);
+            this.grProperties.Location = new System.Drawing.Point(829, 4);
             this.grProperties.Name = "grProperties";
-            this.grProperties.Size = new System.Drawing.Size(351, 358);
+            this.grProperties.Size = new System.Drawing.Size(351, 396);
             this.grProperties.TabIndex = 6;
             this.grProperties.TabStop = false;
             this.grProperties.Text = "Параметры моделирования";
@@ -241,7 +244,7 @@ namespace lw_sm_1
             this.btnExperiment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.btnExperiment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
             this.btnExperiment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExperiment.Location = new System.Drawing.Point(54, 318);
+            this.btnExperiment.Location = new System.Drawing.Point(8, 318);
             this.btnExperiment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExperiment.Name = "btnExperiment";
             this.btnExperiment.Size = new System.Drawing.Size(117, 33);
@@ -1027,14 +1030,30 @@ namespace lw_sm_1
             this.btOp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.btOp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
             this.btOp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btOp.Location = new System.Drawing.Point(963, 403);
+            this.btOp.Location = new System.Drawing.Point(8, 355);
             this.btOp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btOp.Name = "btOp";
-            this.btOp.Size = new System.Drawing.Size(117, 33);
+            this.btOp.Size = new System.Drawing.Size(116, 33);
             this.btOp.TabIndex = 24;
-            this.btOp.Text = "ОпытЦикл";
+            this.btOp.Text = "Опыты (цикл)";
             this.btOp.UseVisualStyleBackColor = true;
             this.btOp.Click += new System.EventHandler(this.btOp_Click);
+            // 
+            // btnParettoOPT
+            // 
+            this.btnParettoOPT.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnParettoOPT.FlatAppearance.BorderSize = 5;
+            this.btnParettoOPT.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btnParettoOPT.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btnParettoOPT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnParettoOPT.Location = new System.Drawing.Point(132, 355);
+            this.btnParettoOPT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnParettoOPT.Name = "btnParettoOPT";
+            this.btnParettoOPT.Size = new System.Drawing.Size(116, 33);
+            this.btnParettoOPT.TabIndex = 25;
+            this.btnParettoOPT.Text = "Оптимизация ";
+            this.btnParettoOPT.UseVisualStyleBackColor = true;
+            this.btnParettoOPT.Click += new System.EventHandler(this.btnParettoOPT_Click);
             // 
             // Form1
             // 
@@ -1042,7 +1061,6 @@ namespace lw_sm_1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1192, 466);
-            this.Controls.Add(this.btOp);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -1183,5 +1201,6 @@ namespace lw_sm_1
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lbExper;
         public System.Windows.Forms.Button btOp;
+        public System.Windows.Forms.Button btnParettoOPT;
     }
 }
