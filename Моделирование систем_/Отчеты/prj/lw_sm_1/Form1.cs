@@ -32,6 +32,7 @@ namespace lw_sm_1
         public static string MESSAGE = "";
         public static bool ExperimentMode=false;
         public static int Experiment = 0;
+        public static int ExpNum = 0;
         public static bool stop = false;
         #endregion
 
@@ -327,7 +328,7 @@ namespace lw_sm_1
         }
         #region Функции для расчета показателей производительности системы
 
-        private int LostSignalChance()
+        public static int LostSignalChance()
         {
             var LostSignalChance = (lostSignal / signalCounter) * 100;
             if (LostSignalChance > 100)
@@ -337,7 +338,7 @@ namespace lw_sm_1
             return (int)LostSignalChance;
         }
 
-        private int WaitSignalChance()
+        public static int WaitSignalChance()
         {
             var waitPosition = compList[0].capacity + compList[1].capacity + compList[2].capacity;
             var WaitSignalChance = 100 * ((signalCounter - waitPosition) / signalCounter);
@@ -348,7 +349,7 @@ namespace lw_sm_1
             return (int)WaitSignalChance;
         }
 
-        private double SpeedSignalProcessing()
+        public static double SpeedSignalProcessing()
         {
             var SpeedSignalProcessing = (prepSignal / signalCounter)/t0;
             return SpeedSignalProcessing;
@@ -508,10 +509,29 @@ namespace lw_sm_1
             CountExperiment(NumPrepSignal, true, true, mat1, mat2, E,la);//lamb, , sig1, sig2);          
             return new ResultLine(la, mat1, mat2, E, lostSignal,t1,t2,t3);
         }
+        static ResultLineExtend WorkExt(double NumPrepSignal, double la, double mat1, double mat2, double E)//double lamb,, double sig1, double sig2)
+        {
+            CountExperiment(NumPrepSignal, true, true, mat1, mat2, E, la);//lamb, , sig1, sig2);
+            var l = LostSignalChance();
+            var w = WaitSignalChance();
+            var s = SpeedSignalProcessing();
+            return new ResultLineExtend{
+                ParamID = ExpNum++,
+                X1 = la, 
+                X2 = mat1, 
+                X3 = mat2, 
+                X4 = (int)E, 
+                T1 = t1,
+                T2 = t2,
+                T3 = t3,
+                L = l,
+                W = w,
+                S = s
+            };
+        }
 
-
-    #region Общее
-    private void NullEverything()
+        #region Общее
+        private void NullEverything()
     {
         signalCounter = 0;
         t0 = 0;
@@ -592,7 +612,7 @@ namespace lw_sm_1
         {
             //количество опытов которые будут сгенерированны с учетом того,
             //что внутри ExperimentParamsCycle уже будет два значения возвращено
-            for (var exp = 0; exp < 160; exp++)
+            for (var exp = 0; exp < Convert.ToInt16(tbEXP.Text.Trim()); exp++)
             {
                 //tmr.Enabled = true; //старт/стоп
                 ExperimentParamsCycle(false);
@@ -603,7 +623,7 @@ namespace lw_sm_1
         }
         private void btnParettoOPT_Click(object sender, EventArgs e)
         {
-            for (var exp = 0; exp < 160; exp++)
+            for (var exp = 0; exp < Convert.ToInt16(tbEXP.Text.Trim()); exp++)
             {
 
                 //tmr.Enabled = true; //старт/стоп
@@ -634,7 +654,7 @@ namespace lw_sm_1
                             {
                                 if (extend)
                                 {
-
+                                    ExpEXT(la1, mat1, mat2, E, numSignal);
                                 }
                                 else
                                 {
@@ -783,7 +803,15 @@ namespace lw_sm_1
         Experiment = ++experiments;
     }
 
-    static void GetPareto(List<ResultLineExtend> results)
+    public void ExpEXT(double la, double mat2, double mat3, double E, double numSignal)//double la1,, double sig1, double sig2)
+    {
+
+        (lambda, m1, m2, Ecapcity) = (la, mat2, mat3, E);
+        var res = WorkExt(numSignal, la, mat2, mat3, E);
+        resultExtend.Add(res);
+        Experiment = ++experiments;
+    }
+        static void GetPareto(List<ResultLineExtend> results)
     {
         var jIds = new List<int>();
         var j = results.FirstOrDefault();

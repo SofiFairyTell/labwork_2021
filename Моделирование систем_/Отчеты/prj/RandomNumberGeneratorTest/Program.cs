@@ -112,11 +112,11 @@ namespace RandomNumberGeneratorTest
                 //throw;
             }
         }
-        public void WriterResultLine(List<ResultLineExtend> res)
+        public void WriterResultLine(List<ResultLineExtend> res, string FileName)
         {
             try
             {
-                using (var streamReader = new StreamWriter("OutputEXT.csv"))
+                using (var streamReader = new StreamWriter(FileName))
                 {
                     using (var csvReader = new CsvWriter(streamReader, new CultureInfo("ru-RU")))
                     {

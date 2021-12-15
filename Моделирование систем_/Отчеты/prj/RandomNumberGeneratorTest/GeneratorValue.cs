@@ -1,5 +1,6 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using System.Linq;
+using System;
 
 namespace RandomNumberGeneratorTest
 {
@@ -88,7 +89,7 @@ namespace RandomNumberGeneratorTest
         }
     }
 
-    public class ResultLineExtend
+    public class ResultLineExtend:IComparable<ResultLineExtend>
     {
         [Ignore]
         public int ParamID { get; set; }
@@ -120,6 +121,7 @@ namespace RandomNumberGeneratorTest
         [Name("S (SpeedSignalProcessing)")]
         public double S { get; set; }
         public ResultLineExtend(
+            int Id,
             double x1,
             double x2,
             double x3,
@@ -145,14 +147,14 @@ namespace RandomNumberGeneratorTest
         }
         public int CompareTo(ResultLineExtend resultLineExtend)
         {
-            var R = new int[3];
+            var R = new int[2];
             R[0] = L == resultLineExtend.L
                 ? 0
                 : L > resultLineExtend.L ? 1 : -1;
-            R[1] = W == resultLineExtend.W
-                ? 0
-                : W > resultLineExtend.L ? 1 : -1;
-            R[2] = S == resultLineExtend.S
+            //R[1] = W == resultLineExtend.W
+            //    ? 0
+            //    : W > resultLineExtend.W ? 1 : -1;
+            R[1] = S == resultLineExtend.S
                 ? 0
                 : S < resultLineExtend.S ? 1 : -1;
 
