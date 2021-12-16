@@ -634,7 +634,7 @@ namespace lw_sm_1
             }
             var writer = new Writer();
             writer.WriterResultLine(resultExtend, "OutputEXT.csv");
-            GetPareto(resultExtend);
+            MethodPareto(resultExtend);
             writer.WriterResultLine(resultExtend, "OutputParreto.csv");
         }
 
@@ -816,7 +816,7 @@ namespace lw_sm_1
         resultExtend.Add(res);
         Experiment = ++experiments;
     }
-        static void GetPareto(List<ResultLineExtend> ResultExtend)
+    static void MethodPareto(List<ResultLineExtend> ResultExtend)
     {
         var j_list= new List<int>();
         var j = ResultExtend.FirstOrDefault(); //выберем вариант j
