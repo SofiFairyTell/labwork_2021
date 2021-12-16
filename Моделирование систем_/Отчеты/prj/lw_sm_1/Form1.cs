@@ -515,7 +515,8 @@ namespace lw_sm_1
             var l = LostSignalChance();
             var w = WaitSignalChance();
             var s = SpeedSignalProcessing();
-            return new ResultLineExtend{
+            return new ResultLineExtend
+            {
                 ParamID = ExpNum++,
                 X1 = la, 
                 X2 = mat1, 
@@ -631,6 +632,10 @@ namespace lw_sm_1
 
                 //tmr.Enabled = false; //старт/стоп
             }
+            var writer = new Writer();
+            writer.WriterResultLine(resultExtend, "OutputEXT.csv");
+            GetPareto(resultExtend);
+            writer.WriterResultLine(resultExtend, "OutputParreto.csv");
         }
 
     #endregion
@@ -672,10 +677,10 @@ namespace lw_sm_1
             }
             else
             {
-                var writer = new Writer();
-                writer.WriterResultLine(resultExtend, "OutputEXT.csv");
-                GetPareto(resultExtend);
-                writer.WriterResultLine(resultExtend, "OutputParreto.csv");
+                //var writer = new Writer();
+                //writer.WriterResultLine(resultExtend, "OutputEXT.csv");
+                //GetPareto(resultExtend);
+                //writer.WriterResultLine(resultExtend, "OutputParreto.csv");
             }
         }
 
@@ -811,22 +816,23 @@ namespace lw_sm_1
         resultExtend.Add(res);
         Experiment = ++experiments;
     }
-        static void GetPareto(List<ResultLineExtend> results)
+        static void GetPareto(List<ResultLineExtend> ResultExtend)
     {
-        var jIds = new List<int>();
-        var j = results.FirstOrDefault();
+        var j_list= new List<int>();
+        var j = ResultExtend.FirstOrDefault(); //выберем вариант j
         do
         {
-            jIds.Add(j.ParamID);
-            var k = results.FirstOrDefault(x => j.ParamID != x.ParamID && j.CompareTo(x) == -1);
+            j_list.Add(j.ParamID); //добавим вариант в список
+
+            var k = ResultExtend.FirstOrDefault(x => j.ParamID != x.ParamID && j.CompareTo(x) == -1);//для варианта k != j
             if (k != null)
             {
-                results.Remove(j);
+                    ResultExtend.Remove(j);
             }
 
-            j = results.FirstOrDefault(x => !jIds.Contains(x.ParamID));
+            j = ResultExtend.FirstOrDefault(x => !j_list.Contains(x.ParamID));
         }
-        while (j != null);
+        while (j != null); //пока не просмотрены все варианты
     }
 
         async void tmr_Tick(object sender, EventArgs e)

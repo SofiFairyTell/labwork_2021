@@ -91,7 +91,7 @@ namespace RandomNumberGeneratorTest
 
     public class ResultLineExtend:IComparable<ResultLineExtend>
     {
-        [Ignore]
+        [Name("ID (exp)")]
         public int ParamID { get; set; }
         [Name("X1 (lambda)")]
         public double X1 { get; set; }
@@ -114,14 +114,14 @@ namespace RandomNumberGeneratorTest
         public double T3 { get; set; }
 
         //Показатели работы моделируемой системы
-        [Name("L (LostSignalChance)")]
+        [Name("L% (LostSignalChance)")]
         public double L { get; set; }
-        [Name("W (WaitSignalChance)")]
+        [Name("W% (WaitSignalChance)")]
         public double W { get; set; }
         [Name("S (SpeedSignalProcessing)")]
         public double S { get; set; }
-        public ResultLineExtend(
-            int Id,
+        public ResultLineExtend() { }
+        public ResultLineExtend(int PID,
             double x1,
             double x2,
             double x3,
@@ -131,9 +131,9 @@ namespace RandomNumberGeneratorTest
             double t3,
             double l,
             double w,
-            double s
-            )
+            double s)
         {
+            ParamID = PID;
             L = l;
             W = w;
             S = s;
@@ -150,13 +150,13 @@ namespace RandomNumberGeneratorTest
             var R = new int[2];
             R[0] = L == resultLineExtend.L
                 ? 0
-                : L > resultLineExtend.L ? 1 : -1;
+                : L < resultLineExtend.L ? 1 : -1;
             //R[1] = W == resultLineExtend.W
             //    ? 0
             //    : W > resultLineExtend.W ? 1 : -1;
             R[1] = S == resultLineExtend.S
                 ? 0
-                : S < resultLineExtend.S ? 1 : -1;
+                : S > resultLineExtend.S ? 1 : -1;
 
             return R.All(x => x == 0)
                 ? 0
