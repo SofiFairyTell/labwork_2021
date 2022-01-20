@@ -13,7 +13,7 @@ using RandomStationaryNormalProcessTest;
 
 using System.Globalization;
 using System.IO;
-
+using System.Runtime.InteropServices;
 
 namespace lw_sm_1
 {
@@ -32,6 +32,7 @@ namespace lw_sm_1
         public static string MESSAGE = "";
         public static bool ExperimentMode=false;
         public static int Experiment = 0;
+        public static int ExpNum = 0;
         public static bool stop = false;
         #endregion
 
@@ -56,6 +57,7 @@ namespace lw_sm_1
         public static List<comp> compList = new List<comp>();
         public static List<LogTable> res = new List<LogTable>();
         public static List<ResultLine> resultLine = new List<ResultLine>();
+        public static List<ResultLineExtend> resultExtend= new List<ResultLineExtend>();
         #endregion
         public Form1()
         {
@@ -298,30 +300,62 @@ namespace lw_sm_1
         }
 
         private async void StatData()
+        {          
+            var waitPosition = compList[0].capacity + compList[1].capacity + compList[2].capacity;
+        
+            var lost = LostSignalChance();
+            var wait = WaitSignalChance();
+            var speed = SpeedSignalProcessing();
+
+            lbAllCapacity.Text = waitPosition.ToString();
+
+            SystemOutputText();
+            SystemProductivityText(lost,wait,speed);
+        }
+        private void SystemOutputText()
         {
             lbSignalCounter.Text = signalCounter.ToString();
             lbPrepSignal.Text = prepSignal.ToString();
             lbOuterSignal.Text = OutSignalCounter.ToString();
             lbLostSignal.Text = lostSignal.ToString();
-            var waitPosition = compList[0].capacity + compList[1].capacity + compList[2].capacity;
-            lbAllCapacity.Text = waitPosition.ToString();
-            var lost = (lostSignal / signalCounter) * 100;
-            if (lost > 100)
-            {
-                lost = 100;
-            }
-            lbPSignal.Text = lost.ToString("F" + tbEpsilon.Text.Trim()) + "%";
-            //Вероятность ожидания в очереди сигнала
-            var wait = 100 * ((signalCounter - waitPosition) / signalCounter);
-            if (wait > 100)
-            {
-                wait = 100;
-            }
-            lbWait.Text = wait.ToString("F" + tbEpsilon.Text.Trim()) + "%";
-            lbProd.Text = "Обработано " + ((prepSignal / signalCounter) / t0).ToString("F" + tbEpsilon.Text.Trim()) + " сигналов в секунду ";
         }
 
+        private void SystemProductivityText(int LostSignalChance, int WaitSignalChance, double SpeedSignalProcessing)
+        {
+            lbPSignal.Text = LostSignalChance.ToString("F" + tbEpsilon.Text.Trim()) + "%";
+            lbWait.Text = WaitSignalChance.ToString("F" + tbEpsilon.Text.Trim()) + "%"; //Вероятность ожидания в очереди сигнала
+            lbProd.Text = "Обработано " + SpeedSignalProcessing.ToString("F" + tbEpsilon.Text.Trim()) + " сигналов в секунду ";
+        }
+        #region Функции для расчета показателей производительности системы
 
+        public static int LostSignalChance()
+        {
+            var LostSignalChance = (lostSignal / signalCounter) * 100;
+            if (LostSignalChance > 100)
+            {
+                LostSignalChance = 100;
+            }
+            return (int)LostSignalChance;
+        }
+
+        public static int WaitSignalChance()
+        {
+            var waitPosition = compList[0].capacity + compList[1].capacity + compList[2].capacity;
+            var WaitSignalChance = 100 * ((signalCounter - waitPosition) / signalCounter);
+            if (WaitSignalChance > 100)
+            {
+                WaitSignalChance = 100;
+            }
+            return (int)WaitSignalChance;
+        }
+
+        public static double SpeedSignalProcessing()
+        {
+            var SpeedSignalProcessing = (prepSignal / signalCounter)/t0;
+            return SpeedSignalProcessing;
+        }
+
+        #endregion
         #region Активности и вычисления
         private static void AK1()
         {
@@ -467,42 +501,80 @@ namespace lw_sm_1
                 }
             }
         }
+
+
+
         static ResultLine Work(double NumPrepSignal, double la,double mat1, double mat2, double E)//double lamb,, double sig1, double sig2)
         {
-            CountExperiment(NumPrepSignal, true, true, mat1, mat2, E,la);//lamb, , sig1, sig2);
-            return new ResultLine(la, mat1, mat2, E, lostSignal/signalCounter,t1,t2,t3);
+            CountExperiment(NumPrepSignal, true, true, mat1, mat2, E,la);//lamb, , sig1, sig2);          
+            return new ResultLine(la, mat1, mat2, E, lostSignal,t1,t2,t3);
         }
-
+        static ResultLineExtend WorkExt(double NumPrepSignal, double la, double mat1, double mat2, double E)//double lamb,, double sig1, double sig2)
+        {
+            CountExperiment(NumPrepSignal, true, true, mat1, mat2, E, la);//lamb, , sig1, sig2);
+            var l = LostSignalChance();
+            var w = WaitSignalChance();
+            var s = SpeedSignalProcessing();
+            return new ResultLineExtend
+            {
+                ParamID = ExpNum++,
+                X1 = la, 
+                X2 = mat1, 
+                X3 = mat2, 
+                X4 = (int)E, 
+                T1 = t1,
+                T2 = t2,
+                T3 = t3,
+                L = l,
+                W = w,
+                S = s
+            };
+        }
 
         #region Общее
         private void NullEverything()
-        {
-            signalCounter = 0;
-            t0 = 0;
-            arivTime = 0;
-            prepTime = 0;
-            checkTime = 0;
-            prepTimeComp = 0;
-            prepSignal = 0;
-            OutSignalCounter = 0;
-            lostSignal = 0;
-        }
+    {
+        signalCounter = 0;
+        t0 = 0;
+        arivTime = 0;
+        prepTime = 0;
+        checkTime = 0;
+        prepTimeComp = 0;
+        prepSignal = 0;
+        OutSignalCounter = 0;
+        lostSignal = 0;
+    }
+    private void ConvertTo(double t1, double t2, double t3)
+    {
+        t1 = Convert.ToDouble(tbT1.Text.Trim());
+        t2 = Convert.ToDouble(tbT2.Text.Trim());
+        t3 = Convert.ToDouble(tbT3.Text.Trim());
+    }
+    private void ConvertTo(int t1, int t2, int t3)
+    {
+        lbComp1.Text = Convert.ToString(t1);
+        lbComp2.Text = Convert.ToString(t2);
+        lbComp3.Text = Convert.ToString(t2);
+    }
+    #endregion
 
-        private void ConvertTo(double t1, double t2, double t3)
-        {
-            t1 = Convert.ToDouble(tbT1.Text.Trim());
-            t2 = Convert.ToDouble(tbT2.Text.Trim());
-            t3 = Convert.ToDouble(tbT3.Text.Trim());
-        }
-        private void ConvertTo(int t1, int t2, int t3)
-        {
-            lbComp1.Text = Convert.ToString(t1);
-            lbComp2.Text = Convert.ToString(t2);
-            lbComp3.Text = Convert.ToString(t2);
-        }
-        #endregion
         #region Кнопочки для запуска
+        private void btnExperiment_Click(object sender, EventArgs e)
+        {
+            ExperimentMode = true;
+            
+            if (tmr.Enabled == false)
+            {
+                tmr.Enabled = true; //старт/стоп
+                ExperimentParams();
+                SLAUwriter();
+            }
+            else
+            {
+                tmr.Enabled = false; //старт/стоп
+            }
 
+        }
         private void btnStart_Click(object sender, EventArgs e)
         {
             NullEverything();
@@ -539,191 +611,272 @@ namespace lw_sm_1
 
         private void btOp_Click(object sender, EventArgs e)
         {
-            for (var exp = 0; exp < 2; exp++)
+            //количество опытов которые будут сгенерированны с учетом того,
+            //что внутри ExperimentParamsCycle уже будет два значения возвращено
+            for (var exp = 0; exp < Convert.ToInt16(tbEXP.Text.Trim()); exp++)
             {
-                //Task.Run(() =>
-                //{
-                //    //  btnExperiment_Click(null, null);
-                //    if (tmr.Enabled == false)
-                //    {
-                //        tmr.Enabled = true; //старт/стоп
-                //        ExperimentParams();
-                //    }
-                //    else
-                //    {
-                //        tmr.Enabled = false; //старт/стоп
-                //    }
-                //});
-                btnExperiment.Click += new EventHandler(btnExperiment_Click);
-                ExperimentParams();
+                //tmr.Enabled = true; //старт/стоп
+                ExperimentParamsCycle(false);
+
+                //tmr.Enabled = false; //старт/стоп
             }
+            SLAUwriter();
         }
-        public void ExperimentParams()
+        private void btnParettoOPT_Click(object sender, EventArgs e)
+        {
+            for (var exp = 0; exp < Convert.ToInt16(tbEXP.Text.Trim()); exp++)
+            {
+
+                //tmr.Enabled = true; //старт/стоп
+                ExperimentParamsCycle(true);
+
+                //tmr.Enabled = false; //старт/стоп
+            }
+            var writer = new Writer();
+            writer.WriterResultLine(resultExtend, "OutputEXT.csv");
+            MethodPareto(resultExtend);
+            writer.WriterResultLine(resultExtend, "OutputParreto.csv");
+        }
+
+    #endregion
+    public void ExperimentParamsCycle(bool extend)
         {
             compList.Clear();
-            logTable.Rows.Clear();
-            if (!cbRandom.Checked)
-            {
-                ConvertTo(t1, t2, t3);
-            }
-            if (!cbRandomEcapacity.Checked)
-            {
-                Ecapcity = Convert.ToDouble(tbEcapcity.Text.Trim());
-            }
             for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
             {
                 compList.Add(new comp());
             }
-            var rnd = new Random();
             var numSignal = Convert.ToDouble(tbNumSignal.Text.Trim());
             NullEverything();
-            Task.Run(() =>
-            {
-                for (var E = 2; E <= 3; E++)
+            var rnd = new Random();
+            foreach (var la1 in Enumerable.Range(1, 2).OrderBy(x => rnd.Next()).Take(1))
                 {
-
-                    for (var la1 = 0.1; la1 < 0.5; la1 += 0.4)
+                    foreach (var mat1 in Enumerable.Range(1, 2).OrderBy(x => rnd.Next()).Take(1))
                     {
-                        for (var mat1 = 0.9; mat1 < 1.6; mat1 += 0.7)
-                        {
-                            for (var mat2 = 2.5; mat2 <= 3; mat2 += 0.5)
+                       foreach(var mat2 in Enumerable.Range(2,3).OrderBy(x=>rnd.Next()).Take(1))
+                       {    
+                            foreach (var E in Enumerable.Range(1, 2).OrderBy(x => rnd.Next()).Take(1))
                             {
-                                Exp(la1, mat1, mat2, E, numSignal);
+                                if (extend)
+                                {
+                                    ExpEXT(la1, mat1, mat2, E, numSignal);
+                                }
+                                else
+                                {
+                                    Exp(la1, mat1, mat2, E, numSignal);
+                                }
+                                
                             }
-                        }
+                       }
                     }
                 }
+            if (extend == false)
+            {
                 var writer = new Writer();
                 writer.WriterResultLine(resultLine);
-
-                var Slau = new SLAULine
-                {
-                    a0 = Experiment,
-                    a1 = resultLine.Select(x => x.X1).Sum(),
-                    a2 = resultLine.Select(x => x.X2).Sum(),
-                    a3 = resultLine.Select(x => x.X3).Sum(),
-                    a4 = resultLine.Select(x => x.X4).Sum(),
-                    b = resultLine.Select(x => x.Y).Sum()
-                };
-                var Slau1 = new SLAULine
-                {
-                    a0 = resultLine.Select(x => x.X1).Sum(),
-                    a1 = resultLine.Select(x => x.X1 * x.X1).Sum(),
-                    a2 = resultLine.Select(x => x.X2 * x.X1).Sum(),
-                    a3 = resultLine.Select(x => x.X3 * x.X1).Sum(),
-                    a4 = resultLine.Select(x => x.X4 * x.X1).Sum(),
-                    b = resultLine.Select(x => x.Y * x.X1).Sum(),
-                };
-
-                var Slau2 = new SLAULine
-                {
-                    a0 = resultLine.Select(x => x.X2).Sum(),
-                    a1 = resultLine.Select(x => x.X1 * x.X2).Sum(),
-                    a2 = resultLine.Select(x => x.X2 * x.X2).Sum(),
-                    a3 = resultLine.Select(x => x.X3 * x.X2).Sum(),
-                    a4 = resultLine.Select(x => x.X4 * x.X2).Sum(),
-                    b = resultLine.Select(x => x.Y * x.X2).Sum(),
-                };
-
-                var Slau3 = new SLAULine
-                {
-                    a0 = resultLine.Select(x => x.X3).Sum(),
-                    a1 = resultLine.Select(x => x.X1 * x.X3).Sum(),
-                    a2 = resultLine.Select(x => x.X2 * x.X3).Sum(),
-                    a3 = resultLine.Select(x => x.X3 * x.X3).Sum(),
-                    a4 = resultLine.Select(x => x.X4 * x.X3).Sum(),
-                    b = resultLine.Select(x => x.Y * x.X3).Sum(),
-                };
-
-                var Slau4 = new SLAULine
-                {
-                    a0 = resultLine.Select(x => x.X4).Sum(),
-                    a1 = resultLine.Select(x => x.X1 * x.X4).Sum(),
-                    a2 = resultLine.Select(x => x.X2 * x.X4).Sum(),
-                    a3 = resultLine.Select(x => x.X3 * x.X4).Sum(),
-                    a4 = resultLine.Select(x => x.X4 * x.X4).Sum(),
-                    b = resultLine.Select(x => x.Y * x.X4).Sum(),
-                };
-                var SLAU = new List<SLAULine>
-                      {
-                        Slau, Slau1, Slau2, Slau3,Slau4
-                      };
-                var slau = new Writer();
-                slau.WriterResultLine(SLAU);
-
-
-            });
-
-        }
-
-        private void btnExperiment_Click(object sender, EventArgs e)
-        {
-            ExperimentMode = true;
-            
-            if (tmr.Enabled == false)
-            {
-                tmr.Enabled = true; //старт/стоп
-                ExperimentParams();
             }
             else
             {
-                tmr.Enabled = false; //старт/стоп
+                //var writer = new Writer();
+                //writer.WriterResultLine(resultExtend, "OutputEXT.csv");
+                //GetPareto(resultExtend);
+                //writer.WriterResultLine(resultExtend, "OutputParreto.csv");
+            }
+        }
+
+    public void ExperimentParams()
+    {
+        compList.Clear();
+        logTable.Rows.Clear();
+        if (!cbRandom.Checked)
+        {
+            ConvertTo(t1, t2, t3);
+        }
+        if (!cbRandomEcapacity.Checked)
+        {
+            Ecapcity = Convert.ToDouble(tbEcapcity.Text.Trim());
+        }
+        for (int i = 0; i < Convert.ToDouble(tbNumComp.Text.Trim()); i++)
+        {
+            compList.Add(new comp());
+        }
+
+        var numSignal = Convert.ToDouble(tbNumSignal.Text.Trim());
+        NullEverything();
+        Task.Run(() =>
+        {
+            //for (var la1 = 0.1; la1 < 0.5; la1 += 0.4)
+            //{
+            //    for (var E = 2; E <= 3; E++)
+            //    {
+            //            for (var mat1 = 0.9; mat1 < 1.6; mat1 += 0.7)
+            //            {
+            //                for (var mat2 = 2.5; mat2 <= 3; mat2 += 0.5)
+            //                {
+            //                    Exp(la1, mat1, mat2, E, numSignal);
+            //                }
+            //            }
+            //        }
+            //}
+            var rnd = new Random();
+            foreach (var la1 in Enumerable.Range(1, 2).OrderBy(x => rnd.Next()).Take(1))
+            {
+                foreach (var mat1 in Enumerable.Range(1, 2).OrderBy(x => rnd.Next()).Take(1))
+                {
+                    foreach (var mat2 in Enumerable.Range(2, 3).OrderBy(x => rnd.Next()).Take(1))
+                    {
+                        foreach (var E in Enumerable.Range(1, 2).OrderBy(x => rnd.Next()).Take(1))
+                        {
+                            Exp(la1, mat1, mat2, E, numSignal);
+                        }
+                    }
+                }
+            }
+            var writer = new Writer();
+            writer.WriterResultLine(resultLine);
+        });
+
+    }
+
+    public void SLAUwriter()
+    {
+
+        var Slau = new SLAULine
+        {
+            a0 = Experiment,
+            a1 = resultLine.Select(x => x.X1).Sum(),
+            a2 = resultLine.Select(x => x.X2).Sum(),
+            a3 = resultLine.Select(x => x.X3).Sum(),
+            a4 = resultLine.Select(x => x.X4).Sum(),
+            b = resultLine.Select(x => x.Y).Sum()
+        };
+        var Slau1 = new SLAULine
+        {
+            a0 = resultLine.Select(x => x.X1).Sum(),
+            a1 = resultLine.Select(x => x.X1 * x.X1).Sum(),
+            a2 = resultLine.Select(x => x.X2 * x.X1).Sum(),
+            a3 = resultLine.Select(x => x.X3 * x.X1).Sum(),
+            a4 = resultLine.Select(x => x.X4 * x.X1).Sum(),
+            b = resultLine.Select(x => x.Y * x.X1).Sum(),
+        };
+
+        var Slau2 = new SLAULine
+        {
+            a0 = resultLine.Select(x => x.X2).Sum(),
+            a1 = resultLine.Select(x => x.X1 * x.X2).Sum(),
+            a2 = resultLine.Select(x => x.X2 * x.X2).Sum(),
+            a3 = resultLine.Select(x => x.X3 * x.X2).Sum(),
+            a4 = resultLine.Select(x => x.X4 * x.X2).Sum(),
+            b = resultLine.Select(x => x.Y * x.X2).Sum(),
+        };
+
+        var Slau3 = new SLAULine
+        {
+            a0 = resultLine.Select(x => x.X3).Sum(),
+            a1 = resultLine.Select(x => x.X1 * x.X3).Sum(),
+            a2 = resultLine.Select(x => x.X2 * x.X3).Sum(),
+            a3 = resultLine.Select(x => x.X3 * x.X3).Sum(),
+            a4 = resultLine.Select(x => x.X4 * x.X3).Sum(),
+            b = resultLine.Select(x => x.Y * x.X3).Sum(),
+        };
+
+        var Slau4 = new SLAULine
+        {
+            a0 = resultLine.Select(x => x.X4).Sum(),
+            a1 = resultLine.Select(x => x.X1 * x.X4).Sum(),
+            a2 = resultLine.Select(x => x.X2 * x.X4).Sum(),
+            a3 = resultLine.Select(x => x.X3 * x.X4).Sum(),
+            a4 = resultLine.Select(x => x.X4 * x.X4).Sum(),
+            b = resultLine.Select(x => x.Y * x.X4).Sum(),
+        };
+        var SLAU = new List<SLAULine>
+                    {
+                    Slau, Slau1, Slau2, Slau3,Slau4
+                    };
+        var slau = new Writer();
+        slau.WriterResultLine(SLAU);
+    }
+    
+
+    
+    public void Exp( double la,double mat2, double mat3, double E, double numSignal)//double la1,, double sig1, double sig2)
+    {
+
+        (lambda, m1, m2, Ecapcity) = (la,mat2, mat3, E);          
+        var res = Work(numSignal,la,mat2,mat3,E);
+        resultLine.Add(res);
+        Experiment = ++experiments;
+    }
+
+    public void ExpEXT(double la, double mat2, double mat3, double E, double numSignal)//double la1,, double sig1, double sig2)
+    {
+
+        (lambda, m1, m2, Ecapcity) = (la, mat2, mat3, E);
+        var res = WorkExt(numSignal, la, mat2, mat3, E);
+        resultExtend.Add(res);
+        Experiment = ++experiments;
+    }
+    static void MethodPareto(List<ResultLineExtend> ResultExtend)
+    {
+        var j_list= new List<int>();
+        var j = ResultExtend.FirstOrDefault(); //выберем вариант j
+        do
+        {
+            j_list.Add(j.ParamID); //добавим вариант в список
+
+            var k = ResultExtend.FirstOrDefault(x => j.ParamID != x.ParamID && j.CompareTo(x) == -1);//для варианта k != j
+            if (k != null)
+            {
+                    ResultExtend.Remove(j);
             }
 
+            j = ResultExtend.FirstOrDefault(x => !j_list.Contains(x.ParamID));
         }
-
-        #endregion
-        public void Exp( double la,double mat2, double mat3, double E, double numSignal)//double la1,, double sig1, double sig2)
-        {
-
-            (lambda, m1, m2, Ecapcity) = (la,mat2, mat3, E);//la1, lambda,           
-            var res = Work(numSignal,la,mat2,mat3,E);//,  la1, sig1, sig2);
-            resultLine.Add(res);
-            Experiment = ++experiments;
-        }
+        while (j != null); //пока не просмотрены все варианты
+    }
 
         async void tmr_Tick(object sender, EventArgs e)
-        {        
-            route.Text = signalCounter.ToString();
-            lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
-            lbExper.Text = Experiment.ToString();
-            signal.Visible = true;
-            LogAdd();
+    {        
+        route.Text = signalCounter.ToString();
+        lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
+        lbExper.Text = Experiment.ToString();
+        signal.Visible = true;
+        LogAdd();
 
-            SignalMovement();
-            switch (min)
-            {
-                case 0:
-                    lbComp1.Text = Convert.ToString(compList[0].capacity);
-                    break;
-                case 1:
-                    lbComp2.Text = Convert.ToString(compList[1].capacity);
-                    break;
-                case 2:
-                    lbComp3.Text = Convert.ToString(compList[2].capacity);
-                    break;
-                default:
-                    break;
-            }
-
-            if (prepSignal >= Convert.ToDouble(tbNumSignal.Text.Trim()))
-            {                                      
-                tmr.Enabled = false; //старт/стоп
-                if(!ExperimentMode)
-                {
-                    var result = res;
-                    var writer = new Writer();
-                    writer.WriterLog(result); 
-                } 
-                lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
-                lbExperiment.Text = Experiment.ToString();
-                StatData(); 
-            }
-            
+        SignalMovement();
+        switch (min)
+        {
+            case 0:
+                lbComp1.Text = Convert.ToString(compList[0].capacity);
+                break;
+            case 1:
+                lbComp2.Text = Convert.ToString(compList[1].capacity);
+                break;
+            case 2:
+                lbComp3.Text = Convert.ToString(compList[2].capacity);
+                break;
+            default:
+                break;
         }
 
+        if (prepSignal >= Convert.ToDouble(tbNumSignal.Text.Trim()))
+        {                                      
+            tmr.Enabled = false; //старт/стоп
+            if(!ExperimentMode)
+            {
+                var result = res;
+                var writer = new Writer();
+                writer.WriterLog(result); 
+            } 
+            lbPrepVisual.Text = prepSignal.ToString() + " / " + tbNumSignal.Text.Trim();
+            lbExperiment.Text = Experiment.ToString();
+            StatData(); 
+        }
+            
+    }
+
 //двойная буферизация
-        protected override CreateParams CreateParams
+    protected override CreateParams CreateParams
         {
             get
             {

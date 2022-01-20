@@ -1,0 +1,14 @@
+F:\Картинки\Учёба\ИИС\IIS4\IIS4\bin\Debug\IIS4.exe.config
+F:\Картинки\Учёба\ИИС\IIS4\IIS4\bin\Debug\IIS4.exe
+F:\Картинки\Учёба\ИИС\IIS4\IIS4\bin\Debug\IIS4.pdb
+F:\Картинки\Учёба\ИИС\IIS4\IIS4\obj\Debug\IIS4.csprojAssemblyReference.cache
+F:\Картинки\Учёба\ИИС\IIS4\IIS4\obj\Debug\IIS4.csproj.CoreCompileInputs.cache
+F:\Картинки\Учёба\ИИС\IIS4\IIS4\obj\Debug\IIS4.exe
+F:\Картинки\Учёба\ИИС\IIS4\IIS4\obj\Debug\IIS4.pdb
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\IIS4\IIS4\bin\Debug\IIS4.exe.config
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\IIS4\IIS4\bin\Debug\IIS4.exe
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\IIS4\IIS4\bin\Debug\IIS4.pdb
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\IIS4\IIS4\obj\Debug\IIS4.csproj.AssemblyReference.cache
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\IIS4\IIS4\obj\Debug\IIS4.csproj.CoreCompileInputs.cache
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\IIS4\IIS4\obj\Debug\IIS4.exe
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\IIS4\IIS4\obj\Debug\IIS4.pdb

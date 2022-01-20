@@ -36,6 +36,8 @@ namespace lw_sm_1
             this.btnStart = new System.Windows.Forms.Button();
             this.signal = new System.Windows.Forms.PictureBox();
             this.grProperties = new System.Windows.Forms.GroupBox();
+            this.btnParettoOPT = new System.Windows.Forms.Button();
+            this.btOp = new System.Windows.Forms.Button();
             this.btnExperiment = new System.Windows.Forms.Button();
             this.tbEcapcity = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -113,7 +115,8 @@ namespace lw_sm_1
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.btOp = new System.Windows.Forms.Button();
+            this.tbEXP = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -193,7 +196,7 @@ namespace lw_sm_1
             this.btnStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.btnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Location = new System.Drawing.Point(222, 318);
+            this.btnStart.Location = new System.Drawing.Point(131, 318);
             this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(117, 33);
@@ -215,6 +218,10 @@ namespace lw_sm_1
             // 
             // grProperties
             // 
+            this.grProperties.Controls.Add(this.label17);
+            this.grProperties.Controls.Add(this.tbEXP);
+            this.grProperties.Controls.Add(this.btnParettoOPT);
+            this.grProperties.Controls.Add(this.btOp);
             this.grProperties.Controls.Add(this.btnExperiment);
             this.grProperties.Controls.Add(this.tbEcapcity);
             this.grProperties.Controls.Add(this.label15);
@@ -227,12 +234,44 @@ namespace lw_sm_1
             this.grProperties.Controls.Add(this.tbNumComp);
             this.grProperties.Controls.Add(this.lbNumComp);
             this.grProperties.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.grProperties.Location = new System.Drawing.Point(829, 42);
+            this.grProperties.Location = new System.Drawing.Point(829, 4);
             this.grProperties.Name = "grProperties";
-            this.grProperties.Size = new System.Drawing.Size(351, 358);
+            this.grProperties.Size = new System.Drawing.Size(351, 396);
             this.grProperties.TabIndex = 6;
             this.grProperties.TabStop = false;
             this.grProperties.Text = "Параметры моделирования";
+            // 
+            // btnParettoOPT
+            // 
+            this.btnParettoOPT.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnParettoOPT.FlatAppearance.BorderSize = 5;
+            this.btnParettoOPT.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btnParettoOPT.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btnParettoOPT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnParettoOPT.Location = new System.Drawing.Point(132, 355);
+            this.btnParettoOPT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnParettoOPT.Name = "btnParettoOPT";
+            this.btnParettoOPT.Size = new System.Drawing.Size(116, 33);
+            this.btnParettoOPT.TabIndex = 25;
+            this.btnParettoOPT.Text = "Оптимизация ";
+            this.btnParettoOPT.UseVisualStyleBackColor = true;
+            this.btnParettoOPT.Click += new System.EventHandler(this.btnParettoOPT_Click);
+            // 
+            // btOp
+            // 
+            this.btOp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btOp.FlatAppearance.BorderSize = 5;
+            this.btOp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btOp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btOp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btOp.Location = new System.Drawing.Point(8, 355);
+            this.btOp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btOp.Name = "btOp";
+            this.btOp.Size = new System.Drawing.Size(116, 33);
+            this.btOp.TabIndex = 24;
+            this.btOp.Text = "Опыты (цикл)";
+            this.btOp.UseVisualStyleBackColor = true;
+            this.btOp.Click += new System.EventHandler(this.btOp_Click);
             // 
             // btnExperiment
             // 
@@ -241,7 +280,7 @@ namespace lw_sm_1
             this.btnExperiment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.btnExperiment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
             this.btnExperiment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExperiment.Location = new System.Drawing.Point(54, 318);
+            this.btnExperiment.Location = new System.Drawing.Point(8, 318);
             this.btnExperiment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExperiment.Name = "btnExperiment";
             this.btnExperiment.Size = new System.Drawing.Size(117, 33);
@@ -254,7 +293,7 @@ namespace lw_sm_1
             // 
             this.tbEcapcity.Location = new System.Drawing.Point(138, 136);
             this.tbEcapcity.Name = "tbEcapcity";
-            this.tbEcapcity.Size = new System.Drawing.Size(117, 23);
+            this.tbEcapcity.Size = new System.Drawing.Size(70, 23);
             this.tbEcapcity.TabIndex = 22;
             // 
             // label15
@@ -367,7 +406,7 @@ namespace lw_sm_1
             // 
             this.tbEpsilon.Location = new System.Drawing.Point(138, 98);
             this.tbEpsilon.Name = "tbEpsilon";
-            this.tbEpsilon.Size = new System.Drawing.Size(117, 23);
+            this.tbEpsilon.Size = new System.Drawing.Size(70, 23);
             this.tbEpsilon.TabIndex = 16;
             // 
             // label4
@@ -383,7 +422,7 @@ namespace lw_sm_1
             // 
             this.tbNumSignal.Location = new System.Drawing.Point(138, 61);
             this.tbNumSignal.Name = "tbNumSignal";
-            this.tbNumSignal.Size = new System.Drawing.Size(117, 23);
+            this.tbNumSignal.Size = new System.Drawing.Size(70, 23);
             this.tbNumSignal.TabIndex = 14;
             // 
             // lbSignal
@@ -399,7 +438,7 @@ namespace lw_sm_1
             // 
             this.tbNumComp.Location = new System.Drawing.Point(138, 27);
             this.tbNumComp.Name = "tbNumComp";
-            this.tbNumComp.Size = new System.Drawing.Size(117, 23);
+            this.tbNumComp.Size = new System.Drawing.Size(70, 23);
             this.tbNumComp.TabIndex = 6;
             // 
             // lbNumComp
@@ -1020,21 +1059,21 @@ namespace lw_sm_1
             this.label14.TabIndex = 22;
             this.label14.Text = "Шаг изменения времени";
             // 
-            // btOp
+            // tbEXP
             // 
-            this.btOp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btOp.FlatAppearance.BorderSize = 5;
-            this.btOp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
-            this.btOp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
-            this.btOp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btOp.Location = new System.Drawing.Point(963, 403);
-            this.btOp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btOp.Name = "btOp";
-            this.btOp.Size = new System.Drawing.Size(117, 33);
-            this.btOp.TabIndex = 24;
-            this.btOp.Text = "ОпытЦикл";
-            this.btOp.UseVisualStyleBackColor = true;
-            this.btOp.Click += new System.EventHandler(this.btOp_Click);
+            this.tbEXP.Location = new System.Drawing.Point(269, 27);
+            this.tbEXP.Name = "tbEXP";
+            this.tbEXP.Size = new System.Drawing.Size(70, 23);
+            this.tbEXP.TabIndex = 26;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(214, 30);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(50, 15);
+            this.label17.TabIndex = 27;
+            this.label17.Text = "Опытов";
             // 
             // Form1
             // 
@@ -1042,7 +1081,6 @@ namespace lw_sm_1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1192, 466);
-            this.Controls.Add(this.btOp);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -1183,5 +1221,8 @@ namespace lw_sm_1
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lbExper;
         public System.Windows.Forms.Button btOp;
+        public System.Windows.Forms.Button btnParettoOPT;
+        private System.Windows.Forms.Label label17;
+        public System.Windows.Forms.TextBox tbEXP;
     }
 }

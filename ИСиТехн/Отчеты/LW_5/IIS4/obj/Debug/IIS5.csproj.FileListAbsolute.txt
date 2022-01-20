@@ -1,0 +1,7 @@
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\LW_5\IIS4\bin\Debug\IIS5.exe.config
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\LW_5\IIS4\bin\Debug\IIS5.exe
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\LW_5\IIS4\bin\Debug\IIS5.pdb
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\LW_5\IIS4\obj\Debug\IIS5.csproj.AssemblyReference.cache
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\LW_5\IIS4\obj\Debug\IIS5.csproj.CoreCompileInputs.cache
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\LW_5\IIS4\obj\Debug\IIS5.exe
+D:\Учеба\Технолог-Учеба\labwork_2021\ИСиТехн\Отчеты\LW_5\IIS4\obj\Debug\IIS5.pdb
